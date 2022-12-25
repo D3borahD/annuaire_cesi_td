@@ -64,5 +64,11 @@ namespace WinFormsApp1
 
             dataGridView1.DataSource = employeeBindingSource;
         }
+
+        private void edition_Click(object sender, EventArgs e)
+        {
+            var adminForm = new AdminEditor();
+            adminForm.Show();
+        }
     }
 }

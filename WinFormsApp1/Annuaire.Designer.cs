@@ -32,6 +32,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.edition = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,11 +73,23 @@
             this.textBox1.Size = new System.Drawing.Size(186, 23);
             this.textBox1.TabIndex = 3;
             // 
+            // edition
+            // 
+            this.edition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.edition.Location = new System.Drawing.Point(24, 72);
+            this.edition.Name = "edition";
+            this.edition.Size = new System.Drawing.Size(128, 43);
+            this.edition.TabIndex = 4;
+            this.edition.Text = "edition";
+            this.edition.UseVisualStyleBackColor = false;
+            this.edition.Click += new System.EventHandler(this.edition_Click);
+            // 
             // Annuaire
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 450);
+            this.Controls.Add(this.edition);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -96,5 +109,6 @@
         private Button button1;
         private Button button2;
         private TextBox textBox1;
+        private Button edition;
     }
 }
