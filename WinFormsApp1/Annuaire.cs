@@ -49,5 +49,20 @@ namespace WinFormsApp1
 
             dataGridView1.DataSource = employeeBindingSource;
         }
+
+        private void Annuaire_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+
+            // connect the list to the grid view control
+            employeeBindingSource.DataSource = employeeDAO.searchName(textBox1.Text);
+
+            dataGridView1.DataSource = employeeBindingSource;
+        }
     }
 }

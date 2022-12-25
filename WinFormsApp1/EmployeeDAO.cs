@@ -32,8 +32,42 @@ namespace WinFormsApp1
                 {
                     Employee emp = new Employee
                     {
+                        id = reader.GetInt32(0),
+                        firstname = reader.GetString(1),
+                        lastname = reader.GetString(2),
+                        landline = reader.GetString(3),
+                        mobile = reader.GetString(4),
+                        email = reader.GetString(5)
+                    };
+                    returnThese.Add(emp);
+                }
+            }
+            connection.Close();
+            return returnThese;
+        }
+        public List<Employee> searchName(String searchName)
+        {
+            // start with an empty list
+            List<Employee> returnThese = new List<Employee>();
 
-                       // id = reader.GetInt32(0),
+            // connect to the mysql server
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            String searchWildPhrase = "%" + searchName + "%";
+            // define the sql statement to fetch all employees
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = "SELECT * FROM employee WHERE lastname LIKE @search"; 
+            command.Parameters.AddWithValue("@search",searchWildPhrase);
+            command.Connection = connection;
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Employee emp = new Employee
+                    {
+                        id = reader.GetInt32(0),
                         firstname = reader.GetString(1),
                         lastname = reader.GetString(2),
                         landline = reader.GetString(3),
@@ -49,3 +83,4 @@ namespace WinFormsApp1
         }
     }
 }
+ 
