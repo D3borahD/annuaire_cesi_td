@@ -1,9 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace WinFormsApp1
 {
@@ -80,6 +83,26 @@ namespace WinFormsApp1
             connection.Close();
             return returnThese;
 
+        }
+
+        internal int addOneEmployee(Employee employee)
+        {
+            // connect to the mysql server
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            String searchWildPhrase = "%" + searchName + "%";
+            // define the sql statement to fetch all employees
+            MySqlCommand command = new MySqlCommand("INSERT INTO `employee`(`firstname`, `lastname`, `landline`, `mobile`, `email`) VALUES(@firstname, @lastname, @landline, @mobile, @email)", connection);
+
+            command.Parameters.AddWithValue("@firstname", employee.firstname);
+            command.Parameters.AddWithValue("@lastname", employee.lastname);
+            command.Parameters.AddWithValue("@landline", employee.landline);
+            command.Parameters.AddWithValue("@mobile", employee.mobile);
+            command.Parameters.AddWithValue("@email", employee.email);
+
+            int newRows = command.ExecuteNonQuery();
+            connection.Close();
+            return newRows;
         }
     }
 }
