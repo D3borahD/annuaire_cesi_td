@@ -90,7 +90,6 @@ namespace WinFormsApp1
             // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-            String searchWildPhrase = "%" + searchName + "%";
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand("INSERT INTO `employee`(`firstname`, `lastname`, `landline`, `mobile`, `email`) VALUES(@firstname, @lastname, @landline, @mobile, @email)", connection);
 

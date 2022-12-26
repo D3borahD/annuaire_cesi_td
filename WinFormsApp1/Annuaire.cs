@@ -41,6 +41,8 @@ namespace WinFormsApp1
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
 
             dataGridView1.DataSource = employeeBindingSource;
+            dataGridView1.Columns["id"].Visible = false;
+
 
 
         }

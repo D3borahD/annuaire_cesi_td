@@ -28,25 +28,24 @@ namespace WinFormsApp1
             SiteDAO siteDAO = new SiteDAO();
             DepartmentDAO departmentDAO = new DepartmentDAO();
 
-
-
-
             // connect the list to the grid view control
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
-
             dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
+            dataGridViewEmployeeEdit.Columns["id"].Visible = false;
 
             // connect the list to the grid view control
             siteBindingSource.DataSource = siteDAO.getAllSites();
-
             dataGridViewSiteEdit.DataSource = siteBindingSource;
+            dataGridViewSiteEdit.Columns["id"].Visible = false;
+
 
             // connect the list to the grid view control
             departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
-
             dataGridViewDepartmentEdit.DataSource = departmentBindingSource;
+            dataGridViewDepartmentEdit.Columns["id"].Visible = false;
+
         }
-        
+
         private void add_employee_Click(object sender, EventArgs e)
         {
             // add a new item to the database

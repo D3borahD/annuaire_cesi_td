@@ -81,7 +81,7 @@
             this.addEmployee.Controls.Add(this.label3);
             this.addEmployee.Controls.Add(this.label2);
             this.addEmployee.Controls.Add(this.name);
-            this.addEmployee.Location = new System.Drawing.Point(29, 45);
+            this.addEmployee.Location = new System.Drawing.Point(24, 36);
             this.addEmployee.Name = "addEmployee";
             this.addEmployee.Size = new System.Drawing.Size(301, 348);
             this.addEmployee.TabIndex = 1;
@@ -218,9 +218,9 @@
             this.addDepartment.Controls.Add(this.addService);
             this.addDepartment.Controls.Add(this.txt_department_name);
             this.addDepartment.Controls.Add(this.label8);
-            this.addDepartment.Location = new System.Drawing.Point(343, 46);
+            this.addDepartment.Location = new System.Drawing.Point(346, 36);
             this.addDepartment.Name = "addDepartment";
-            this.addDepartment.Size = new System.Drawing.Size(360, 167);
+            this.addDepartment.Size = new System.Drawing.Size(240, 348);
             this.addDepartment.TabIndex = 2;
             this.addDepartment.TabStop = false;
             this.addDepartment.Text = "Ajouter un service";
@@ -228,18 +228,18 @@
             // dataGridViewDepartmentEdit
             // 
             this.dataGridViewDepartmentEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDepartmentEdit.Location = new System.Drawing.Point(28, 86);
+            this.dataGridViewDepartmentEdit.Location = new System.Drawing.Point(14, 123);
             this.dataGridViewDepartmentEdit.Name = "dataGridViewDepartmentEdit";
             this.dataGridViewDepartmentEdit.RowTemplate.Height = 25;
-            this.dataGridViewDepartmentEdit.Size = new System.Drawing.Size(200, 68);
+            this.dataGridViewDepartmentEdit.Size = new System.Drawing.Size(200, 197);
             this.dataGridViewDepartmentEdit.TabIndex = 3;
             // 
             // addService
             // 
             this.addService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.addService.Location = new System.Drawing.Point(245, 112);
+            this.addService.Location = new System.Drawing.Point(141, 68);
             this.addService.Name = "addService";
-            this.addService.Size = new System.Drawing.Size(91, 26);
+            this.addService.Size = new System.Drawing.Size(73, 26);
             this.addService.TabIndex = 2;
             this.addService.Text = "Ajouter";
             this.addService.UseVisualStyleBackColor = false;
@@ -247,7 +247,7 @@
             // 
             // txt_department_name
             // 
-            this.txt_department_name.Location = new System.Drawing.Point(126, 44);
+            this.txt_department_name.Location = new System.Drawing.Point(14, 68);
             this.txt_department_name.Name = "txt_department_name";
             this.txt_department_name.Size = new System.Drawing.Size(121, 23);
             this.txt_department_name.TabIndex = 1;
@@ -255,7 +255,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(19, 45);
+            this.label8.Location = new System.Drawing.Point(14, 35);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(90, 15);
             this.label8.TabIndex = 0;
@@ -268,9 +268,9 @@
             this.groupBox1.Controls.Add(this.addSite);
             this.groupBox1.Controls.Add(this.txt_site_name);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Location = new System.Drawing.Point(343, 226);
+            this.groupBox1.Location = new System.Drawing.Point(601, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(360, 167);
+            this.groupBox1.Size = new System.Drawing.Size(246, 348);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ajouter un site";
@@ -278,18 +278,18 @@
             // dataGridViewSiteEdit
             // 
             this.dataGridViewSiteEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSiteEdit.Location = new System.Drawing.Point(14, 84);
+            this.dataGridViewSiteEdit.Location = new System.Drawing.Point(19, 123);
             this.dataGridViewSiteEdit.Name = "dataGridViewSiteEdit";
             this.dataGridViewSiteEdit.RowTemplate.Height = 25;
-            this.dataGridViewSiteEdit.Size = new System.Drawing.Size(206, 68);
+            this.dataGridViewSiteEdit.Size = new System.Drawing.Size(206, 197);
             this.dataGridViewSiteEdit.TabIndex = 4;
             // 
             // addSite
             // 
             this.addSite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.addSite.Location = new System.Drawing.Point(245, 116);
+            this.addSite.Location = new System.Drawing.Point(152, 68);
             this.addSite.Name = "addSite";
-            this.addSite.Size = new System.Drawing.Size(91, 26);
+            this.addSite.Size = new System.Drawing.Size(73, 26);
             this.addSite.TabIndex = 3;
             this.addSite.Text = "Ajouter";
             this.addSite.UseVisualStyleBackColor = false;
@@ -297,7 +297,7 @@
             // 
             // txt_site_name
             // 
-            this.txt_site_name.Location = new System.Drawing.Point(126, 44);
+            this.txt_site_name.Location = new System.Drawing.Point(19, 68);
             this.txt_site_name.Name = "txt_site_name";
             this.txt_site_name.Size = new System.Drawing.Size(121, 23);
             this.txt_site_name.TabIndex = 1;
@@ -305,7 +305,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 45);
+            this.label9.Location = new System.Drawing.Point(19, 39);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 15);
             this.label9.TabIndex = 0;
@@ -314,10 +314,10 @@
             // dataGridViewEmployeeEdit
             // 
             this.dataGridViewEmployeeEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEmployeeEdit.Location = new System.Drawing.Point(36, 423);
+            this.dataGridViewEmployeeEdit.Location = new System.Drawing.Point(24, 412);
             this.dataGridViewEmployeeEdit.Name = "dataGridViewEmployeeEdit";
             this.dataGridViewEmployeeEdit.RowTemplate.Height = 25;
-            this.dataGridViewEmployeeEdit.Size = new System.Drawing.Size(666, 166);
+            this.dataGridViewEmployeeEdit.Size = new System.Drawing.Size(823, 298);
             this.dataGridViewEmployeeEdit.TabIndex = 4;
             // 
             // AdminEditor
@@ -325,7 +325,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(723, 603);
+            this.ClientSize = new System.Drawing.Size(864, 741);
             this.Controls.Add(this.dataGridViewEmployeeEdit);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.addDepartment);
@@ -372,7 +372,6 @@
         private Button addSite;
         private TextBox txt_site_name;
         private Label label9;
-        private DataGridView dataGridViewServiceEdit;
         private DataGridView dataGridViewEmployeeEdit;
         private TextBox txt_department_name;
         private DataGridView dataGridViewSiteEdit;
