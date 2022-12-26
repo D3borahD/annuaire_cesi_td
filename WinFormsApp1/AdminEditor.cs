@@ -32,17 +32,24 @@ namespace WinFormsApp1
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
             dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
             dataGridViewEmployeeEdit.Columns["id"].Visible = false;
+            dataGridViewEmployeeEdit.Columns[1].HeaderText = "Prénom";
+            dataGridViewEmployeeEdit.Columns[2].HeaderText = "Nom";
+            dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone Fixe";
+            dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
+            dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
 
             // connect the list to the grid view control
             siteBindingSource.DataSource = siteDAO.getAllSites();
             dataGridViewSiteEdit.DataSource = siteBindingSource;
             dataGridViewSiteEdit.Columns["id"].Visible = false;
+            dataGridViewSiteEdit.Columns[1].HeaderText = "Nom du Site";
 
 
             // connect the list to the grid view control
             departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
             dataGridViewDepartmentEdit.DataSource = departmentBindingSource;
             dataGridViewDepartmentEdit.Columns["id"].Visible = false;
+            dataGridViewDepartmentEdit.Columns[1].HeaderText = "Nom du Service";
 
         }
 

@@ -42,6 +42,12 @@ namespace WinFormsApp1
 
             dataGridView1.DataSource = employeeBindingSource;
             dataGridView1.Columns["id"].Visible = false;
+            dataGridView1.Columns[1].HeaderText = "Prénom";
+            dataGridView1.Columns[2].HeaderText = "Nom";
+            dataGridView1.Columns[3].HeaderText = "Téléphone Fixe";
+            dataGridView1.Columns[4].HeaderText = "Mobile";
+            dataGridView1.Columns[5].HeaderText = "Email";
+
 
 
 
