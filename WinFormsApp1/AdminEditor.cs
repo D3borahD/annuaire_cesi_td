@@ -22,38 +22,31 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
-        private void AdminEditor_Load(object sender, EventArgs e)
+        private void AdminEditor_Load_1(object sender, EventArgs e)
         {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             SiteDAO siteDAO = new SiteDAO();
             DepartmentDAO departmentDAO = new DepartmentDAO();
 
 
-            // connect the list to the grid view control
-             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
 
-             dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
 
             // connect the list to the grid view control
-             siteBindingSource.DataSource = siteDAO.getAllSites();
+            employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
 
-             dataGridViewDepartmentEdit.DataSource = siteBindingSource;
+            dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
 
             // connect the list to the grid view control
-             departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
+            siteBindingSource.DataSource = siteDAO.getAllSites();
 
-             dataGridViewDepartmentEdit.DataSource = departmentBindingSource;
+            dataGridViewSiteEdit.DataSource = siteBindingSource;
 
+            // connect the list to the grid view control
+            departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
 
-
-
+            dataGridViewDepartmentEdit.DataSource = departmentBindingSource;
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void add_employee_Click(object sender, EventArgs e)
         {
             // add a new item to the database
@@ -103,5 +96,6 @@ namespace WinFormsApp1
       
 
         }
+
     }
 }

@@ -45,21 +45,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.name = new System.Windows.Forms.Label();
             this.addDepartment = new System.Windows.Forms.GroupBox();
-            this.dataGridViewServiceEdit = new System.Windows.Forms.DataGridView();
+            this.dataGridViewDepartmentEdit = new System.Windows.Forms.DataGridView();
             this.addService = new System.Windows.Forms.Button();
             this.txt_department_name = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridViewDepartmentEdit = new System.Windows.Forms.DataGridView();
+            this.dataGridViewSiteEdit = new System.Windows.Forms.DataGridView();
             this.addSite = new System.Windows.Forms.Button();
             this.txt_site_name = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.dataGridViewEmployeeEdit = new System.Windows.Forms.DataGridView();
             this.addEmployee.SuspendLayout();
             this.addDepartment.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceEdit)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDepartmentEdit)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSiteEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeEdit)).BeginInit();
             this.SuspendLayout();
             // 
@@ -214,7 +214,7 @@
             // addDepartment
             // 
             this.addDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.addDepartment.Controls.Add(this.dataGridViewServiceEdit);
+            this.addDepartment.Controls.Add(this.dataGridViewDepartmentEdit);
             this.addDepartment.Controls.Add(this.addService);
             this.addDepartment.Controls.Add(this.txt_department_name);
             this.addDepartment.Controls.Add(this.label8);
@@ -225,14 +225,14 @@
             this.addDepartment.TabStop = false;
             this.addDepartment.Text = "Ajouter un service";
             // 
-            // dataGridViewServiceEdit
+            // dataGridViewDepartmentEdit
             // 
-            this.dataGridViewServiceEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewServiceEdit.Location = new System.Drawing.Point(28, 86);
-            this.dataGridViewServiceEdit.Name = "dataGridViewServiceEdit";
-            this.dataGridViewServiceEdit.RowTemplate.Height = 25;
-            this.dataGridViewServiceEdit.Size = new System.Drawing.Size(200, 68);
-            this.dataGridViewServiceEdit.TabIndex = 3;
+            this.dataGridViewDepartmentEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDepartmentEdit.Location = new System.Drawing.Point(28, 86);
+            this.dataGridViewDepartmentEdit.Name = "dataGridViewDepartmentEdit";
+            this.dataGridViewDepartmentEdit.RowTemplate.Height = 25;
+            this.dataGridViewDepartmentEdit.Size = new System.Drawing.Size(200, 68);
+            this.dataGridViewDepartmentEdit.TabIndex = 3;
             // 
             // addService
             // 
@@ -264,7 +264,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.groupBox1.Controls.Add(this.dataGridViewDepartmentEdit);
+            this.groupBox1.Controls.Add(this.dataGridViewSiteEdit);
             this.groupBox1.Controls.Add(this.addSite);
             this.groupBox1.Controls.Add(this.txt_site_name);
             this.groupBox1.Controls.Add(this.label9);
@@ -275,14 +275,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ajouter un site";
             // 
-            // dataGridViewDepartmentEdit
+            // dataGridViewSiteEdit
             // 
-            this.dataGridViewDepartmentEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDepartmentEdit.Location = new System.Drawing.Point(14, 84);
-            this.dataGridViewDepartmentEdit.Name = "dataGridViewDepartmentEdit";
-            this.dataGridViewDepartmentEdit.RowTemplate.Height = 25;
-            this.dataGridViewDepartmentEdit.Size = new System.Drawing.Size(206, 68);
-            this.dataGridViewDepartmentEdit.TabIndex = 4;
+            this.dataGridViewSiteEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSiteEdit.Location = new System.Drawing.Point(14, 84);
+            this.dataGridViewSiteEdit.Name = "dataGridViewSiteEdit";
+            this.dataGridViewSiteEdit.RowTemplate.Height = 25;
+            this.dataGridViewSiteEdit.Size = new System.Drawing.Size(206, 68);
+            this.dataGridViewSiteEdit.TabIndex = 4;
             // 
             // addSite
             // 
@@ -332,14 +332,15 @@
             this.Controls.Add(this.addEmployee);
             this.Name = "AdminEditor";
             this.Text = "Administrateur Edition";
+            this.Load += new System.EventHandler(this.AdminEditor_Load_1);
             this.addEmployee.ResumeLayout(false);
             this.addEmployee.PerformLayout();
             this.addDepartment.ResumeLayout(false);
             this.addDepartment.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDepartmentEdit)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDepartmentEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSiteEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeEdit)).EndInit();
             this.ResumeLayout(false);
 
@@ -347,7 +348,7 @@
 
         #endregion
 
-        private Label label1;
+        //private Label label1;
         private GroupBox addEmployee;
         private TextBox txt_employee_email;
         private TextBox txt_employee_mobile;
@@ -366,15 +367,15 @@
         private Button add_employee;
         private GroupBox addDepartment;
         private Button addService;
-        private TextBox txt_service_name;
         private Label label8;
         private GroupBox groupBox1;
         private Button addSite;
         private TextBox txt_site_name;
         private Label label9;
         private DataGridView dataGridViewServiceEdit;
-        private DataGridView dataGridViewDepartmentEdit;
         private DataGridView dataGridViewEmployeeEdit;
         private TextBox txt_department_name;
+        private DataGridView dataGridViewSiteEdit;
+        private DataGridView dataGridViewDepartmentEdit;
     }
 }
