@@ -400,6 +400,7 @@
             this.deleteEmployee.TabIndex = 6;
             this.deleteEmployee.Text = "Supprimer";
             this.deleteEmployee.UseVisualStyleBackColor = false;
+            this.deleteEmployee.Click += new System.EventHandler(this.deleteEmployee_Click);
             // 
             // AdminEditor
             // 

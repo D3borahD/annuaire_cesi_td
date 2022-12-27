@@ -210,6 +210,21 @@ namespace WinFormsApp1
             connection.Close();
             return returnThese;
         }
+
+        internal int deleteEmployee(int idSelectedEmployee)
+        {
+            // connect to the mysql server
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            // define the sql statement to fetch all employees
+            MySqlCommand command = new MySqlCommand("DELETE FROM `employee` WHERE `employee`.`id` = @id;", connection);
+
+            command.Parameters.AddWithValue("@id", idSelectedEmployee);
+           
+            int result = command.ExecuteNonQuery();
+            connection.Close();
+            return result;
+        }
     }
 }
  

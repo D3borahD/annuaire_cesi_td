@@ -183,8 +183,17 @@ namespace WinFormsApp1
 
         }
 
-   
+        private void deleteEmployee_Click(object sender, EventArgs e)
+        {
+            int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
+            int idSelectedEmployee = (int) dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value;
+            MessageBox.Show("" + idSelectedEmployee);
 
-   
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            int result = employeeDAO.deleteEmployee(idSelectedEmployee);
+
+            MessageBox.Show("L'employé(e) a été supprimé(e)");
+            loadDataEmployee();
+        }
     }
 }
