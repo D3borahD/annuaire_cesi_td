@@ -95,7 +95,7 @@
             this.dataGridViewDepartmentDisplay.RowTemplate.Height = 25;
             this.dataGridViewDepartmentDisplay.Size = new System.Drawing.Size(148, 158);
             this.dataGridViewDepartmentDisplay.TabIndex = 6;
-            this.dataGridViewDepartmentDisplay.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSiteDisplay_CellContentClick);
+            this.dataGridViewDepartmentDisplay.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDepartmentDisplay_CellContentClick);
             // 
             // Annuaire
             // 

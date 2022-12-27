@@ -60,15 +60,11 @@ namespace WinFormsApp1
             dataGridViewSiteDisplay.Columns["id"].Visible = false;
             dataGridViewSiteDisplay.Columns[1].HeaderText = "Nom du Site";
 
-
             // connect the list to the grid view control
             departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
             dataGridViewDepartmentDisplay.DataSource = departmentBindingSource;
             dataGridViewDepartmentDisplay.Columns["id"].Visible = false;
             dataGridViewDepartmentDisplay.Columns[1].HeaderText = "Nom du Service";
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -98,6 +94,33 @@ namespace WinFormsApp1
             //MessageBox.Show(" row " + rowClicked + " ID " + idOfChoosen);
 
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoin((int) dataGridView.Rows[rowClicked].Cells[0].Value);
+
+
+
+            dataGridView1.DataSource = employeeBindingSource;
+            //dataGridView1.Columns["id"].Visible = false;
+            dataGridView1.Columns[0].HeaderText = "Prénom";
+            dataGridView1.Columns[1].HeaderText = "Nom";
+            dataGridView1.Columns[2].HeaderText = "Téléphone Fixe";
+            dataGridView1.Columns[3].HeaderText = "Mobile";
+            dataGridView1.Columns[4].HeaderText = "Email";
+            dataGridView1.Columns[5].HeaderText = "Site";
+            dataGridView1.Columns[6].HeaderText = "Service";
+        }
+
+        private void dataGridViewDepartmentDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+
+            int rowClicked = dataGridView.CurrentRow.Index;
+
+            String idOfChoosen = dataGridView.Rows[rowClicked].Cells[0].Value.ToString();
+            //MessageBox.Show(" row " + rowClicked + " ID " + idOfChoosen);
+
+            employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoinDepartment((int)dataGridView.Rows[rowClicked].Cells[0].Value);
+
+
 
             dataGridView1.DataSource = employeeBindingSource;
             //dataGridView1.Columns["id"].Visible = false;

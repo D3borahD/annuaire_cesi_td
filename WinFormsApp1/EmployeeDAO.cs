@@ -173,6 +173,41 @@ namespace WinFormsApp1
             connection.Close();
             return returnThese;
         }
+
+        public List<JObject> getEmployeesUsingJoinDepartment(int department_id)
+        {
+            // start with an empty list
+            List<JObject> returnThese = new List<JObject>();
+
+            // connect to the mysql server
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            // define the sql statement to fetch all employees
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`,  site_id, department.name FROM `employee` JOIN department on department_id = department.id WHERE department_id = @department_id";
+
+            command.Parameters.AddWithValue("@department_id", department_id);
+            command.Connection = connection;
+
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+
+
+                while (reader.Read())
+                {
+                    JObject newEmployee = new JObject();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        newEmployee.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                    }
+                    returnThese.Add(newEmployee);
+                }
+            }
+            connection.Close();
+            return returnThese;
+        }
     }
 }
  
