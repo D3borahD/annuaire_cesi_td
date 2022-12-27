@@ -26,7 +26,7 @@ namespace WinFormsApp1
           connection.Open();
 
             // define the sql statement to fetch all employees
-            MySqlCommand command = new MySqlCommand("SELECT * FROM employee", connection);
+            MySqlCommand command = new MySqlCommand("SELECT `firstname`, `lastname`,`landline`, `mobile`, `email`, `site_id`, `department_id` FROM employee", connection);
 
             using (MySqlDataReader reader = command.ExecuteReader())
             {
@@ -34,14 +34,14 @@ namespace WinFormsApp1
                 {
                     Employee emp = new Employee
                     {
-                        id = reader.GetInt32(0),
-                        firstname = reader.GetString(1),
-                        lastname = reader.GetString(2),
-                        landline = reader.GetString(3),
-                        mobile = reader.GetString(4),
-                        email = reader.GetString(5),
+                        //id = reader.GetInt32(0),
+                        firstname = reader.GetString(0),
+                        lastname = reader.GetString(1),
+                        landline = reader.GetString(2),
+                        mobile = reader.GetString(3),
+                        email = reader.GetString(4),
                         //site.id = reader.GetFieldValue<Site>(6),
-                        //department.id = reader.GetFieldValue<Department>(7)
+                       // department.id = reader.GetFieldValue<Department>(7)
                     };
                     returnThese.Add(emp);
                 }
@@ -77,6 +77,7 @@ namespace WinFormsApp1
                         landline = reader.GetString(3),
                         mobile = reader.GetString(4),
                         email = reader.GetString(5)
+
                     };
                     returnThese.Add(emp);
                 }
@@ -195,8 +196,6 @@ namespace WinFormsApp1
 
             using (MySqlDataReader reader = command.ExecuteReader())
             {
-
-
                 while (reader.Read())
                 {
                     JObject newEmployee = new JObject();
@@ -217,7 +216,7 @@ namespace WinFormsApp1
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
             // define the sql statement to fetch all employees
-            MySqlCommand command = new MySqlCommand("DELETE FROM `employee` WHERE `employee`.`id` = @id;", connection);
+            MySqlCommand command = new MySqlCommand("UPDATE `employee` SET `id`='[value-1]',`firstname`=@id,`lastname`=@id,`landline`=@id',`mobile`=@id,`email`=@id,`site_id`=@id,`department_id`=@department WHERE `employee`.`id` = @id;", connection);
 
             command.Parameters.AddWithValue("@id", idSelectedEmployee);
            
@@ -225,6 +224,28 @@ namespace WinFormsApp1
             connection.Close();
             return result;
         }
+
+       // internal int updateEmployee(int idSelectedEmployee)
+      //  {
+            // connect to the mysql server
+           // MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+            // define the sql statement to fetch all employees
+           // MySqlCommand command = new MySqlCommand("DELETE FROM `employee` WHERE `employee`.`id` = @id;", connection);
+
+           // command.Parameters.AddWithValue("@id", idSelectedEmployee);
+            //command.Parameters.AddWithValue("@firstname", employee.firstname);
+            //command.Parameters.AddWithValue("@lastname", employee.lastname);
+            //command.Parameters.AddWithValue("@landline", employee.landline);
+           // command.Parameters.AddWithValue("@mobile", employee.mobile);
+           // command.Parameters.AddWithValue("@email", employee.email);
+           // command.Parameters.AddWithValue("@site", employee.site);
+          //  command.Parameters.AddWithValue("@department", employee.department);
+
+          //  int result = command.ExecuteNonQuery();
+           // connection.Close();
+           // return result;
+      //  }
     }
 }
  

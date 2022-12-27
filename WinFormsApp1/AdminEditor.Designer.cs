@@ -390,6 +390,7 @@
             this.updateEmployee.TabIndex = 7;
             this.updateEmployee.Text = "Modifier";
             this.updateEmployee.UseVisualStyleBackColor = false;
+            this.updateEmployee.Click += new System.EventHandler(this.updateEmployee_Click);
             // 
             // deleteEmployee
             // 

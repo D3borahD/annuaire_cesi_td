@@ -21,50 +21,56 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
-       // private void button1_Click(object sender, EventArgs e)
-       // {
-        //    EmployeeDAO employeeDAO = new EmployeeDAO();
-          
-
-            // connect the list to the grid view control
-        //    employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
-
-        //    dataGridView1.DataSource = employeeBindingSource;
-       // }
-
-
-
-        private void Annuaire_Load(object sender, EventArgs e)
+        private void loadDataDepartment()
         {
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            SiteDAO siteDAO = new SiteDAO();
             DepartmentDAO departmentDAO = new DepartmentDAO();
-
-
-            // connect the list to the grid view control
-            employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
-
-            dataGridView1.DataSource = employeeBindingSource;
-            dataGridView1.Columns["id"].Visible = false;
-            dataGridView1.Columns[1].HeaderText = "Prénom";
-            dataGridView1.Columns[2].HeaderText = "Nom";
-            dataGridView1.Columns[3].HeaderText = "Téléphone Fixe";
-            dataGridView1.Columns[4].HeaderText = "Mobile";
-            dataGridView1.Columns[5].HeaderText = "Email";
-            dataGridView1.Columns[6].HeaderText = "Site";
-            dataGridView1.Columns[7].HeaderText = "Service";
-
-            // connect the list to the grid view control
-            siteBindingSource.DataSource = siteDAO.getAllSites();
-            dataGridViewSiteDisplay.DataSource = siteBindingSource;
-            dataGridViewSiteDisplay.Columns["id"].Visible = false;
-            dataGridViewSiteDisplay.Columns[1].HeaderText = "Nom du Site";
-
-            // connect the list to the grid view control
             departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
             dataGridViewDepartmentDisplay.DataSource = departmentBindingSource;
             dataGridViewDepartmentDisplay.Columns["id"].Visible = false;
             dataGridViewDepartmentDisplay.Columns[1].HeaderText = "Nom du Service";
+        }
+
+        private void loadDataSite()
+        {
+            SiteDAO siteDAO = new SiteDAO();
+            siteBindingSource.DataSource = siteDAO.getAllSites();
+            dataGridViewSiteDisplay.DataSource = siteBindingSource;
+            dataGridViewSiteDisplay.Columns["id"].Visible = false;
+            dataGridViewSiteDisplay.Columns[1].HeaderText = "Nom du Site";
+        }
+
+        private void loadDataEmployee()
+        {
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
+            dataGridView1.DataSource = employeeBindingSource;
+            dataGridView1.Columns["id"].Visible = false;
+            dataGridView1.Columns[1].HeaderText = "Prénom";
+            dataGridView1.Columns[2].HeaderText = "Nom";
+            dataGridView1.Columns[3].Visible = false;
+            dataGridView1.Columns[4].Visible = false;
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[6].HeaderText = "Site";
+            dataGridView1.Columns[7].HeaderText = "Service";
+        }
+
+        // private void button1_Click(object sender, EventArgs e)
+        // {
+        //    EmployeeDAO employeeDAO = new EmployeeDAO();
+
+
+        // connect the list to the grid view control
+        //    employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
+
+        //    dataGridView1.DataSource = employeeBindingSource;
+        // }
+
+
+        private void Annuaire_Load(object sender, EventArgs e)
+        {
+            loadDataEmployee();
+            loadDataDepartment();
+            loadDataSite();
         }
 
         private void button2_Click(object sender, EventArgs e)
