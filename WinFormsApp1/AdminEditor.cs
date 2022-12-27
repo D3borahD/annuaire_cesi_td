@@ -65,22 +65,22 @@ namespace WinFormsApp1
 
         private void add_employee_Click(object sender, EventArgs e)
         {
-           //Regex numberRegex = new Regex("^[0-9]+$");
-           // String fixNumber = txt_employee_landline.Text;
+           Regex numberRegex = new Regex("^[0-9]+$");
+            String fixNumber = txt_employee_landline.Text;
             //int countNumber = fixNumber.Split().Length + 1;
-           // String mobileNumber = txt_employee_mobile.Text;
+            String mobileNumber = txt_employee_mobile.Text;
 
             //Console.WrteLine(coun);
 
-          //  if (!numberRegex.IsMatch(fixNumber) && !numberRegex.IsMatch(mobileNumber))
-               //  {
-           //     MessageBox.Show("Le numéro de téléphone fixe doit comporter uniqument des chiffres");
-          //  }
+            if (!numberRegex.IsMatch(fixNumber) && !numberRegex.IsMatch(mobileNumber))
+                 {
+                MessageBox.Show("Le numéro de téléphone fixe doit comporter uniqument des chiffres");
+            }
            // else if (countNumber != 10)
             //{
               //  MessageBox.Show("Le numéro ne comporte pas 10 chiffres");
             //}
-           // else 
+           else 
             if (
                 String.IsNullOrEmpty(txt_employee_lastname.Text) ||
                 String.IsNullOrEmpty(txt_employee_firstname.Text) ||
