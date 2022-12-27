@@ -14,8 +14,6 @@ namespace WinFormsApp1
     {
         string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
-        // Version 1 only contains fake data. No connection to actual db yet.
-       // public List<Employee> employees = new List<Employee>();
 
         public List<Employee> getAllEmployees()
         {
@@ -40,7 +38,9 @@ namespace WinFormsApp1
                         lastname = reader.GetString(2),
                         landline = reader.GetString(3),
                         mobile = reader.GetString(4),
-                        email = reader.GetString(5)
+                        email = reader.GetString(5),
+                        //site.id = reader.GetFieldValue<Site>(6),
+                        //department.id = reader.GetFieldValue<Department>(7)
                     };
                     returnThese.Add(emp);
                 }
@@ -102,6 +102,40 @@ namespace WinFormsApp1
             int newRows = command.ExecuteNonQuery();
             connection.Close();
             return newRows;
+        }
+
+        public List<Employee> getOneEmployees(int site_id)
+        {
+            // start with an empty list
+            List<Employee> returnThese = new List<Employee>();
+
+            // connect to the mysql server
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            // define the sql statement to fetch all employees
+            MySqlCommand command = new MySqlCommand("SELECT * FROM employee WHERE site_id = @site_id", connection);
+            command.Parameters.AddWithValue("@site_id", site_id);
+
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Employee emp = new Employee
+                    {
+                        id = reader.GetInt32(0),
+                        firstname = reader.GetString(1),
+                        lastname = reader.GetString(2),
+                        landline = reader.GetString(3),
+                        mobile = reader.GetString(4),
+                        email = reader.GetString(5)
+                    };
+                    returnThese.Add(emp);
+                }
+            }
+            connection.Close();
+            return returnThese;
         }
     }
 }

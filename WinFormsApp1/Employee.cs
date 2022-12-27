@@ -18,5 +18,9 @@ namespace WinFormsApp1
         public String mobile { get; set; }
 
         public String email { get; set; }
+
+        public Site site { get; set; }
+
+        public Department department { get; set; }
     }
 }
