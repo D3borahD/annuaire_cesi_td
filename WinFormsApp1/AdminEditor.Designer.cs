@@ -46,20 +46,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.name = new System.Windows.Forms.Label();
             this.addDepartment = new System.Windows.Forms.GroupBox();
+            this.updateDepartment = new System.Windows.Forms.Button();
             this.deleteDepartment = new System.Windows.Forms.Button();
             this.dataGridViewDepartmentEdit = new System.Windows.Forms.DataGridView();
             this.addService = new System.Windows.Forms.Button();
             this.txt_department_name = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.updateSite = new System.Windows.Forms.Button();
             this.dataGridViewSiteEdit = new System.Windows.Forms.DataGridView();
+            this.deleteSite = new System.Windows.Forms.Button();
             this.addSite = new System.Windows.Forms.Button();
             this.txt_site_name = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.dataGridViewEmployeeEdit = new System.Windows.Forms.DataGridView();
-            this.updateDepartment = new System.Windows.Forms.Button();
-            this.updateSite = new System.Windows.Forms.Button();
-            this.deleteSite = new System.Windows.Forms.Button();
             this.updateEmployee = new System.Windows.Forms.Button();
             this.deleteEmployee = new System.Windows.Forms.Button();
             this.addEmployee.SuspendLayout();
@@ -244,6 +244,16 @@
             this.addDepartment.TabStop = false;
             this.addDepartment.Text = "Ajouter un service";
             // 
+            // updateDepartment
+            // 
+            this.updateDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.updateDepartment.Location = new System.Drawing.Point(14, 297);
+            this.updateDepartment.Name = "updateDepartment";
+            this.updateDepartment.Size = new System.Drawing.Size(73, 27);
+            this.updateDepartment.TabIndex = 5;
+            this.updateDepartment.Text = "Modifier";
+            this.updateDepartment.UseVisualStyleBackColor = false;
+            // 
             // deleteDepartment
             // 
             this.deleteDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
@@ -306,6 +316,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ajouter un site";
             // 
+            // updateSite
+            // 
+            this.updateSite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.updateSite.Location = new System.Drawing.Point(16, 297);
+            this.updateSite.Name = "updateSite";
+            this.updateSite.Size = new System.Drawing.Size(73, 27);
+            this.updateSite.TabIndex = 7;
+            this.updateSite.Text = "Modifier";
+            this.updateSite.UseVisualStyleBackColor = false;
+            // 
             // dataGridViewSiteEdit
             // 
             this.dataGridViewSiteEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -314,6 +334,16 @@
             this.dataGridViewSiteEdit.RowTemplate.Height = 25;
             this.dataGridViewSiteEdit.Size = new System.Drawing.Size(206, 177);
             this.dataGridViewSiteEdit.TabIndex = 4;
+            // 
+            // deleteSite
+            // 
+            this.deleteSite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.deleteSite.Location = new System.Drawing.Point(141, 297);
+            this.deleteSite.Name = "deleteSite";
+            this.deleteSite.Size = new System.Drawing.Size(75, 27);
+            this.deleteSite.TabIndex = 6;
+            this.deleteSite.Text = "Supprimer";
+            this.deleteSite.UseVisualStyleBackColor = false;
             // 
             // addSite
             // 
@@ -350,36 +380,6 @@
             this.dataGridViewEmployeeEdit.RowTemplate.Height = 25;
             this.dataGridViewEmployeeEdit.Size = new System.Drawing.Size(823, 256);
             this.dataGridViewEmployeeEdit.TabIndex = 4;
-            // 
-            // updateDepartment
-            // 
-            this.updateDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.updateDepartment.Location = new System.Drawing.Point(14, 297);
-            this.updateDepartment.Name = "updateDepartment";
-            this.updateDepartment.Size = new System.Drawing.Size(73, 27);
-            this.updateDepartment.TabIndex = 5;
-            this.updateDepartment.Text = "Modifier";
-            this.updateDepartment.UseVisualStyleBackColor = false;
-            // 
-            // updateSite
-            // 
-            this.updateSite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.updateSite.Location = new System.Drawing.Point(16, 297);
-            this.updateSite.Name = "updateSite";
-            this.updateSite.Size = new System.Drawing.Size(73, 27);
-            this.updateSite.TabIndex = 7;
-            this.updateSite.Text = "Modifier";
-            this.updateSite.UseVisualStyleBackColor = false;
-            // 
-            // deleteSite
-            // 
-            this.deleteSite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.deleteSite.Location = new System.Drawing.Point(141, 297);
-            this.deleteSite.Name = "deleteSite";
-            this.deleteSite.Size = new System.Drawing.Size(75, 27);
-            this.deleteSite.TabIndex = 6;
-            this.deleteSite.Text = "Supprimer";
-            this.deleteSite.UseVisualStyleBackColor = false;
             // 
             // updateEmployee
             // 
