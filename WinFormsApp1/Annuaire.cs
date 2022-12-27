@@ -91,11 +91,8 @@ namespace WinFormsApp1
             int rowClicked = dataGridView.CurrentRow.Index;
 
             String idOfChoosen = dataGridView.Rows[rowClicked].Cells[0].Value.ToString();
-            //MessageBox.Show(" row " + rowClicked + " ID " + idOfChoosen);
 
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoin((int) dataGridView.Rows[rowClicked].Cells[0].Value);
-
-
 
             dataGridView1.DataSource = employeeBindingSource;
             //dataGridView1.Columns["id"].Visible = false;
@@ -116,11 +113,8 @@ namespace WinFormsApp1
             int rowClicked = dataGridView.CurrentRow.Index;
 
             String idOfChoosen = dataGridView.Rows[rowClicked].Cells[0].Value.ToString();
-            //MessageBox.Show(" row " + rowClicked + " ID " + idOfChoosen);
 
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoinDepartment((int)dataGridView.Rows[rowClicked].Cells[0].Value);
-
-
 
             dataGridView1.DataSource = employeeBindingSource;
             //dataGridView1.Columns["id"].Visible = false;

@@ -92,13 +92,15 @@ namespace WinFormsApp1
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
             // define the sql statement to fetch all employees
-            MySqlCommand command = new MySqlCommand("INSERT INTO `employee`(`firstname`, `lastname`, `landline`, `mobile`, `email`) VALUES(@firstname, @lastname, @landline, @mobile, @email)", connection);
+            MySqlCommand command = new MySqlCommand("INSERT INTO `employee`(`firstname`, `lastname`, `landline`, `mobile`, `email`, `site_id`, `department_id`) VALUES(@firstname, @lastname, @landline, @mobile, @email, @site, @department)", connection);
 
             command.Parameters.AddWithValue("@firstname", employee.firstname);
             command.Parameters.AddWithValue("@lastname", employee.lastname);
             command.Parameters.AddWithValue("@landline", employee.landline);
             command.Parameters.AddWithValue("@mobile", employee.mobile);
             command.Parameters.AddWithValue("@email", employee.email);
+            command.Parameters.AddWithValue("@site", employee.site);
+            command.Parameters.AddWithValue("@department", employee.department);
 
             int newRows = command.ExecuteNonQuery();
             connection.Close();
@@ -185,7 +187,7 @@ namespace WinFormsApp1
 
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
-            command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`,  site_id, department.name FROM `employee` JOIN department on department_id = department.id WHERE department_id = @department_id";
+            command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`, site_id, department.name FROM `employee` JOIN department on department_id = department.id WHERE department_id = @department_id";
 
             command.Parameters.AddWithValue("@department_id", department_id);
             command.Connection = connection;

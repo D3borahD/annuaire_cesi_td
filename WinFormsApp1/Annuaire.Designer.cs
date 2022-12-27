@@ -42,10 +42,10 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(25, 282);
+            this.dataGridView1.Location = new System.Drawing.Point(23, 377);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(697, 154);
+            this.dataGridView1.Size = new System.Drawing.Size(883, 154);
             this.dataGridView1.TabIndex = 0;
             // 
             // button2
@@ -83,17 +83,17 @@
             this.dataGridViewSiteDisplay.Location = new System.Drawing.Point(23, 104);
             this.dataGridViewSiteDisplay.Name = "dataGridViewSiteDisplay";
             this.dataGridViewSiteDisplay.RowTemplate.Height = 25;
-            this.dataGridViewSiteDisplay.Size = new System.Drawing.Size(148, 158);
+            this.dataGridViewSiteDisplay.Size = new System.Drawing.Size(191, 241);
             this.dataGridViewSiteDisplay.TabIndex = 5;
             this.dataGridViewSiteDisplay.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSiteDisplay_CellContentClick);
             // 
             // dataGridViewDepartmentDisplay
             // 
             this.dataGridViewDepartmentDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDepartmentDisplay.Location = new System.Drawing.Point(197, 104);
+            this.dataGridViewDepartmentDisplay.Location = new System.Drawing.Point(241, 104);
             this.dataGridViewDepartmentDisplay.Name = "dataGridViewDepartmentDisplay";
             this.dataGridViewDepartmentDisplay.RowTemplate.Height = 25;
-            this.dataGridViewDepartmentDisplay.Size = new System.Drawing.Size(148, 158);
+            this.dataGridViewDepartmentDisplay.Size = new System.Drawing.Size(195, 241);
             this.dataGridViewDepartmentDisplay.TabIndex = 6;
             this.dataGridViewDepartmentDisplay.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDepartmentDisplay_CellContentClick);
             // 

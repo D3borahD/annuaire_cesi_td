@@ -16,7 +16,6 @@ namespace WinFormsApp1
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
 
-
         public AdminEditor()
         {
             InitializeComponent();
@@ -44,13 +43,11 @@ namespace WinFormsApp1
             dataGridViewSiteEdit.Columns["id"].Visible = false;
             dataGridViewSiteEdit.Columns[1].HeaderText = "Nom du Site";
 
-
             // connect the list to the grid view control
             departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
             dataGridViewDepartmentEdit.DataSource = departmentBindingSource;
             dataGridViewDepartmentEdit.Columns["id"].Visible = false;
             dataGridViewDepartmentEdit.Columns[1].HeaderText = "Nom du Service";
-
         }
 
         private void add_employee_Click(object sender, EventArgs e)
@@ -63,12 +60,14 @@ namespace WinFormsApp1
                 landline = txt_employee_landline.Text,
                 mobile = txt_employee_mobile.Text,
                 email = txt_employee_email.Text,
+                site = txt_employee_site.Text,
+                department = txt_employee_service.Text,
             };
 
             EmployeeDAO employeeDAO = new EmployeeDAO();
             int result = employeeDAO.addOneEmployee(employee);
 
-            MessageBox.Show(result + " employé ajouté");
+            MessageBox.Show("L'employé " + employee.lastname + " " + employee.firstname+ " a été ajouté");
         }
 
         private void addService_Click(object sender, EventArgs e)
@@ -103,5 +102,26 @@ namespace WinFormsApp1
 
         }
 
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+      
+
+        // Don't work, foreignkey => pb !
+        private void button1_Click(object sender, EventArgs e)
+        {
+           // int rowClicked = dataGridViewDepartmentEdit.CurrentRow.Index;
+
+           // int departmentId = (int) dataGridViewDepartmentEdit.Rows[rowClicked].Cells[0].Value;
+            
+           // DepartmentDAO departmentDAO = new DepartmentDAO();
+
+           // int result = departmentDAO.deleteDepartment(departmentId);
+
+          //  MessageBox.Show("result " + result);
+
+        }
     }
 }

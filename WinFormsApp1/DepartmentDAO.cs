@@ -56,5 +56,22 @@ namespace WinFormsApp1
             connection.Close();
             return newRows;
         }
+
+        // Don't work => foreignkey pb
+        //internal int deleteDepartment(int departmentId)
+        //{
+            // connect to the mysql server
+           // MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+            // define the sql statement to fetch all employees
+           // MySqlCommand command = new MySqlCommand("DELETE FROM `department` WHERE `department`.`id` = @id; ", connection);
+
+            //command.Parameters.AddWithValue("@id", departmentId);
+          
+
+           // int result = command.ExecuteNonQuery();
+           // connection.Close();
+           // return result;
+        //}
     }
 }

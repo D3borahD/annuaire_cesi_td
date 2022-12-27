@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.addEmployee = new System.Windows.Forms.GroupBox();
+            this.Site = new System.Windows.Forms.Label();
             this.add_employee = new System.Windows.Forms.Button();
             this.txt_employee_email = new System.Windows.Forms.TextBox();
             this.txt_employee_mobile = new System.Windows.Forms.TextBox();
@@ -45,6 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.name = new System.Windows.Forms.Label();
             this.addDepartment = new System.Windows.Forms.GroupBox();
+            this.deleteDepartment = new System.Windows.Forms.Button();
             this.dataGridViewDepartmentEdit = new System.Windows.Forms.DataGridView();
             this.addService = new System.Windows.Forms.Button();
             this.txt_department_name = new System.Windows.Forms.TextBox();
@@ -55,6 +57,11 @@
             this.txt_site_name = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.dataGridViewEmployeeEdit = new System.Windows.Forms.DataGridView();
+            this.updateDepartment = new System.Windows.Forms.Button();
+            this.updateSite = new System.Windows.Forms.Button();
+            this.deleteSite = new System.Windows.Forms.Button();
+            this.updateEmployee = new System.Windows.Forms.Button();
+            this.deleteEmployee = new System.Windows.Forms.Button();
             this.addEmployee.SuspendLayout();
             this.addDepartment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDepartmentEdit)).BeginInit();
@@ -66,6 +73,7 @@
             // addEmployee
             // 
             this.addEmployee.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.addEmployee.Controls.Add(this.Site);
             this.addEmployee.Controls.Add(this.add_employee);
             this.addEmployee.Controls.Add(this.txt_employee_email);
             this.addEmployee.Controls.Add(this.txt_employee_mobile);
@@ -88,10 +96,19 @@
             this.addEmployee.TabStop = false;
             this.addEmployee.Text = "Ajouter un employé";
             // 
+            // Site
+            // 
+            this.Site.AutoSize = true;
+            this.Site.Location = new System.Drawing.Point(16, 285);
+            this.Site.Name = "Site";
+            this.Site.Size = new System.Drawing.Size(0, 15);
+            this.Site.TabIndex = 15;
+            this.Site.Click += new System.EventHandler(this.label10_Click);
+            // 
             // add_employee
             // 
             this.add_employee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.add_employee.Location = new System.Drawing.Point(191, 297);
+            this.add_employee.Location = new System.Drawing.Point(198, 297);
             this.add_employee.Name = "add_employee";
             this.add_employee.Size = new System.Drawing.Size(75, 23);
             this.add_employee.TabIndex = 14;
@@ -214,6 +231,8 @@
             // addDepartment
             // 
             this.addDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.addDepartment.Controls.Add(this.updateDepartment);
+            this.addDepartment.Controls.Add(this.deleteDepartment);
             this.addDepartment.Controls.Add(this.dataGridViewDepartmentEdit);
             this.addDepartment.Controls.Add(this.addService);
             this.addDepartment.Controls.Add(this.txt_department_name);
@@ -225,13 +244,23 @@
             this.addDepartment.TabStop = false;
             this.addDepartment.Text = "Ajouter un service";
             // 
+            // deleteDepartment
+            // 
+            this.deleteDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.deleteDepartment.Location = new System.Drawing.Point(139, 297);
+            this.deleteDepartment.Name = "deleteDepartment";
+            this.deleteDepartment.Size = new System.Drawing.Size(75, 27);
+            this.deleteDepartment.TabIndex = 4;
+            this.deleteDepartment.Text = "Supprimer";
+            this.deleteDepartment.UseVisualStyleBackColor = false;
+            // 
             // dataGridViewDepartmentEdit
             // 
             this.dataGridViewDepartmentEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDepartmentEdit.Location = new System.Drawing.Point(14, 123);
+            this.dataGridViewDepartmentEdit.Location = new System.Drawing.Point(14, 106);
             this.dataGridViewDepartmentEdit.Name = "dataGridViewDepartmentEdit";
             this.dataGridViewDepartmentEdit.RowTemplate.Height = 25;
-            this.dataGridViewDepartmentEdit.Size = new System.Drawing.Size(200, 197);
+            this.dataGridViewDepartmentEdit.Size = new System.Drawing.Size(200, 177);
             this.dataGridViewDepartmentEdit.TabIndex = 3;
             // 
             // addService
@@ -264,7 +293,9 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.groupBox1.Controls.Add(this.updateSite);
             this.groupBox1.Controls.Add(this.dataGridViewSiteEdit);
+            this.groupBox1.Controls.Add(this.deleteSite);
             this.groupBox1.Controls.Add(this.addSite);
             this.groupBox1.Controls.Add(this.txt_site_name);
             this.groupBox1.Controls.Add(this.label9);
@@ -278,10 +309,10 @@
             // dataGridViewSiteEdit
             // 
             this.dataGridViewSiteEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSiteEdit.Location = new System.Drawing.Point(19, 123);
+            this.dataGridViewSiteEdit.Location = new System.Drawing.Point(19, 106);
             this.dataGridViewSiteEdit.Name = "dataGridViewSiteEdit";
             this.dataGridViewSiteEdit.RowTemplate.Height = 25;
-            this.dataGridViewSiteEdit.Size = new System.Drawing.Size(206, 197);
+            this.dataGridViewSiteEdit.Size = new System.Drawing.Size(206, 177);
             this.dataGridViewSiteEdit.TabIndex = 4;
             // 
             // addSite
@@ -314,11 +345,61 @@
             // dataGridViewEmployeeEdit
             // 
             this.dataGridViewEmployeeEdit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEmployeeEdit.Location = new System.Drawing.Point(24, 412);
+            this.dataGridViewEmployeeEdit.Location = new System.Drawing.Point(24, 408);
             this.dataGridViewEmployeeEdit.Name = "dataGridViewEmployeeEdit";
             this.dataGridViewEmployeeEdit.RowTemplate.Height = 25;
-            this.dataGridViewEmployeeEdit.Size = new System.Drawing.Size(823, 298);
+            this.dataGridViewEmployeeEdit.Size = new System.Drawing.Size(823, 256);
             this.dataGridViewEmployeeEdit.TabIndex = 4;
+            // 
+            // updateDepartment
+            // 
+            this.updateDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.updateDepartment.Location = new System.Drawing.Point(14, 297);
+            this.updateDepartment.Name = "updateDepartment";
+            this.updateDepartment.Size = new System.Drawing.Size(73, 27);
+            this.updateDepartment.TabIndex = 5;
+            this.updateDepartment.Text = "Modifier";
+            this.updateDepartment.UseVisualStyleBackColor = false;
+            // 
+            // updateSite
+            // 
+            this.updateSite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.updateSite.Location = new System.Drawing.Point(16, 297);
+            this.updateSite.Name = "updateSite";
+            this.updateSite.Size = new System.Drawing.Size(73, 27);
+            this.updateSite.TabIndex = 7;
+            this.updateSite.Text = "Modifier";
+            this.updateSite.UseVisualStyleBackColor = false;
+            // 
+            // deleteSite
+            // 
+            this.deleteSite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.deleteSite.Location = new System.Drawing.Point(141, 297);
+            this.deleteSite.Name = "deleteSite";
+            this.deleteSite.Size = new System.Drawing.Size(75, 27);
+            this.deleteSite.TabIndex = 6;
+            this.deleteSite.Text = "Supprimer";
+            this.deleteSite.UseVisualStyleBackColor = false;
+            // 
+            // updateEmployee
+            // 
+            this.updateEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.updateEmployee.Location = new System.Drawing.Point(647, 692);
+            this.updateEmployee.Name = "updateEmployee";
+            this.updateEmployee.Size = new System.Drawing.Size(73, 27);
+            this.updateEmployee.TabIndex = 7;
+            this.updateEmployee.Text = "Modifier";
+            this.updateEmployee.UseVisualStyleBackColor = false;
+            // 
+            // deleteEmployee
+            // 
+            this.deleteEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.deleteEmployee.Location = new System.Drawing.Point(772, 692);
+            this.deleteEmployee.Name = "deleteEmployee";
+            this.deleteEmployee.Size = new System.Drawing.Size(75, 27);
+            this.deleteEmployee.TabIndex = 6;
+            this.deleteEmployee.Text = "Supprimer";
+            this.deleteEmployee.UseVisualStyleBackColor = false;
             // 
             // AdminEditor
             // 
@@ -326,6 +407,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(864, 741);
+            this.Controls.Add(this.updateEmployee);
+            this.Controls.Add(this.deleteEmployee);
             this.Controls.Add(this.dataGridViewEmployeeEdit);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.addDepartment);
@@ -376,5 +459,12 @@
         private TextBox txt_department_name;
         private DataGridView dataGridViewSiteEdit;
         private DataGridView dataGridViewDepartmentEdit;
+        private Label Site;
+        private Button deleteDepartment;
+        private Button updateDepartment;
+        private Button updateSite;
+        private Button deleteSite;
+        private Button updateEmployee;
+        private Button deleteEmployee;
     }
 }
