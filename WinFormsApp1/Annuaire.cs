@@ -51,6 +51,8 @@ namespace WinFormsApp1
             dataGridView1.Columns[3].HeaderText = "Téléphone Fixe";
             dataGridView1.Columns[4].HeaderText = "Mobile";
             dataGridView1.Columns[5].HeaderText = "Email";
+            dataGridView1.Columns[6].HeaderText = "Site";
+            dataGridView1.Columns[7].HeaderText = "Service";
 
             // connect the list to the grid view control
             siteBindingSource.DataSource = siteDAO.getAllSites();
@@ -99,13 +101,13 @@ namespace WinFormsApp1
 
             dataGridView1.DataSource = employeeBindingSource;
             //dataGridView1.Columns["id"].Visible = false;
-            dataGridView1.Columns[1].HeaderText = "Prénom";
-            dataGridView1.Columns[2].HeaderText = "Nom";
-            dataGridView1.Columns[3].HeaderText = "Téléphone Fixe";
-            dataGridView1.Columns[4].HeaderText = "Mobile";
-            dataGridView1.Columns[5].HeaderText = "Email";
-            //dataGridView1.Columns[6].HeaderText = "Site";
-            //dataGridView1.Columns[7].HeaderText = "Service";
+            dataGridView1.Columns[0].HeaderText = "Prénom";
+            dataGridView1.Columns[1].HeaderText = "Nom";
+            dataGridView1.Columns[2].HeaderText = "Téléphone Fixe";
+            dataGridView1.Columns[3].HeaderText = "Mobile";
+            dataGridView1.Columns[4].HeaderText = "Email";
+            dataGridView1.Columns[5].HeaderText = "Site";
+            dataGridView1.Columns[6].HeaderText = "Service";
         }
     }
 }
