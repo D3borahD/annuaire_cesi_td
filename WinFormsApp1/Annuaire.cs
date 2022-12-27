@@ -132,5 +132,14 @@ namespace WinFormsApp1
             dataGridView1.Columns[5].HeaderText = "Site";
             dataGridView1.Columns[6].HeaderText = "Service";
         }
+
+        private void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowClicked = dataGridView1.CurrentRow.Index;
+
+            String idOfChoosen = dataGridView1.Rows[rowClicked].Cells[0].Value.ToString();
+            MessageBox.Show("" + idOfChoosen);
+
+        }
     }
 }

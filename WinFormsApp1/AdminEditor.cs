@@ -46,7 +46,7 @@ namespace WinFormsApp1
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
             dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
-          dataGridViewEmployeeEdit.Columns["id"].Visible = false;
+            dataGridViewEmployeeEdit.Columns["id"].Visible = false;
             dataGridViewEmployeeEdit.Columns[1].HeaderText = "Prénom";
             dataGridViewEmployeeEdit.Columns[2].HeaderText = "Nom";
             dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone Fixe";
