@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
@@ -132,6 +133,41 @@ namespace WinFormsApp1
                         email = reader.GetString(5)
                     };
                     returnThese.Add(emp);
+                }
+            }
+            connection.Close();
+            return returnThese;
+        }
+
+        public List<JObject> getEmployeesUsingJoin(int site_id)
+        {
+            // start with an empty list
+            List<JObject> returnThese = new List<JObject>();
+
+            // connect to the mysql server
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            // define the sql statement to fetch all employees
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name, department_id FROM `employee` JOIN site on site_id = site.id WHERE site_id = @site_id";
+
+            command.Parameters.AddWithValue("@site_id", site_id);
+            command.Connection = connection;
+
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+               
+
+                while (reader.Read())
+                {
+                    JObject newEmployee = new JObject();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        newEmployee.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                    }
+                    returnThese.Add(newEmployee);
                 }
             }
             connection.Close();

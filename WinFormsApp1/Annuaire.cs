@@ -95,15 +95,17 @@ namespace WinFormsApp1
             String idOfChoosen = dataGridView.Rows[rowClicked].Cells[0].Value.ToString();
             //MessageBox.Show(" row " + rowClicked + " ID " + idOfChoosen);
 
-            employeeBindingSource.DataSource = employeeDAO.getOneEmployees((int) dataGridView.Rows[rowClicked].Cells[0].Value);
+            employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoin((int) dataGridView.Rows[rowClicked].Cells[0].Value);
 
             dataGridView1.DataSource = employeeBindingSource;
-            dataGridView1.Columns["id"].Visible = false;
+            //dataGridView1.Columns["id"].Visible = false;
             dataGridView1.Columns[1].HeaderText = "Prénom";
             dataGridView1.Columns[2].HeaderText = "Nom";
             dataGridView1.Columns[3].HeaderText = "Téléphone Fixe";
             dataGridView1.Columns[4].HeaderText = "Mobile";
             dataGridView1.Columns[5].HeaderText = "Email";
+            //dataGridView1.Columns[6].HeaderText = "Site";
+            //dataGridView1.Columns[7].HeaderText = "Service";
         }
     }
 }
