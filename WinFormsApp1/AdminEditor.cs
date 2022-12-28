@@ -111,7 +111,8 @@ namespace WinFormsApp1
             EmployeeDAO employeeDAO = new EmployeeDAO();
             int result = employeeDAO.addOneEmployee(employee);
 
-            // clear input form
+                // clear input form
+                // txt_employee_lastname.Clear();
             txt_employee_lastname.Text = String.Empty;
             txt_employee_firstname.Text = String.Empty;
             txt_employee_landline.Text = String.Empty;
@@ -137,19 +138,19 @@ namespace WinFormsApp1
             {
                 // add a new item to the database
                 Department department = new Department
-            {
+                {
                 name = txt_department_name.Text,
-            };
+                };
 
-            DepartmentDAO departmentDAO = new DepartmentDAO();
-            int result = departmentDAO.addOneDepartment(department);
+                DepartmentDAO departmentDAO = new DepartmentDAO();
+                int result = departmentDAO.addOneDepartment(department);
 
-            // clear input
-            txt_department_name.Text = String.Empty;
+                // clear input
+                txt_department_name.Text = String.Empty;
 
-            MessageBox.Show("Le service " + department.name + " a été ajouté");
+                MessageBox.Show("Le service " + department.name + " a été ajouté");
 
-            loadDataDepartment();
+                loadDataDepartment();
             }
         }
 
@@ -188,16 +189,19 @@ namespace WinFormsApp1
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
             int idSelectedEmployee = (int) dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value;
 
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            int result = employeeDAO.deleteEmployee(idSelectedEmployee);
+            MessageBox.Show("Test " + idSelectedEmployee);
 
-            MessageBox.Show("L'employé(e) a été supprimé(e)");
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            // int result = employeeDAO.deleteEmployee(idSelectedEmployee);
+
+           // MessageBox.Show("L'employé(e) a été supprimé(e)");
             loadDataEmployee();
         }
 
         private void updateEmployee_Click(object sender, EventArgs e)
         {
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
+
             int idSelectedEmployee = (int)dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value;
 
             EmployeeDAO employeeDAO = new EmployeeDAO();
@@ -206,6 +210,11 @@ namespace WinFormsApp1
             MessageBox.Show("L'employé(e) a été modifié(e)");
             loadDataEmployee();
 
+
+        }
+
+        private void dataGridViewEmployeeEdit_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

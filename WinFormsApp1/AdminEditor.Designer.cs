@@ -380,6 +380,7 @@
             this.dataGridViewEmployeeEdit.RowTemplate.Height = 25;
             this.dataGridViewEmployeeEdit.Size = new System.Drawing.Size(823, 256);
             this.dataGridViewEmployeeEdit.TabIndex = 4;
+            this.dataGridViewEmployeeEdit.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmployeeEdit_CellClick);
             // 
             // updateEmployee
             // 

@@ -75,6 +75,7 @@ namespace WinFormsApp1
             loadDataSite();
         }
 
+        // SearchName function 
         private void button2_Click(object sender, EventArgs e)
         {
             EmployeeDAO employeeDAO = new EmployeeDAO();

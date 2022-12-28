@@ -134,6 +134,7 @@ namespace WinFormsApp1
             return returnThese;
         }
 
+        // Get employee with Site search
         public List<JObject> getEmployeesUsingJoin(int site_id)
         {
             // start with an empty list
@@ -171,6 +172,7 @@ namespace WinFormsApp1
             return returnThese;
         }
 
+        // get employee with department search 
         public List<JObject> getEmployeesUsingJoinDepartment(int department_id)
         {
             // start with an empty list
