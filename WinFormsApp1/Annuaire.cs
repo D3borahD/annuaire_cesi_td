@@ -16,6 +16,7 @@ namespace WinFormsApp1
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
 
+ 
         public Annuaire()
         {
             InitializeComponent();
@@ -83,6 +84,7 @@ namespace WinFormsApp1
             dataGridView1.DataSource = employeeBindingSource;
         }
 
+        // remove at the end project
         private void edition_Click(object sender, EventArgs e)
         {
             var adminForm = new AdminEditor();
@@ -101,7 +103,6 @@ namespace WinFormsApp1
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoin((int) dataGridView.Rows[rowClicked].Cells[0].Value);
 
             dataGridView1.DataSource = employeeBindingSource;
-            //dataGridView1.Columns["id"].Visible = false;
             dataGridView1.Columns[0].HeaderText = "Prénom";
             dataGridView1.Columns[1].HeaderText = "Nom";
             dataGridView1.Columns[2].HeaderText = "Téléphone Fixe";
@@ -123,7 +124,6 @@ namespace WinFormsApp1
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoinDepartment((int)dataGridView.Rows[rowClicked].Cells[0].Value);
 
             dataGridView1.DataSource = employeeBindingSource;
-            //dataGridView1.Columns["id"].Visible = false;
             dataGridView1.Columns[0].HeaderText = "Prénom";
             dataGridView1.Columns[1].HeaderText = "Nom";
             dataGridView1.Columns[2].HeaderText = "Téléphone Fixe";
@@ -133,21 +133,40 @@ namespace WinFormsApp1
             dataGridView1.Columns[6].HeaderText = "Service";
         }
 
-        // DO COMPLETE
-        private void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
+        public string userId;
+        public string GetId
         {
-            int rowClicked = dataGridView1.CurrentRow.Index;
+            get
+            {
+                return "je fonctionne";
+            }
+        }
 
-            String idOfChoosen = dataGridView1.Rows[rowClicked].Cells[0].Value.ToString();
-            MessageBox.Show("" + idOfChoosen);
-            var employeeCardView = new EmployeeCardView();
-            employeeCardView.Show();
-
-            // send id in new box ?
+        public void getIdSelected(string id)
+        {
 
         }
 
-    
+        // DO COMPLETE
+        public void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowClicked = dataGridView1.CurrentRow.Index;
+
+            string userId = dataGridView1.Rows[rowClicked].Cells[0].Value.ToString();
+
+            MessageBox.Show("" + userId);
+
+
+            string id = "je veux fonctionner";
+           
+
+            EmployeeCardView employeeCardView = new EmployeeCardView(userId);
+            employeeCardView.Show(); 
+       
+        // send id in new box ?
+
+    }
+
         private void AdminAcces_KeyDown(object sender, KeyEventArgs e)
         {
            // System.Diagnostics.Debug.Write(e.KeyCode);
@@ -155,6 +174,7 @@ namespace WinFormsApp1
             {
                 var adminConnection = new AdminConnection();
                 adminConnection.Show();
+
             }
 
         }

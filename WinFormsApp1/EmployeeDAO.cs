@@ -57,6 +57,8 @@ namespace WinFormsApp1
             connection.Close();
             return returnThese;
         }
+
+        // DO JOIN TABLE DISPLAY
         public List<Employee> searchName(String searchName)
         {
             // start with an empty list
@@ -116,7 +118,7 @@ namespace WinFormsApp1
             return newRows;
         }
 
-        public List<Employee> getOneEmployees(int site_id)
+        public List<Employee> getOneEmployee(int site_id)
         {
             // start with an empty list
             List<Employee> returnThese = new List<Employee>();

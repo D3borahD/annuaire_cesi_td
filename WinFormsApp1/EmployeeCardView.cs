@@ -7,16 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WinFormsApp1
 {
     public partial class EmployeeCardView : Form
     {
-        public EmployeeCardView()
+        //public event SendId Send;
+        public string GetUserId;
+
+        public EmployeeCardView(string userId)
         {
             InitializeComponent();
+
+            lastname.Text = userId;
         }
 
-      
     }
 }
