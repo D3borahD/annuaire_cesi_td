@@ -27,7 +27,7 @@ namespace WinFormsApp1
 
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
-            command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id;";
+            command.CommandText = "SELECT employee.id as employee_id, `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id;";
             command.Connection = connection;
 
             using (MySqlDataReader reader = command.ExecuteReader())
@@ -118,7 +118,7 @@ namespace WinFormsApp1
             return newRows;
         }
 
-        public List<Employee> getOneEmployee(int site_id)
+        public List<Employee> getOneEmployees(int site_id)
         {
             // start with an empty list
             List<Employee> returnThese = new List<Employee>();

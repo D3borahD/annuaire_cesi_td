@@ -46,13 +46,14 @@ namespace WinFormsApp1
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
             dataGridView1.DataSource = employeeBindingSource;
-            dataGridView1.Columns[0].HeaderText = "Prénom";
-            dataGridView1.Columns[1].HeaderText = "Nom";
-            dataGridView1.Columns[2].Visible = false;
+            dataGridView1.Columns[0].Visible = false;
+            dataGridView1.Columns[1].HeaderText = "Prénom";
+            dataGridView1.Columns[2].HeaderText = "Nom";
             dataGridView1.Columns[3].Visible = false;
             dataGridView1.Columns[4].Visible = false;
-            dataGridView1.Columns[5].HeaderText = "Site";
-            dataGridView1.Columns[6].HeaderText = "Service";
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[6].HeaderText = "Site";
+            dataGridView1.Columns[7].HeaderText = "Service";
         }
 
         // private void button1_Click(object sender, EventArgs e)
@@ -103,13 +104,13 @@ namespace WinFormsApp1
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoin((int) dataGridView.Rows[rowClicked].Cells[0].Value);
 
             dataGridView1.DataSource = employeeBindingSource;
-            dataGridView1.Columns[0].HeaderText = "Prénom";
+           /* dataGridView1.Columns[0].HeaderText = "Prénom";
             dataGridView1.Columns[1].HeaderText = "Nom";
             dataGridView1.Columns[2].HeaderText = "Téléphone Fixe";
             dataGridView1.Columns[3].HeaderText = "Mobile";
             dataGridView1.Columns[4].HeaderText = "Email";
             dataGridView1.Columns[5].HeaderText = "Site";
-            dataGridView1.Columns[6].HeaderText = "Service";
+            dataGridView1.Columns[6].HeaderText = "Service";*/
         }
 
         private void dataGridViewDepartmentDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -124,27 +125,13 @@ namespace WinFormsApp1
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoinDepartment((int)dataGridView.Rows[rowClicked].Cells[0].Value);
 
             dataGridView1.DataSource = employeeBindingSource;
-            dataGridView1.Columns[0].HeaderText = "Prénom";
+           /* dataGridView1.Columns[0].HeaderText = "Prénom";
             dataGridView1.Columns[1].HeaderText = "Nom";
             dataGridView1.Columns[2].HeaderText = "Téléphone Fixe";
             dataGridView1.Columns[3].HeaderText = "Mobile";
             dataGridView1.Columns[4].HeaderText = "Email";
             dataGridView1.Columns[5].HeaderText = "Site";
-            dataGridView1.Columns[6].HeaderText = "Service";
-        }
-
-        public string userId;
-        public string GetId
-        {
-            get
-            {
-                return "je fonctionne";
-            }
-        }
-
-        public void getIdSelected(string id)
-        {
-
+            dataGridView1.Columns[6].HeaderText = "Service";*/
         }
 
         // DO COMPLETE
@@ -155,10 +142,6 @@ namespace WinFormsApp1
             string userId = dataGridView1.Rows[rowClicked].Cells[0].Value.ToString();
 
             MessageBox.Show("" + userId);
-
-
-            string id = "je veux fonctionner";
-           
 
             EmployeeCardView employeeCardView = new EmployeeCardView(userId);
             employeeCardView.Show(); 
