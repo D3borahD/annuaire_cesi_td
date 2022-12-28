@@ -42,10 +42,11 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(469, 104);
+            this.dataGridView1.Location = new System.Drawing.Point(459, 104);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(425, 383);
+            this.dataGridView1.Size = new System.Drawing.Size(451, 383);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.displayEmplyeeCard_CellClick);
             // 
@@ -83,6 +84,7 @@
             this.dataGridViewSiteDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSiteDisplay.Location = new System.Drawing.Point(23, 104);
             this.dataGridViewSiteDisplay.Name = "dataGridViewSiteDisplay";
+            this.dataGridViewSiteDisplay.ReadOnly = true;
             this.dataGridViewSiteDisplay.RowTemplate.Height = 25;
             this.dataGridViewSiteDisplay.Size = new System.Drawing.Size(191, 383);
             this.dataGridViewSiteDisplay.TabIndex = 5;
@@ -93,6 +95,7 @@
             this.dataGridViewDepartmentDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDepartmentDisplay.Location = new System.Drawing.Point(241, 104);
             this.dataGridViewDepartmentDisplay.Name = "dataGridViewDepartmentDisplay";
+            this.dataGridViewDepartmentDisplay.ReadOnly = true;
             this.dataGridViewDepartmentDisplay.RowTemplate.Height = 25;
             this.dataGridViewDepartmentDisplay.Size = new System.Drawing.Size(195, 383);
             this.dataGridViewDepartmentDisplay.TabIndex = 6;
@@ -112,6 +115,7 @@
             this.Name = "Annuaire";
             this.Text = "Annuaire";
             this.Load += new System.EventHandler(this.Annuaire_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AdminAcces_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSiteDisplay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDepartmentDisplay)).EndInit();

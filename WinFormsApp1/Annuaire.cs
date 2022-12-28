@@ -19,6 +19,7 @@ namespace WinFormsApp1
         public Annuaire()
         {
             InitializeComponent();
+            KeyPreview = true;
         }
 
         private void loadDataDepartment()
@@ -147,16 +148,15 @@ namespace WinFormsApp1
         }
 
     
-
-       
-        // DON'T WORK ...
-        private void Annuaire_KeyDown(object sender, KeyEventArgs e)
+        private void AdminAcces_KeyDown(object sender, KeyEventArgs e)
         {
+           // System.Diagnostics.Debug.Write(e.KeyCode);
             if (e.KeyCode == Keys.E)
             {
-                MessageBox.Show("Youpi ");
+                MessageBox.Show("jE FONCTIONNE ");
 
             }
+
         }
     }
 }
