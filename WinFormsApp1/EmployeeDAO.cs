@@ -21,9 +21,8 @@ namespace WinFormsApp1
             // start with an empty list
             List<JObject> returnThese = new List<JObject>();
 
-            // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
-          connection.Open();
+            connection.Open();
 
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
@@ -39,18 +38,6 @@ namespace WinFormsApp1
                     {
                         emp.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
                     }
-
-                   // Employee emp = new Employee
-                    //{
-                      //  id = reader.GetInt32(0),
-                       // firstname = reader.GetString(1),
-                        //lastname = reader.GetString(2),
-                      //  landline = reader.GetString(3),
-                       // mobile = reader.GetString(4),
-                       // email = reader.GetString(5),
-                        // site.id = reader.GetFieldValue<Site>(6),
-                        //department.id = reader.GetFieldValue<Department>(7)
-                    //};
                     returnThese.Add(emp);
                 }
             }
@@ -58,20 +45,20 @@ namespace WinFormsApp1
             return returnThese;
         }
 
-        // DO JOIN TABLE DISPLAY
-        public List<Employee> searchName(String searchName)
+        public List<JObject> searchName(String searchName)
         {
             // start with an empty list
-            List<Employee> returnThese = new List<Employee>();
+            List<JObject> returnThese = new List<JObject>();
 
             // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             String searchWildPhrase = "%" + searchName + "%";
+
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
-            command.CommandText = "SELECT * FROM employee WHERE lastname LIKE @search"; 
+            command.CommandText = "SELECT employee.id as employee_id, `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE lastname LIKE @search;";
             command.Parameters.AddWithValue("@search",searchWildPhrase);
             command.Connection = connection;
 
@@ -79,22 +66,17 @@ namespace WinFormsApp1
             {
                 while (reader.Read())
                 {
-                    Employee emp = new Employee
-                    {
-                        id = reader.GetInt32(0),
-                        firstname = reader.GetString(1),
-                        lastname = reader.GetString(2),
-                        landline = reader.GetString(3),
-                        mobile = reader.GetString(4),
-                        email = reader.GetString(5)
+                    JObject emp = new JObject();    
 
-                    };
+                    for(int i = 0; i< reader.FieldCount; i++)
+                    {
+                        emp.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                    }
                     returnThese.Add(emp);
                 }
             }
             connection.Close();
             return returnThese;
-
         }
 
         internal int addOneEmployee(Employee employee)
@@ -164,7 +146,7 @@ namespace WinFormsApp1
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
   
-            command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE site_id = @site_id;";
+            command.CommandText = "SELECT employee.id as employee_id, `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE site_id = @site_id;";
 
             command.Parameters.AddWithValue("@site_id", site_id);
             command.Connection = connection;
@@ -200,7 +182,7 @@ namespace WinFormsApp1
 
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
-            command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE department_id = @department_id;";
+            command.CommandText = "SELECT employee.id as employee_id, `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE department_id = @department_id;";
 
             command.Parameters.AddWithValue("@department_id", department_id);
             command.Connection = connection;

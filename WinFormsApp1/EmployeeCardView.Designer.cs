@@ -38,6 +38,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.email = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lastname
@@ -84,7 +86,7 @@
             // 
             this.Department.AutoSize = true;
             this.Department.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Department.Location = new System.Drawing.Point(163, 217);
+            this.Department.Location = new System.Drawing.Point(163, 251);
             this.Department.Name = "Department";
             this.Department.Size = new System.Drawing.Size(44, 15);
             this.Department.TabIndex = 5;
@@ -94,7 +96,7 @@
             // 
             this.Site.AutoSize = true;
             this.Site.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Site.Location = new System.Drawing.Point(163, 183);
+            this.Site.Location = new System.Drawing.Point(163, 217);
             this.Site.Name = "Site";
             this.Site.Size = new System.Drawing.Size(26, 15);
             this.Site.TabIndex = 4;
@@ -104,7 +106,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(38, 217);
+            this.label1.Location = new System.Drawing.Point(38, 251);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 15);
             this.label1.TabIndex = 11;
@@ -114,7 +116,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(38, 183);
+            this.label2.Location = new System.Drawing.Point(38, 217);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 15);
             this.label2.TabIndex = 10;
@@ -140,11 +142,33 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Téléphone Fixe";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(38, 183);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(36, 15);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Email";
+            // 
+            // email
+            // 
+            this.email.AutoSize = true;
+            this.email.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.email.Location = new System.Drawing.Point(163, 183);
+            this.email.Name = "email";
+            this.email.Size = new System.Drawing.Size(44, 15);
+            this.email.TabIndex = 12;
+            this.email.Text = "Mobile";
+            // 
             // EmployeeCardView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(322, 315);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.email);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
@@ -174,5 +198,7 @@
         private Label label2;
         private Label label3;
         private Label label4;
+        private Label label5;
+        private Label email;
     }
 }

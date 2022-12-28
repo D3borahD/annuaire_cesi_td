@@ -13,15 +13,17 @@ namespace WinFormsApp1
 {
     public partial class EmployeeCardView : Form
     {
-        //public event SendId Send;
-        public string GetUserId;
-
-        public EmployeeCardView(string userId)
+        public EmployeeCardView(List<string> userInfo)
         {
             InitializeComponent();
 
-            lastname.Text = userId;
+            lastname.Text = userInfo[2];
+            firstname.Text = userInfo[1];
+            landline.Text = userInfo[3];
+            mobile.Text = userInfo[4];
+            email.Text = userInfo[5];
+            Site.Text = userInfo[6];
+            Department.Text = userInfo[7];
         }
-
     }
 }

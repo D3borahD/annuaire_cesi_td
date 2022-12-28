@@ -99,18 +99,11 @@ namespace WinFormsApp1
 
             int rowClicked = dataGridView.CurrentRow.Index;
 
-            String idOfChoosen = dataGridView.Rows[rowClicked].Cells[0].Value.ToString();
+           // String idOfChoosen = dataGridView.Rows[rowClicked].Cells[0].Value.ToString();
 
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoin((int) dataGridView.Rows[rowClicked].Cells[0].Value);
 
             dataGridView1.DataSource = employeeBindingSource;
-           /* dataGridView1.Columns[0].HeaderText = "Prénom";
-            dataGridView1.Columns[1].HeaderText = "Nom";
-            dataGridView1.Columns[2].HeaderText = "Téléphone Fixe";
-            dataGridView1.Columns[3].HeaderText = "Mobile";
-            dataGridView1.Columns[4].HeaderText = "Email";
-            dataGridView1.Columns[5].HeaderText = "Site";
-            dataGridView1.Columns[6].HeaderText = "Service";*/
         }
 
         private void dataGridViewDepartmentDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -120,46 +113,31 @@ namespace WinFormsApp1
 
             int rowClicked = dataGridView.CurrentRow.Index;
 
-            String idOfChoosen = dataGridView.Rows[rowClicked].Cells[0].Value.ToString();
-
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoinDepartment((int)dataGridView.Rows[rowClicked].Cells[0].Value);
-
             dataGridView1.DataSource = employeeBindingSource;
-           /* dataGridView1.Columns[0].HeaderText = "Prénom";
-            dataGridView1.Columns[1].HeaderText = "Nom";
-            dataGridView1.Columns[2].HeaderText = "Téléphone Fixe";
-            dataGridView1.Columns[3].HeaderText = "Mobile";
-            dataGridView1.Columns[4].HeaderText = "Email";
-            dataGridView1.Columns[5].HeaderText = "Site";
-            dataGridView1.Columns[6].HeaderText = "Service";*/
         }
 
-        // DO COMPLETE
         public void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int rowClicked = dataGridView1.CurrentRow.Index;
+            int rowClicked = dataGridView1.CurrentRow.Index;           
+            List<String> userInfo = new List<string>();
 
-            string userId = dataGridView1.Rows[rowClicked].Cells[0].Value.ToString();
+            for (int i = 0; i< dataGridView1.ColumnCount; i++)
+            {
+                userInfo.Add(dataGridView1.Rows[rowClicked].Cells[i].Value.ToString());
+            }
 
-            MessageBox.Show("" + userId);
-
-            EmployeeCardView employeeCardView = new EmployeeCardView(userId);
+            EmployeeCardView employeeCardView = new EmployeeCardView(userInfo);
             employeeCardView.Show(); 
-       
-        // send id in new box ?
-
-    }
+        }
 
         private void AdminAcces_KeyDown(object sender, KeyEventArgs e)
         {
-           // System.Diagnostics.Debug.Write(e.KeyCode);
             if (e.Shift && e.Control && e.KeyCode == Keys.E)
             {
                 var adminConnection = new AdminConnection();
                 adminConnection.Show();
-
             }
-
         }
     }
 }
