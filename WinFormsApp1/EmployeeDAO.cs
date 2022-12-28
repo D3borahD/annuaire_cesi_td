@@ -153,9 +153,8 @@ namespace WinFormsApp1
 
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
+  
             command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE site_id = @site_id;";
-            //command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name, department_id FROM `employee` JOIN site on site_id = site.id WHERE site_id = @site_id;";
-
 
             command.Parameters.AddWithValue("@site_id", site_id);
             command.Connection = connection;
@@ -191,7 +190,7 @@ namespace WinFormsApp1
 
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
-            command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`, site_id, department.name FROM `employee` JOIN department on department_id = department.id WHERE department_id = @department_id";
+            command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE department_id = @department_id;";
 
             command.Parameters.AddWithValue("@department_id", department_id);
             command.Connection = connection;
