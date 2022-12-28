@@ -151,10 +151,10 @@ namespace WinFormsApp1
         private void AdminAcces_KeyDown(object sender, KeyEventArgs e)
         {
            // System.Diagnostics.Debug.Write(e.KeyCode);
-            if (e.KeyCode == Keys.E)
+            if (e.Shift && e.Control && e.KeyCode == Keys.E)
             {
-                MessageBox.Show("jE FONCTIONNE ");
-
+                var adminConnection = new AdminConnection();
+                adminConnection.Show();
             }
 
         }

@@ -52,3 +52,4 @@ C:\Users\vboxuser\Documents\td-dotNet\annuaire_cesi_td\WinFormsApp1\obj\Debug\ne
 C:\Users\vboxuser\Documents\td-dotNet\annuaire_cesi_td\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.AdminEditor.resources
 C:\Users\vboxuser\Documents\td-dotNet\annuaire_cesi_td\WinFormsApp1\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
 C:\Users\vboxuser\Documents\td-dotNet\annuaire_cesi_td\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.EmployeeCardView.resources
+C:\Users\vboxuser\Documents\td-dotNet\annuaire_cesi_td\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.AdminConnection.resources
