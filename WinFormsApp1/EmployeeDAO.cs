@@ -16,33 +16,41 @@ namespace WinFormsApp1
         string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
 
-        public List<Employee> getAllEmployees()
+        public List<JObject> getAllEmployees()
         {
             // start with an empty list
-            List<Employee> returnThese = new List<Employee>();
+            List<JObject> returnThese = new List<JObject>();
 
             // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
           connection.Open();
 
             // define the sql statement to fetch all employees
-            MySqlCommand command = new MySqlCommand("SELECT `id`, `firstname`, `lastname`,`landline`, `mobile`, `email`, `site_id`, `department_id` FROM employee", connection);
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = "SELECT `firstname`, `lastname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id;";
+            command.Connection = connection;
 
             using (MySqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    Employee emp = new Employee
+                    JObject emp = new JObject();
+                    for (int i = 0; i < reader.FieldCount; i++)
                     {
-                        id = reader.GetInt32(0),
-                        firstname = reader.GetString(1),
-                        lastname = reader.GetString(2),
-                        landline = reader.GetString(3),
-                        mobile = reader.GetString(4),
-                        email = reader.GetString(5),
-                        //site.id = reader.GetFieldValue<Site>(6),
-                       // department.id = reader.GetFieldValue<Department>(7)
-                    };
+                        emp.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                    }
+
+                   // Employee emp = new Employee
+                    //{
+                      //  id = reader.GetInt32(0),
+                       // firstname = reader.GetString(1),
+                        //lastname = reader.GetString(2),
+                      //  landline = reader.GetString(3),
+                       // mobile = reader.GetString(4),
+                       // email = reader.GetString(5),
+                        // site.id = reader.GetFieldValue<Site>(6),
+                        //department.id = reader.GetFieldValue<Department>(7)
+                    //};
                     returnThese.Add(emp);
                 }
             }

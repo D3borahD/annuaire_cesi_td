@@ -46,14 +46,13 @@ namespace WinFormsApp1
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
             dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
-            dataGridViewEmployeeEdit.Columns["id"].Visible = false;
-            dataGridViewEmployeeEdit.Columns[1].HeaderText = "Prénom";
-            dataGridViewEmployeeEdit.Columns[2].HeaderText = "Nom";
-            dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone Fixe";
-            dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
-            dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
-            dataGridViewEmployeeEdit.Columns[6].HeaderText = "Site";
-            dataGridViewEmployeeEdit.Columns[7].HeaderText = "Service";
+            dataGridViewEmployeeEdit.Columns[0].HeaderText = "Prénom";
+            dataGridViewEmployeeEdit.Columns[1].HeaderText = "Nom";
+            dataGridViewEmployeeEdit.Columns[2].HeaderText = "Téléphone Fixe";
+            dataGridViewEmployeeEdit.Columns[3].HeaderText = "Mobile";
+            dataGridViewEmployeeEdit.Columns[4].HeaderText = "Email";
+            dataGridViewEmployeeEdit.Columns[5].HeaderText = "Site";
+            dataGridViewEmployeeEdit.Columns[6].HeaderText = "Service";
         }
 
         private void AdminEditor_Load_1(object sender, EventArgs e)

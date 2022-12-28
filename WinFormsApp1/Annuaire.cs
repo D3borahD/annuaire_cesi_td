@@ -44,14 +44,13 @@ namespace WinFormsApp1
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
             dataGridView1.DataSource = employeeBindingSource;
-            dataGridView1.Columns["id"].Visible = false;
-            dataGridView1.Columns[1].HeaderText = "Prénom";
-            dataGridView1.Columns[2].HeaderText = "Nom";
+            dataGridView1.Columns[0].HeaderText = "Prénom";
+            dataGridView1.Columns[1].HeaderText = "Nom";
+            dataGridView1.Columns[2].Visible = false;
             dataGridView1.Columns[3].Visible = false;
             dataGridView1.Columns[4].Visible = false;
-            dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].HeaderText = "Site";
-            dataGridView1.Columns[7].HeaderText = "Service";
+            dataGridView1.Columns[5].HeaderText = "Site";
+            dataGridView1.Columns[6].HeaderText = "Service";
         }
 
         // private void button1_Click(object sender, EventArgs e)
@@ -133,6 +132,7 @@ namespace WinFormsApp1
             dataGridView1.Columns[6].HeaderText = "Service";
         }
 
+        // DO COMPLETE
         private void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowClicked = dataGridView1.CurrentRow.Index;
@@ -142,6 +142,21 @@ namespace WinFormsApp1
             var employeeCardView = new EmployeeCardView();
             employeeCardView.Show();
 
+            // send id in new box ?
+
+        }
+
+    
+
+       
+        // DON'T WORK ...
+        private void Annuaire_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.E)
+            {
+                MessageBox.Show("Youpi ");
+
+            }
         }
     }
 }
