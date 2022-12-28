@@ -139,6 +139,8 @@ namespace WinFormsApp1
 
             String idOfChoosen = dataGridView1.Rows[rowClicked].Cells[0].Value.ToString();
             MessageBox.Show("" + idOfChoosen);
+            var employeeCardView = new EmployeeCardView();
+            employeeCardView.Show();
 
         }
     }
