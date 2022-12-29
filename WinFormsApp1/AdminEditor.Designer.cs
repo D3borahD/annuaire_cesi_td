@@ -29,14 +29,12 @@
         private void InitializeComponent()
         {
             this.addEmployee = new System.Windows.Forms.GroupBox();
+            this.listBoxDepartment = new System.Windows.Forms.ListBox();
             this.listBoxSite = new System.Windows.Forms.ListBox();
             this.Site = new System.Windows.Forms.Label();
             this.add_employee = new System.Windows.Forms.Button();
-            this.txt_employee_email = new System.Windows.Forms.TextBox();
             this.txt_employee_mobile = new System.Windows.Forms.TextBox();
             this.txt_employee_landline = new System.Windows.Forms.TextBox();
-            this.txt_employee_service = new System.Windows.Forms.TextBox();
-            this.txt_employee_site = new System.Windows.Forms.TextBox();
             this.txt_employee_firstname = new System.Windows.Forms.TextBox();
             this.txt_employee_lastname = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -74,14 +72,12 @@
             // addEmployee
             // 
             this.addEmployee.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.addEmployee.Controls.Add(this.listBoxDepartment);
             this.addEmployee.Controls.Add(this.listBoxSite);
             this.addEmployee.Controls.Add(this.Site);
             this.addEmployee.Controls.Add(this.add_employee);
-            this.addEmployee.Controls.Add(this.txt_employee_email);
             this.addEmployee.Controls.Add(this.txt_employee_mobile);
             this.addEmployee.Controls.Add(this.txt_employee_landline);
-            this.addEmployee.Controls.Add(this.txt_employee_service);
-            this.addEmployee.Controls.Add(this.txt_employee_site);
             this.addEmployee.Controls.Add(this.txt_employee_firstname);
             this.addEmployee.Controls.Add(this.txt_employee_lastname);
             this.addEmployee.Controls.Add(this.label7);
@@ -98,6 +94,15 @@
             this.addEmployee.TabStop = false;
             this.addEmployee.Text = "Ajouter un employé";
             // 
+            // listBoxDepartment
+            // 
+            this.listBoxDepartment.FormattingEnabled = true;
+            this.listBoxDepartment.ItemHeight = 15;
+            this.listBoxDepartment.Location = new System.Drawing.Point(134, 155);
+            this.listBoxDepartment.Name = "listBoxDepartment";
+            this.listBoxDepartment.Size = new System.Drawing.Size(139, 34);
+            this.listBoxDepartment.TabIndex = 17;
+            // 
             // listBoxSite
             // 
             this.listBoxSite.FormattingEnabled = true;
@@ -109,9 +114,9 @@
             "tet",
             "df",
             "po"});
-            this.listBoxSite.Location = new System.Drawing.Point(16, 285);
+            this.listBoxSite.Location = new System.Drawing.Point(134, 107);
             this.listBoxSite.Name = "listBoxSite";
-            this.listBoxSite.Size = new System.Drawing.Size(235, 49);
+            this.listBoxSite.Size = new System.Drawing.Size(139, 34);
             this.listBoxSite.TabIndex = 16;
             // 
             // Site
@@ -134,44 +139,23 @@
             this.add_employee.UseVisualStyleBackColor = false;
             this.add_employee.Click += new System.EventHandler(this.add_employee_Click);
             // 
-            // txt_employee_email
-            // 
-            this.txt_employee_email.Location = new System.Drawing.Point(134, 249);
-            this.txt_employee_email.Name = "txt_employee_email";
-            this.txt_employee_email.Size = new System.Drawing.Size(139, 23);
-            this.txt_employee_email.TabIndex = 13;
-            // 
             // txt_employee_mobile
             // 
-            this.txt_employee_mobile.Location = new System.Drawing.Point(134, 214);
+            this.txt_employee_mobile.Location = new System.Drawing.Point(134, 240);
             this.txt_employee_mobile.Name = "txt_employee_mobile";
             this.txt_employee_mobile.Size = new System.Drawing.Size(139, 23);
             this.txt_employee_mobile.TabIndex = 12;
             // 
             // txt_employee_landline
             // 
-            this.txt_employee_landline.Location = new System.Drawing.Point(134, 176);
+            this.txt_employee_landline.Location = new System.Drawing.Point(134, 203);
             this.txt_employee_landline.Name = "txt_employee_landline";
             this.txt_employee_landline.Size = new System.Drawing.Size(139, 23);
             this.txt_employee_landline.TabIndex = 11;
             // 
-            // txt_employee_service
-            // 
-            this.txt_employee_service.Location = new System.Drawing.Point(134, 141);
-            this.txt_employee_service.Name = "txt_employee_service";
-            this.txt_employee_service.Size = new System.Drawing.Size(139, 23);
-            this.txt_employee_service.TabIndex = 10;
-            // 
-            // txt_employee_site
-            // 
-            this.txt_employee_site.Location = new System.Drawing.Point(134, 106);
-            this.txt_employee_site.Name = "txt_employee_site";
-            this.txt_employee_site.Size = new System.Drawing.Size(139, 23);
-            this.txt_employee_site.TabIndex = 9;
-            // 
             // txt_employee_firstname
             // 
-            this.txt_employee_firstname.Location = new System.Drawing.Point(134, 68);
+            this.txt_employee_firstname.Location = new System.Drawing.Point(134, 70);
             this.txt_employee_firstname.Name = "txt_employee_firstname";
             this.txt_employee_firstname.Size = new System.Drawing.Size(139, 23);
             this.txt_employee_firstname.TabIndex = 8;
@@ -186,16 +170,15 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 246);
+            this.label7.Location = new System.Drawing.Point(16, 279);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 15);
+            this.label7.Size = new System.Drawing.Size(0, 15);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Email";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 211);
+            this.label6.Location = new System.Drawing.Point(16, 244);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 15);
             this.label6.TabIndex = 5;
@@ -204,7 +187,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 176);
+            this.label5.Location = new System.Drawing.Point(16, 209);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(85, 15);
             this.label5.TabIndex = 4;
@@ -213,7 +196,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 141);
+            this.label4.Location = new System.Drawing.Point(16, 155);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 15);
             this.label4.TabIndex = 3;
@@ -454,11 +437,8 @@
 
         //private Label label1;
         private GroupBox addEmployee;
-        private TextBox txt_employee_email;
         private TextBox txt_employee_mobile;
         private TextBox txt_employee_landline;
-        private TextBox txt_employee_service;
-        private TextBox txt_employee_site;
         private TextBox txt_employee_firstname;
         private TextBox txt_employee_lastname;
         private Label label7;
@@ -488,5 +468,6 @@
         private Button updateEmployee;
         private Button deleteEmployee;
         private ListBox listBoxSite;
+        private ListBox listBoxDepartment;
     }
 }

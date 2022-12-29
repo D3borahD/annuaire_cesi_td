@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -65,10 +66,15 @@ namespace WinFormsApp1
             listBoxSite.DataSource = siteBindingSource;
             listBoxSite.DisplayMember = "name";
             listBoxSite.ValueMember = "id";
-            // String testc = listBoxSite.Items[listBoxSite.SelectedIndex].ToString();
-            String testc = listBoxSite.SelectedValue.ToString();
+        }
 
-            //MessageBox.Show("" + testc);
+        private void loadListBoxDepartment()
+        {
+            DepartmentDAO departmentDAO = new DepartmentDAO();
+            departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
+            listBoxDepartment.DataSource = departmentBindingSource;
+            listBoxDepartment.DisplayMember = "name";
+            listBoxDepartment.ValueMember = "id";
         }
 
         private void AdminEditor_Load_1(object sender, EventArgs e)
@@ -77,8 +83,10 @@ namespace WinFormsApp1
             loadDataSite();
             loadDataDepartment();
             loadListBoxSite();
+            loadListBoxDepartment();
         }
 
+      
         private void add_employee_Click(object sender, EventArgs e)
         {
            Regex numberRegex = new Regex("^[0-9]+$");
@@ -86,7 +94,14 @@ namespace WinFormsApp1
             //int countNumber = fixNumber.Split().Length + 1;
             String mobileNumber = txt_employee_mobile.Text;
 
-            //Console.WrteLine(coun);
+
+            String formatFirstname = txt_employee_firstname.Text;
+            formatFirstname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatFirstname.ToLower());
+
+            String getFirstletter = formatFirstname.Substring(0, 1);
+            String createEmail = (getFirstletter + "." + txt_employee_lastname.Text + "@agro.bio").ToLower();
+           
+            
 
             if (!numberRegex.IsMatch(fixNumber) && !numberRegex.IsMatch(mobileNumber))
                  {
@@ -101,48 +116,37 @@ namespace WinFormsApp1
                 String.IsNullOrEmpty(txt_employee_lastname.Text) ||
                 String.IsNullOrEmpty(txt_employee_firstname.Text) ||
                 String.IsNullOrEmpty(txt_employee_landline.Text) ||
-                String.IsNullOrEmpty(txt_employee_mobile.Text) ||
-                String.IsNullOrEmpty(txt_employee_email.Text) ||
-                String.IsNullOrEmpty(txt_employee_site.Text) ||
-                String.IsNullOrEmpty(txt_employee_service.Text)
+                String.IsNullOrEmpty(txt_employee_mobile.Text) 
                 )
             {
                 MessageBox.Show("Erreur : au moins un champ est vide");
             }
             else
             {
-                // int site = int.Parse(listBoxSite.Items[listBoxSite.SelectedIndex].ToString());
-                // add a new item to the database
-                //int site = Convert.ToInt32(listBoxSite.SelectedValue.ToString());
                 Employee employee = new Employee
-            {
-                lastname = txt_employee_lastname.Text,
-                firstname = txt_employee_firstname.Text,
-                landline = txt_employee_landline.Text,
-                mobile = txt_employee_mobile.Text,
-                email = txt_employee_email.Text,
-               // site = txt_employee_site.Text,
-                site = listBoxSite.SelectedValue.ToString(),
-                //site = listBoxSite.Items[listBoxSite.SelectedIndex].ToString(),
-                department = txt_employee_service.Text,
-            };
+                {
+                    lastname = txt_employee_lastname.Text.ToUpper(),
+                    firstname = formatFirstname,
+                    landline = txt_employee_landline.Text,
+                    mobile = txt_employee_mobile.Text,
+                    email = createEmail,
+                    site = listBoxSite.SelectedValue.ToString(),
+                    department = listBoxDepartment.SelectedValue.ToString(),
+                };
 
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            int result = employeeDAO.addOneEmployee(employee);
+                EmployeeDAO employeeDAO = new EmployeeDAO();
+                int result = employeeDAO.addOneEmployee(employee);
 
                 // clear input form
                 // txt_employee_lastname.Clear();
-            txt_employee_lastname.Text = String.Empty;
-            txt_employee_firstname.Text = String.Empty;
-            txt_employee_landline.Text = String.Empty;
-            txt_employee_mobile.Text = String.Empty;
-            txt_employee_email.Text = String.Empty;
-            txt_employee_site.Text = String.Empty;
-            txt_employee_service.Text = String.Empty;
+                txt_employee_lastname.Text = String.Empty;
+                txt_employee_firstname.Text = String.Empty;
+                txt_employee_landline.Text = String.Empty;
+                txt_employee_mobile.Text = String.Empty;
 
-            MessageBox.Show("L'employé(e) " + employee.lastname + " " + employee.firstname+ " a été ajouté");
+                MessageBox.Show("L'employé(e) " + employee.lastname + " " + employee.firstname+ " a été ajouté");
 
-            loadDataEmployee();
+                loadDataEmployee();
             }
         }
 
