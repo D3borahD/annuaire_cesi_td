@@ -37,7 +37,6 @@ namespace WinFormsApp1
         private void update_employee_Click(object sender, EventArgs e)
         {
 
-           //MessageBox.Show("test" + employeeId);
             Employee employee = new Employee
             {
                 id = employeeId,
@@ -55,18 +54,7 @@ namespace WinFormsApp1
 
             int result = employeeDAO.updateEmployee(employee);
 
-             MessageBox.Show("L'employé(e) a été modifié(e)" + employeeId);
+            MessageBox.Show("L'employé(e) a été modifié(e)" + employeeId);
         }
-
-
-        // int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
-
-        // int idSelectedEmployee = (int)dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value;
-
-        // EmployeeDAO employeeDAO = new EmployeeDAO();
-        //int result = employeeDAO.updateEmployee(idSelectedEmployee);
-
-        // MessageBox.Show("L'employé(e) a été modifié(e)");
-        // loadDataEmployee();
     }
 }

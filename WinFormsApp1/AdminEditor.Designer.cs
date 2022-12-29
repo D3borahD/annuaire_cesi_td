@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.addEmployee = new System.Windows.Forms.GroupBox();
+            this.listBoxSite = new System.Windows.Forms.ListBox();
             this.Site = new System.Windows.Forms.Label();
             this.add_employee = new System.Windows.Forms.Button();
             this.txt_employee_email = new System.Windows.Forms.TextBox();
@@ -73,6 +74,7 @@
             // addEmployee
             // 
             this.addEmployee.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.addEmployee.Controls.Add(this.listBoxSite);
             this.addEmployee.Controls.Add(this.Site);
             this.addEmployee.Controls.Add(this.add_employee);
             this.addEmployee.Controls.Add(this.txt_employee_email);
@@ -95,6 +97,22 @@
             this.addEmployee.TabIndex = 1;
             this.addEmployee.TabStop = false;
             this.addEmployee.Text = "Ajouter un employé";
+            // 
+            // listBoxSite
+            // 
+            this.listBoxSite.FormattingEnabled = true;
+            this.listBoxSite.ItemHeight = 15;
+            this.listBoxSite.Items.AddRange(new object[] {
+            "Test",
+            "test1",
+            "TEST2",
+            "tet",
+            "df",
+            "po"});
+            this.listBoxSite.Location = new System.Drawing.Point(16, 285);
+            this.listBoxSite.Name = "listBoxSite";
+            this.listBoxSite.Size = new System.Drawing.Size(235, 49);
+            this.listBoxSite.TabIndex = 16;
             // 
             // Site
             // 
@@ -469,5 +487,6 @@
         private Button deleteSite;
         private Button updateEmployee;
         private Button deleteEmployee;
+        private ListBox listBoxSite;
     }
 }

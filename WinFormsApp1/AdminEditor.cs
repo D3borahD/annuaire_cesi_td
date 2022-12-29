@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -57,11 +58,25 @@ namespace WinFormsApp1
             dataGridViewEmployeeEdit.Columns[7].HeaderText = "Service";
         }
 
+        private void loadListBoxSite()
+        {
+            SiteDAO siteDAO = new SiteDAO();
+            siteBindingSource.DataSource = siteDAO.getAllSites();
+            listBoxSite.DataSource = siteBindingSource;
+            listBoxSite.DisplayMember = "name";
+            listBoxSite.ValueMember = "id";
+            // String testc = listBoxSite.Items[listBoxSite.SelectedIndex].ToString();
+            String testc = listBoxSite.SelectedValue.ToString();
+
+            //MessageBox.Show("" + testc);
+        }
+
         private void AdminEditor_Load_1(object sender, EventArgs e)
         {
             loadDataEmployee();
             loadDataSite();
             loadDataDepartment();
+            loadListBoxSite();
         }
 
         private void add_employee_Click(object sender, EventArgs e)
@@ -96,8 +111,9 @@ namespace WinFormsApp1
             }
             else
             {
-
+                // int site = int.Parse(listBoxSite.Items[listBoxSite.SelectedIndex].ToString());
                 // add a new item to the database
+                //int site = Convert.ToInt32(listBoxSite.SelectedValue.ToString());
                 Employee employee = new Employee
             {
                 lastname = txt_employee_lastname.Text,
@@ -105,7 +121,9 @@ namespace WinFormsApp1
                 landline = txt_employee_landline.Text,
                 mobile = txt_employee_mobile.Text,
                 email = txt_employee_email.Text,
-                site = txt_employee_site.Text,
+               // site = txt_employee_site.Text,
+                site = listBoxSite.SelectedValue.ToString(),
+                //site = listBoxSite.Items[listBoxSite.SelectedIndex].ToString(),
                 department = txt_employee_service.Text,
             };
 
