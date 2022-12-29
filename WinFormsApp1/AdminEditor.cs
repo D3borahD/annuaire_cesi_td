@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Bcpg;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -187,9 +188,9 @@ namespace WinFormsApp1
         private void deleteEmployee_Click(object sender, EventArgs e)
         {
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
-            int idSelectedEmployee = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
 
-           // MessageBox.Show("Test " + idSelectedEmployee);
+            // cast don't work ??
+            int idSelectedEmployee = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
 
             EmployeeDAO employeeDAO = new EmployeeDAO();
             int result = employeeDAO.deleteEmployee(idSelectedEmployee);
@@ -201,21 +202,6 @@ namespace WinFormsApp1
         private void updateEmployee_Click(object sender, EventArgs e)
         {
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
-
-           // int idSelectedEmployee = (int)dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value;
-
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            //int result = employeeDAO.updateEmployee(idSelectedEmployee);
-
-            MessageBox.Show("L'employé(e) a été modifié(e)");
-            loadDataEmployee();
-
-
-        }
-
-        private void dataGridViewEmployeeEdit_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
             List<String> userInfo = new List<string>();
 
             for (int i = 0; i < dataGridViewEmployeeEdit.ColumnCount; i++)
@@ -223,8 +209,15 @@ namespace WinFormsApp1
                 userInfo.Add(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[i].Value.ToString());
             }
 
+            //int userId = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
+
             UpdateEmployee updateEmployee = new UpdateEmployee(userInfo);
             updateEmployee.Show();
+        }
+
+        private void dataGridViewEmployeeEdit_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Reference click dataGrid
         }
     }
 }

@@ -173,15 +173,17 @@
             this.update_employee.TabIndex = 33;
             this.update_employee.Text = "Modifier";
             this.update_employee.UseVisualStyleBackColor = true;
+            this.update_employee.Click += new System.EventHandler(this.update_employee_Click);
             // 
             // deleteEmployee
             // 
+            this.deleteEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.deleteEmployee.Location = new System.Drawing.Point(155, 340);
             this.deleteEmployee.Name = "deleteEmployee";
             this.deleteEmployee.Size = new System.Drawing.Size(115, 35);
             this.deleteEmployee.TabIndex = 34;
             this.deleteEmployee.Text = "Supprimer";
-            this.deleteEmployee.UseVisualStyleBackColor = true;
+            this.deleteEmployee.UseVisualStyleBackColor = false;
             // 
             // UpdateEmployee
             // 
