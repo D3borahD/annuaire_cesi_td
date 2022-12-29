@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.VisualBasic;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Utilities.Collections;
 using System;
@@ -155,8 +156,6 @@ namespace WinFormsApp1
 
             using (MySqlDataReader reader = command.ExecuteReader())
             {
-               
-
                 while (reader.Read())
                 {
                     JObject newEmployee = new JObject();
@@ -189,7 +188,6 @@ namespace WinFormsApp1
             command.Parameters.AddWithValue("@department_id", department_id);
             command.Connection = connection;
 
-
             using (MySqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -221,27 +219,40 @@ namespace WinFormsApp1
             return result;
         }
 
-       // internal int updateEmployee(int idSelectedEmployee)
-      //  {
+        internal int updateEmployee(Employee employee)
+        {
             // connect to the mysql server
-           // MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
             // define the sql statement to fetch all employees
-           // MySqlCommand command = new MySqlCommand("DELETE FROM `employee` WHERE `employee`.`id` = @id;", connection);
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = "UPDATE `employee` " +
+                "SET " +
+                "`firstname`= @firstname," +
+                "`lastname`= @lastname," +
+                "`landline`= @landline," +
+                "`mobile`= @mobile," +
+                "`email`= @email," +
+                "`site_id`= @site," +
+                "`department_id`= @department" +
+                " WHERE `id`= @id";
+            
+            command.Connection = connection;
 
-           // command.Parameters.AddWithValue("@id", idSelectedEmployee);
-            //command.Parameters.AddWithValue("@firstname", employee.firstname);
-            //command.Parameters.AddWithValue("@lastname", employee.lastname);
-            //command.Parameters.AddWithValue("@landline", employee.landline);
-           // command.Parameters.AddWithValue("@mobile", employee.mobile);
-           // command.Parameters.AddWithValue("@email", employee.email);
-           // command.Parameters.AddWithValue("@site", employee.site);
-          //  command.Parameters.AddWithValue("@department", employee.department);
-
-          //  int result = command.ExecuteNonQuery();
-           // connection.Close();
-           // return result;
-      //  }
+            // command.Parameters.AddWithValue("@id", idSelectedEmployee);
+            command.Parameters.AddWithValue("@firstname", employee.firstname);
+            command.Parameters.AddWithValue("@lastname", employee.lastname);
+            command.Parameters.AddWithValue("@landline", employee.landline);
+            command.Parameters.AddWithValue("@mobile", employee.mobile);
+            command.Parameters.AddWithValue("@email", employee.email);
+            command.Parameters.AddWithValue("@site", employee.site);
+            command.Parameters.AddWithValue("@department", employee.department);
+            command.Parameters.AddWithValue("@id", employee.id) ;
+            
+            int result = command.ExecuteNonQuery();
+            connection.Close();
+            return result;
+        }
     }
 }
  

@@ -12,15 +12,17 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace WinFormsApp1
 {
+
     public partial class UpdateEmployee : Form
     {
+        BindingSource employeeBindingSource = new BindingSource();
 
-        public int test;
+        public int employeeId;
         public UpdateEmployee(List<String> userInfo)
         {
             InitializeComponent();
 
-            test = int.Parse(userInfo[0]);
+            employeeId = int.Parse(userInfo[0]);
            
             txt_update_lastname.Text = userInfo[1];
             txt_update_firstname.Text = userInfo[2];
@@ -35,14 +37,25 @@ namespace WinFormsApp1
         private void update_employee_Click(object sender, EventArgs e)
         {
 
-            MessageBox.Show("test" + test);
-            // EmployeeDAO employeeDAO = new EmployeeDAO();
-           // employeeBindingSource.DataSource = employeeDAO.getOneEmployees(test);
+           //MessageBox.Show("test" + employeeId);
+            Employee employee = new Employee
+            {
+                id = employeeId,
+                lastname = txt_update_lastname.Text,
+                firstname = txt_update_firstname.Text,
+                landline = txt_update_landline.Text,
+                mobile = txt_update_mobile.Text,
+                email = txt_update_email.Text,
+                site = txt_update_site.Text,
+                department = txt_update_department.Text,
+            };
 
-            //int result = employeeDAO.updateEmployee(idSelectedEmployee);
 
-            // MessageBox.Show("L'employé(e) a été modifié(e)" + idEmpoyee);
-            // loadDataEmployee();
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+
+            int result = employeeDAO.updateEmployee(employee);
+
+             MessageBox.Show("L'employé(e) a été modifié(e)" + employeeId);
         }
 
 
