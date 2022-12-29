@@ -187,14 +187,14 @@ namespace WinFormsApp1
         private void deleteEmployee_Click(object sender, EventArgs e)
         {
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
-            int idSelectedEmployee = (int) dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value;
+            int idSelectedEmployee = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
 
-            MessageBox.Show("Test " + idSelectedEmployee);
+           // MessageBox.Show("Test " + idSelectedEmployee);
 
             EmployeeDAO employeeDAO = new EmployeeDAO();
-            // int result = employeeDAO.deleteEmployee(idSelectedEmployee);
+            int result = employeeDAO.deleteEmployee(idSelectedEmployee);
 
-           // MessageBox.Show("L'employé(e) a été supprimé(e)");
+            MessageBox.Show("L'employé(e) a été supprimé(e)");
             loadDataEmployee();
         }
 
@@ -202,7 +202,7 @@ namespace WinFormsApp1
         {
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
 
-            int idSelectedEmployee = (int)dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value;
+           // int idSelectedEmployee = (int)dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value;
 
             EmployeeDAO employeeDAO = new EmployeeDAO();
             //int result = employeeDAO.updateEmployee(idSelectedEmployee);
@@ -215,7 +215,16 @@ namespace WinFormsApp1
 
         private void dataGridViewEmployeeEdit_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
+            List<String> userInfo = new List<string>();
 
+            for (int i = 0; i < dataGridViewEmployeeEdit.ColumnCount; i++)
+            {
+                userInfo.Add(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[i].Value.ToString());
+            }
+
+            UpdateEmployee updateEmployee = new UpdateEmployee(userInfo);
+            updateEmployee.Show();
         }
     }
 }
