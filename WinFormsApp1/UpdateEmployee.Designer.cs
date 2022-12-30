@@ -44,6 +44,10 @@
             this.txt_update_lastname = new System.Windows.Forms.TextBox();
             this.update_employee = new System.Windows.Forms.Button();
             this.deleteEmployee = new System.Windows.Forms.Button();
+            this.listBoxDepartmentUpdate = new System.Windows.Forms.ListBox();
+            this.listBoxSiteUpdate = new System.Windows.Forms.ListBox();
+            this.labelSiteUpdate = new System.Windows.Forms.Label();
+            this.labelDepartmentUpdate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label5
@@ -60,7 +64,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(41, 253);
+            this.label1.Location = new System.Drawing.Point(41, 280);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 15);
             this.label1.TabIndex = 23;
@@ -120,21 +124,21 @@
             // 
             this.txt_update_landline.Location = new System.Drawing.Point(153, 109);
             this.txt_update_landline.Name = "txt_update_landline";
-            this.txt_update_landline.Size = new System.Drawing.Size(117, 23);
+            this.txt_update_landline.Size = new System.Drawing.Size(172, 23);
             this.txt_update_landline.TabIndex = 26;
             // 
             // txt_update_firstname
             // 
             this.txt_update_firstname.Location = new System.Drawing.Point(153, 69);
             this.txt_update_firstname.Name = "txt_update_firstname";
-            this.txt_update_firstname.Size = new System.Drawing.Size(117, 23);
+            this.txt_update_firstname.Size = new System.Drawing.Size(172, 23);
             this.txt_update_firstname.TabIndex = 27;
             // 
             // txt_update_mobile
             // 
             this.txt_update_mobile.Location = new System.Drawing.Point(153, 151);
             this.txt_update_mobile.Name = "txt_update_mobile";
-            this.txt_update_mobile.Size = new System.Drawing.Size(117, 23);
+            this.txt_update_mobile.Size = new System.Drawing.Size(172, 23);
             this.txt_update_mobile.TabIndex = 28;
             // 
             // txt_update_department
@@ -148,7 +152,7 @@
             // 
             this.txt_update_email.Location = new System.Drawing.Point(153, 185);
             this.txt_update_email.Name = "txt_update_email";
-            this.txt_update_email.Size = new System.Drawing.Size(117, 23);
+            this.txt_update_email.Size = new System.Drawing.Size(172, 23);
             this.txt_update_email.TabIndex = 30;
             // 
             // txt_update_site
@@ -162,34 +166,84 @@
             // 
             this.txt_update_lastname.Location = new System.Drawing.Point(153, 26);
             this.txt_update_lastname.Name = "txt_update_lastname";
-            this.txt_update_lastname.Size = new System.Drawing.Size(117, 23);
+            this.txt_update_lastname.Size = new System.Drawing.Size(172, 23);
             this.txt_update_lastname.TabIndex = 32;
             // 
             // update_employee
             // 
-            this.update_employee.Location = new System.Drawing.Point(25, 340);
+            this.update_employee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.update_employee.Location = new System.Drawing.Point(119, 375);
             this.update_employee.Name = "update_employee";
             this.update_employee.Size = new System.Drawing.Size(115, 35);
             this.update_employee.TabIndex = 33;
             this.update_employee.Text = "Modifier";
-            this.update_employee.UseVisualStyleBackColor = true;
+            this.update_employee.UseVisualStyleBackColor = false;
             this.update_employee.Click += new System.EventHandler(this.update_employee_Click);
             // 
             // deleteEmployee
             // 
-            this.deleteEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.deleteEmployee.Location = new System.Drawing.Point(155, 340);
+            this.deleteEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.deleteEmployee.Location = new System.Drawing.Point(249, 375);
             this.deleteEmployee.Name = "deleteEmployee";
             this.deleteEmployee.Size = new System.Drawing.Size(115, 35);
             this.deleteEmployee.TabIndex = 34;
             this.deleteEmployee.Text = "Supprimer";
             this.deleteEmployee.UseVisualStyleBackColor = false;
             // 
+            // listBoxDepartmentUpdate
+            // 
+            this.listBoxDepartmentUpdate.FormattingEnabled = true;
+            this.listBoxDepartmentUpdate.ItemHeight = 15;
+            this.listBoxDepartmentUpdate.Location = new System.Drawing.Point(299, 280);
+            this.listBoxDepartmentUpdate.Name = "listBoxDepartmentUpdate";
+            this.listBoxDepartmentUpdate.Size = new System.Drawing.Size(165, 34);
+            this.listBoxDepartmentUpdate.TabIndex = 36;
+            this.listBoxDepartmentUpdate.SelectedIndexChanged += new System.EventHandler(this.listBoxDepartment_SelectedIndexChanged);
+            // 
+            // listBoxSiteUpdate
+            // 
+            this.listBoxSiteUpdate.FormattingEnabled = true;
+            this.listBoxSiteUpdate.ItemHeight = 15;
+            this.listBoxSiteUpdate.Items.AddRange(new object[] {
+            "Test",
+            "test1",
+            "TEST2",
+            "tet",
+            "df",
+            "po"});
+            this.listBoxSiteUpdate.Location = new System.Drawing.Point(299, 225);
+            this.listBoxSiteUpdate.Name = "listBoxSiteUpdate";
+            this.listBoxSiteUpdate.Size = new System.Drawing.Size(165, 34);
+            this.listBoxSiteUpdate.TabIndex = 35;
+            this.listBoxSiteUpdate.SelectedIndexChanged += new System.EventHandler(this.listBoxSite_SelectedIndexChanged);
+            // 
+            // labelSiteUpdate
+            // 
+            this.labelSiteUpdate.AutoSize = true;
+            this.labelSiteUpdate.Location = new System.Drawing.Point(131, 233);
+            this.labelSiteUpdate.Name = "labelSiteUpdate";
+            this.labelSiteUpdate.Size = new System.Drawing.Size(89, 15);
+            this.labelSiteUpdate.TabIndex = 37;
+            this.labelSiteUpdate.Text = "labelSiteUpdate";
+            // 
+            // labelDepartmentUpdate
+            // 
+            this.labelDepartmentUpdate.AutoSize = true;
+            this.labelDepartmentUpdate.Location = new System.Drawing.Point(131, 293);
+            this.labelDepartmentUpdate.Name = "labelDepartmentUpdate";
+            this.labelDepartmentUpdate.Size = new System.Drawing.Size(89, 15);
+            this.labelDepartmentUpdate.TabIndex = 38;
+            this.labelDepartmentUpdate.Text = "labelSiteUpdate";
+            // 
             // UpdateEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 450);
+            this.ClientSize = new System.Drawing.Size(500, 450);
+            this.Controls.Add(this.labelDepartmentUpdate);
+            this.Controls.Add(this.labelSiteUpdate);
+            this.Controls.Add(this.listBoxDepartmentUpdate);
+            this.Controls.Add(this.listBoxSiteUpdate);
             this.Controls.Add(this.deleteEmployee);
             this.Controls.Add(this.update_employee);
             this.Controls.Add(this.txt_update_lastname);
@@ -231,5 +285,9 @@
         private TextBox txt_update_lastname;
         private Button update_employee;
         private Button deleteEmployee;
+        private ListBox listBoxDepartmentUpdate;
+        private ListBox listBoxSiteUpdate;
+        private Label labelSiteUpdate;
+        private Label labelDepartmentUpdate;
     }
 }

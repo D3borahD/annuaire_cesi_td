@@ -101,33 +101,31 @@ namespace WinFormsApp1
             return newRows;
         }
 
-        public List<Employee> getOneEmployees(int site_id)
+        public List<JObject> getOneEmployees(int employeeId)
         {
             // start with an empty list
-            List<Employee> returnThese = new List<Employee>();
+            List<JObject> returnThese = new List<JObject>();
 
             // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             // define the sql statement to fetch all employees
-            MySqlCommand command = new MySqlCommand("SELECT * FROM employee WHERE site_id = @site_id", connection);
-            command.Parameters.AddWithValue("@site_id", site_id);
+            MySqlCommand command = new MySqlCommand("SELECT employee.id as employee_id, `firstname`, `lastname`, `landline`, `mobile`, `email`, site.id as site_id, department.id as department_id FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id WHERE employee.id = @id", connection);
+            command.Parameters.AddWithValue("@id", employeeId);
 
 
             using (MySqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    Employee emp = new Employee
+                    JObject emp = new JObject();
+                   for(int i = 0; i< reader.FieldCount; i++)
                     {
-                        id = reader.GetInt32(0),
-                        firstname = reader.GetString(1),
-                        lastname = reader.GetString(2),
-                        landline = reader.GetString(3),
-                        mobile = reader.GetString(4),
-                        email = reader.GetString(5)
-                    };
+                        emp.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                    }
+
+                   
                     returnThese.Add(emp);
                 }
             }
