@@ -264,6 +264,7 @@
             this.deleteDepartment.TabIndex = 4;
             this.deleteDepartment.Text = "Supprimer";
             this.deleteDepartment.UseVisualStyleBackColor = false;
+            this.deleteDepartment.Click += new System.EventHandler(this.deleteDepartment_Click);
             // 
             // dataGridViewDepartmentEdit
             // 

@@ -241,5 +241,30 @@ namespace WinFormsApp1
         {
             // Reference click dataGrid
         }
+
+        private void deleteDepartment_Click(object sender, EventArgs e)
+        {
+
+            int rowClicked = dataGridViewDepartmentEdit.CurrentRow.Index;
+
+            int idSelectedDepartment = int.Parse(dataGridViewDepartmentEdit.Rows[rowClicked].Cells[0].Value.ToString());
+            string nameSelectedDepartment = dataGridViewDepartmentEdit.Rows[rowClicked].Cells[1].Value.ToString();
+
+            DialogResult dialogResult = MessageBox.Show("ATTENTION : \n\n" + "Si vous supprimez le service : \n" + nameSelectedDepartment + "\nles employé(e)s associé(e)s à ce service seront aussi supprimé(e)s.\nVoulez_vous vraiment supprimer ce service ?", "SUPPRESSION D'UN SERVICE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(dialogResult  == DialogResult.Yes)
+            {
+                
+                DepartmentDAO departmentDAO = new DepartmentDAO();
+                int result = departmentDAO.deleteDepartment(idSelectedDepartment);
+
+                MessageBox.Show("Le service " + nameSelectedDepartment + " a été supprimé(e)");
+                loadDataEmployee();
+                loadDataDepartment();
+            }
+            else if(dialogResult == DialogResult.Yes)
+            {
+                return;
+            }
+        }
     }
 }

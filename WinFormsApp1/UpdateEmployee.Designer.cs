@@ -156,7 +156,7 @@
             // update_employee
             // 
             this.update_employee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.update_employee.Location = new System.Drawing.Point(119, 375);
+            this.update_employee.Location = new System.Drawing.Point(80, 375);
             this.update_employee.Name = "update_employee";
             this.update_employee.Size = new System.Drawing.Size(115, 35);
             this.update_employee.TabIndex = 33;
@@ -167,7 +167,7 @@
             // deleteEmployee
             // 
             this.deleteEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.deleteEmployee.Location = new System.Drawing.Point(249, 375);
+            this.deleteEmployee.Location = new System.Drawing.Point(210, 375);
             this.deleteEmployee.Name = "deleteEmployee";
             this.deleteEmployee.Size = new System.Drawing.Size(115, 35);
             this.deleteEmployee.TabIndex = 34;
@@ -180,7 +180,7 @@
             this.listBoxDepartmentUpdate.ItemHeight = 15;
             this.listBoxDepartmentUpdate.Location = new System.Drawing.Point(153, 280);
             this.listBoxDepartmentUpdate.Name = "listBoxDepartmentUpdate";
-            this.listBoxDepartmentUpdate.Size = new System.Drawing.Size(172, 64);
+            this.listBoxDepartmentUpdate.Size = new System.Drawing.Size(172, 49);
             this.listBoxDepartmentUpdate.TabIndex = 36;
             this.listBoxDepartmentUpdate.SelectedIndexChanged += new System.EventHandler(this.listBoxDepartment_SelectedIndexChanged);
             // 
