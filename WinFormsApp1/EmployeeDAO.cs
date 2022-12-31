@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -101,17 +102,17 @@ namespace WinFormsApp1
             return newRows;
         }
 
-        public List<JObject> getOneEmployees(int employeeId)
+        public List<Employee> getOneEmployee(int employeeId)
         {
             // start with an empty list
-            List<JObject> returnThese = new List<JObject>();
+            List<Employee> returnThese = new List<Employee>();
 
             // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             // define the sql statement to fetch all employees
-            MySqlCommand command = new MySqlCommand("SELECT employee.id as employee_id, `firstname`, `lastname`, `landline`, `mobile`, `email`, site.id as site_id, department.id as department_id FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id WHERE employee.id = @id", connection);
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `employee`WHERE employee.id = @id", connection);
             command.Parameters.AddWithValue("@id", employeeId);
 
 
@@ -119,13 +120,18 @@ namespace WinFormsApp1
             {
                 while (reader.Read())
                 {
-                    JObject emp = new JObject();
-                   for(int i = 0; i< reader.FieldCount; i++)
-                    {
-                        emp.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
-                    }
+                    Employee emp = new Employee
 
-                   
+                    {
+                        id = reader.GetInt32(0),
+                        firstname = reader.GetString(1),
+                        lastname = reader.GetString(2),
+                        landline = reader.GetString(3),
+                        mobile = reader.GetString(4),
+                        email = reader.GetString(5),
+                        site = reader.GetString(6),
+                        department = reader.GetString(7),
+                    };                   
                     returnThese.Add(emp);
                 }
             }

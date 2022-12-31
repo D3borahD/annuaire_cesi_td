@@ -1,13 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WinFormsApp1
@@ -20,19 +24,20 @@ namespace WinFormsApp1
         BindingSource departmentBindingSource = new BindingSource();
 
         public int employeeId;
-        //public int departmentId;
-       // public int siteId;
+        public int departmentId;
+        public int siteId;
 
-        private void loadListBoxSite()
+        private void loadListBoxSite(int siteId)
         {
             SiteDAO siteDAO = new SiteDAO();
             siteBindingSource.DataSource = siteDAO.getAllSites();
             listBoxSiteUpdate.DataSource = siteBindingSource;
             listBoxSiteUpdate.DisplayMember = "name";
             listBoxSiteUpdate.ValueMember = "id";
+            listBoxSiteUpdate.SelectedValue = siteId;
         }
 
-        private void loadListBoxDepartment()
+        private void loadListBoxDepartment(int departmentId)
         {
             DepartmentDAO departmentDAO = new DepartmentDAO();
 
@@ -40,56 +45,37 @@ namespace WinFormsApp1
             listBoxDepartmentUpdate.DataSource = departmentBindingSource;
             listBoxDepartmentUpdate.DisplayMember = "name";
             listBoxDepartmentUpdate.ValueMember = "id";
-            //listBoxDepartmentUpdate.Focus();
-
-
-
-            listBoxDepartmentUpdate.SelectedValue = 4;
-           // var listBoxItem = (listBoxItem)listBoxDepartmentUpdate.ItemContainerGenerator.ContainerFromItem(listBoxDepartmentUpdate.SelectedItem);
-
+            listBoxDepartmentUpdate.SelectedValue = departmentId;
         }
-        
 
         public UpdateEmployee(List<String> userInfo)
         {
             InitializeComponent();
-            loadListBoxSite();
-            loadListBoxDepartment();
-
+            
             employeeId = int.Parse(userInfo[0]);
-
+            
             EmployeeDAO employeeDAO = new EmployeeDAO();
-            employeeBindingSource.DataSource = employeeDAO.getOneEmployees(employeeId);
+            employeeBindingSource.DataSource = employeeDAO.getOneEmployee(employeeId);
+            
+            //get id site and department 
+            testGrid.DataSource = employeeBindingSource;
+            testGrid.Visible = false;
+            List<string> employeeSite = new List<string>();
+            for (int i =0; i < testGrid.ColumnCount; i++)
+            {
+              employeeSite.Add(testGrid.Rows[0].Cells[i].Value.ToString());
+            }
+            departmentId = int.Parse(employeeSite[7]);
+            siteId = int.Parse(employeeSite[6]);
 
-
-            Employee employee = new Employee();
-           /* {
-                id = employeeId,
-                lastname = txt_update_lastname.Text,
-                firstname = txt_update_firstname.Text,
-                landline = txt_update_landline.Text,
-                mobile = txt_update_mobile.Text,
-                email = txt_update_email.Text,
-                site = listBoxSiteUpdate.SelectedValue.ToString(),
-                department = listBoxDepartmentUpdate.SelectedValue.ToString(),
-            };*/
-            MessageBox.Show("mon site : " + employee.site);
-
-            string departmentId = userInfo[7];
-
-            MessageBox.Show(" depart" + departmentId);
-            //Label labelUpdate = new Label();
-            //int departmentSelected = int.Parse(userInfo[6].ToString());
-
+            loadListBoxDepartment(departmentId);
+            loadListBoxSite(siteId);
+            
             txt_update_lastname.Text = userInfo[1];
             txt_update_firstname.Text = userInfo[2];
             txt_update_landline.Text = userInfo[3];
             txt_update_mobile.Text = userInfo[4];
             txt_update_email.Text = userInfo[5];
-            labelSiteUpdate.Text = userInfo[6];
-            //listBoxDepartmentUpdate.SelectedIndex = ;
-            //txt_update_site.Text = userInfo[6];
-            labelDepartmentUpdate.Text = userInfo[7];
         }
 
       

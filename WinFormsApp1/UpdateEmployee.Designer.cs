@@ -38,23 +38,21 @@
             this.txt_update_landline = new System.Windows.Forms.TextBox();
             this.txt_update_firstname = new System.Windows.Forms.TextBox();
             this.txt_update_mobile = new System.Windows.Forms.TextBox();
-            this.txt_update_department = new System.Windows.Forms.TextBox();
             this.txt_update_email = new System.Windows.Forms.TextBox();
-            this.txt_update_site = new System.Windows.Forms.TextBox();
             this.txt_update_lastname = new System.Windows.Forms.TextBox();
             this.update_employee = new System.Windows.Forms.Button();
             this.deleteEmployee = new System.Windows.Forms.Button();
             this.listBoxDepartmentUpdate = new System.Windows.Forms.ListBox();
             this.listBoxSiteUpdate = new System.Windows.Forms.ListBox();
-            this.labelSiteUpdate = new System.Windows.Forms.Label();
-            this.labelDepartmentUpdate = new System.Windows.Forms.Label();
+            this.testGrid = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.testGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(41, 185);
+            this.label5.Location = new System.Drawing.Point(54, 185);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(36, 15);
             this.label5.TabIndex = 25;
@@ -64,7 +62,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(41, 280);
+            this.label1.Location = new System.Drawing.Point(54, 280);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 15);
             this.label1.TabIndex = 23;
@@ -74,7 +72,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(41, 219);
+            this.label2.Location = new System.Drawing.Point(54, 219);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 15);
             this.label2.TabIndex = 22;
@@ -84,7 +82,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(41, 151);
+            this.label3.Location = new System.Drawing.Point(54, 151);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 15);
             this.label3.TabIndex = 21;
@@ -94,7 +92,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(41, 117);
+            this.label4.Location = new System.Drawing.Point(54, 117);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 15);
             this.label4.TabIndex = 20;
@@ -104,7 +102,7 @@
             // 
             this.firstname.AutoSize = true;
             this.firstname.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.firstname.Location = new System.Drawing.Point(41, 71);
+            this.firstname.Location = new System.Drawing.Point(54, 71);
             this.firstname.Name = "firstname";
             this.firstname.Size = new System.Drawing.Size(70, 21);
             this.firstname.TabIndex = 15;
@@ -141,26 +139,12 @@
             this.txt_update_mobile.Size = new System.Drawing.Size(172, 23);
             this.txt_update_mobile.TabIndex = 28;
             // 
-            // txt_update_department
-            // 
-            this.txt_update_department.Location = new System.Drawing.Point(153, 267);
-            this.txt_update_department.Name = "txt_update_department";
-            this.txt_update_department.Size = new System.Drawing.Size(117, 23);
-            this.txt_update_department.TabIndex = 31;
-            // 
             // txt_update_email
             // 
             this.txt_update_email.Location = new System.Drawing.Point(153, 185);
             this.txt_update_email.Name = "txt_update_email";
             this.txt_update_email.Size = new System.Drawing.Size(172, 23);
             this.txt_update_email.TabIndex = 30;
-            // 
-            // txt_update_site
-            // 
-            this.txt_update_site.Location = new System.Drawing.Point(153, 225);
-            this.txt_update_site.Name = "txt_update_site";
-            this.txt_update_site.Size = new System.Drawing.Size(117, 23);
-            this.txt_update_site.TabIndex = 29;
             // 
             // txt_update_lastname
             // 
@@ -194,9 +178,9 @@
             // 
             this.listBoxDepartmentUpdate.FormattingEnabled = true;
             this.listBoxDepartmentUpdate.ItemHeight = 15;
-            this.listBoxDepartmentUpdate.Location = new System.Drawing.Point(299, 280);
+            this.listBoxDepartmentUpdate.Location = new System.Drawing.Point(153, 280);
             this.listBoxDepartmentUpdate.Name = "listBoxDepartmentUpdate";
-            this.listBoxDepartmentUpdate.Size = new System.Drawing.Size(165, 34);
+            this.listBoxDepartmentUpdate.Size = new System.Drawing.Size(172, 64);
             this.listBoxDepartmentUpdate.TabIndex = 36;
             this.listBoxDepartmentUpdate.SelectedIndexChanged += new System.EventHandler(this.listBoxDepartment_SelectedIndexChanged);
             // 
@@ -211,45 +195,33 @@
             "tet",
             "df",
             "po"});
-            this.listBoxSiteUpdate.Location = new System.Drawing.Point(299, 225);
+            this.listBoxSiteUpdate.Location = new System.Drawing.Point(153, 219);
             this.listBoxSiteUpdate.Name = "listBoxSiteUpdate";
-            this.listBoxSiteUpdate.Size = new System.Drawing.Size(165, 34);
+            this.listBoxSiteUpdate.Size = new System.Drawing.Size(172, 49);
             this.listBoxSiteUpdate.TabIndex = 35;
             this.listBoxSiteUpdate.SelectedIndexChanged += new System.EventHandler(this.listBoxSite_SelectedIndexChanged);
             // 
-            // labelSiteUpdate
+            // testGrid
             // 
-            this.labelSiteUpdate.AutoSize = true;
-            this.labelSiteUpdate.Location = new System.Drawing.Point(131, 233);
-            this.labelSiteUpdate.Name = "labelSiteUpdate";
-            this.labelSiteUpdate.Size = new System.Drawing.Size(89, 15);
-            this.labelSiteUpdate.TabIndex = 37;
-            this.labelSiteUpdate.Text = "labelSiteUpdate";
-            // 
-            // labelDepartmentUpdate
-            // 
-            this.labelDepartmentUpdate.AutoSize = true;
-            this.labelDepartmentUpdate.Location = new System.Drawing.Point(131, 293);
-            this.labelDepartmentUpdate.Name = "labelDepartmentUpdate";
-            this.labelDepartmentUpdate.Size = new System.Drawing.Size(89, 15);
-            this.labelDepartmentUpdate.TabIndex = 38;
-            this.labelDepartmentUpdate.Text = "labelSiteUpdate";
+            this.testGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.testGrid.Location = new System.Drawing.Point(356, 79);
+            this.testGrid.Name = "testGrid";
+            this.testGrid.RowTemplate.Height = 25;
+            this.testGrid.Size = new System.Drawing.Size(109, 119);
+            this.testGrid.TabIndex = 39;
             // 
             // UpdateEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 450);
-            this.Controls.Add(this.labelDepartmentUpdate);
-            this.Controls.Add(this.labelSiteUpdate);
+            this.ClientSize = new System.Drawing.Size(389, 450);
+            this.Controls.Add(this.testGrid);
             this.Controls.Add(this.listBoxDepartmentUpdate);
             this.Controls.Add(this.listBoxSiteUpdate);
             this.Controls.Add(this.deleteEmployee);
             this.Controls.Add(this.update_employee);
             this.Controls.Add(this.txt_update_lastname);
-            this.Controls.Add(this.txt_update_department);
             this.Controls.Add(this.txt_update_email);
-            this.Controls.Add(this.txt_update_site);
             this.Controls.Add(this.txt_update_mobile);
             this.Controls.Add(this.txt_update_firstname);
             this.Controls.Add(this.txt_update_landline);
@@ -262,6 +234,7 @@
             this.Controls.Add(this.lastname);
             this.Name = "UpdateEmployee";
             this.Text = "UpdateEmployee";
+            ((System.ComponentModel.ISupportInitialize)(this.testGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -279,15 +252,12 @@
         private TextBox txt_update_landline;
         private TextBox txt_update_firstname;
         private TextBox txt_update_mobile;
-        private TextBox txt_update_department;
         private TextBox txt_update_email;
-        private TextBox txt_update_site;
         private TextBox txt_update_lastname;
         private Button update_employee;
         private Button deleteEmployee;
         private ListBox listBoxDepartmentUpdate;
         private ListBox listBoxSiteUpdate;
-        private Label labelSiteUpdate;
-        private Label labelDepartmentUpdate;
+        private DataGridView testGrid;
     }
 }
