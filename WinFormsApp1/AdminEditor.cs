@@ -37,7 +37,6 @@ namespace WinFormsApp1
         private void loadDataSite()
         {
             SiteDAO siteDAO = new SiteDAO();
-            // connect the list to the grid view control
             siteBindingSource.DataSource = siteDAO.getAllSites();
             dataGridViewSiteEdit.DataSource = siteBindingSource;
             dataGridViewSiteEdit.Columns["id"].Visible = false;
@@ -103,7 +102,7 @@ namespace WinFormsApp1
             formatFirstname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatFirstname.ToLower());
 
             String getFirstletter = formatFirstname.Substring(0, 1);
-            String createEmail = (getFirstletter + "." + txt_employee_lastname.Text + "@agro.bio").ToLower();
+            String createEmail = (getFirstletter + "." + txt_employee_lastname.Text + "@natural.product").ToLower();
            
             
 
@@ -175,8 +174,7 @@ namespace WinFormsApp1
                 DepartmentDAO departmentDAO = new DepartmentDAO();
                 int result = departmentDAO.addOneDepartment(department);
 
-                // clear input
-                txt_department_name.Text = String.Empty;
+                txt_department_name.Clear();
 
                 MessageBox.Show("Le service " + department.name + " a été ajouté");
 
@@ -192,26 +190,23 @@ namespace WinFormsApp1
             } 
             else
             {
+                String name = txt_site_name.Text;
+                name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
+
                 Site site = new Site
             {
-                name = txt_site_name.Text,
+                name = name,
             };
 
             SiteDAO siteDAO = new SiteDAO();
             int result = siteDAO.addOneSite(site);
 
-            // clear input
-            txt_site_name.Text = String.Empty;
+            txt_site_name.Clear();
 
             MessageBox.Show("Le site " + site.name + " a été ajouté");
 
             loadDataSite();
             }
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void deleteEmployee_Click(object sender, EventArgs e)
@@ -242,6 +237,7 @@ namespace WinFormsApp1
 
             UpdateEmployee updateEmployee = new UpdateEmployee(userInfo);
             updateEmployee.Show();
+         
         }
 
         private void dataGridViewEmployeeEdit_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -326,6 +322,46 @@ namespace WinFormsApp1
 
             UpdateSite updateSite = new UpdateSite(siteInfo);
             updateSite.Show();
+        }
+
+
+        private void dataGridViewSiteEdit_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+           /* int rowClicked = dataGridViewSiteEdit.CurrentRow.Index;
+            List<String> siteInfo = new List<string>();
+
+            for (int i = 0; i < dataGridViewSiteEdit.ColumnCount; i++)
+            {
+                siteInfo.Add(dataGridViewSiteEdit.Rows[rowClicked].Cells[i].Value.ToString());
+            }
+
+            UpdateSite updateSite = new UpdateSite(siteInfo);
+            updateSite.Show();*/
+           // loadDataEmployee();
+           // loadDataSite();
+        }
+
+        private void searchEmployee_Click(object sender, EventArgs e)
+        {
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            employeeBindingSource.DataSource = employeeDAO.searchName(textBoxSearch.Text);
+
+            dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
+
+            int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
+            if (count != 0)
+            {
+                dataGridViewEmployeeEdit.Columns[0].Visible = false;
+                dataGridViewEmployeeEdit.Columns[1].HeaderText = "Nom";
+                dataGridViewEmployeeEdit.Columns[2].HeaderText = "Prénom";
+                dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone Fixe";
+                dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
+                dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
+                dataGridViewEmployeeEdit.Columns[6].HeaderText = "Site";
+                dataGridViewEmployeeEdit.Columns[7].HeaderText = "Service";
+            }
+
+            textBoxSearch.Clear();
         }
     }
 }

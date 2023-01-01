@@ -49,16 +49,12 @@ namespace WinFormsApp1
 
         public List<JObject> searchName(String searchName)
         {
-            // start with an empty list
-            List<JObject> returnThese = new List<JObject>();
 
-            // connect to the mysql server
+            List<JObject> returnThese = new List<JObject>();
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             String searchWildPhrase = "%" + searchName + "%";
-
-            // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
             command.CommandText = "SELECT employee.id as employee_id, `lastname`, `firstname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE lastname LIKE @search;";
             command.Parameters.AddWithValue("@search",searchWildPhrase);

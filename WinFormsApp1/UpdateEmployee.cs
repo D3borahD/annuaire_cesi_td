@@ -46,6 +46,10 @@ namespace WinFormsApp1
             listBoxDepartmentUpdate.DisplayMember = "name";
             listBoxDepartmentUpdate.ValueMember = "id";
             listBoxDepartmentUpdate.SelectedValue = departmentId;
+
+
+
+
         }
 
         public UpdateEmployee(List<String> userInfo)
@@ -54,9 +58,14 @@ namespace WinFormsApp1
             
             employeeId = int.Parse(userInfo[0]);
             
+
+
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getOneEmployee(employeeId);
-            
+
+           
+
+
             //get id site and department 
             testGrid.DataSource = employeeBindingSource;
             testGrid.Visible = false;
@@ -67,6 +76,8 @@ namespace WinFormsApp1
             }
             departmentId = int.Parse(employeeSite[7]);
             siteId = int.Parse(employeeSite[6]);
+
+
 
             loadListBoxDepartment(departmentId);
             loadListBoxSite(siteId);
@@ -81,7 +92,9 @@ namespace WinFormsApp1
       
         private void update_employee_Click(object sender, EventArgs e)
         {
-
+            String formatFirstname = txt_update_firstname.Text;
+           formatFirstname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatFirstname.ToLower());
+           
             Employee employee = new Employee
             {
                 id = employeeId,
