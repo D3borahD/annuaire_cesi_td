@@ -254,6 +254,7 @@
             this.updateDepartment.TabIndex = 5;
             this.updateDepartment.Text = "Modifier";
             this.updateDepartment.UseVisualStyleBackColor = false;
+            this.updateDepartment.Click += new System.EventHandler(this.updateDepartment_Click);
             // 
             // deleteDepartment
             // 

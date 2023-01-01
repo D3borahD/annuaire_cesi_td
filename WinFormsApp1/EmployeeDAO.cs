@@ -104,17 +104,13 @@ namespace WinFormsApp1
 
         public List<Employee> getOneEmployee(int employeeId)
         {
-            // start with an empty list
             List<Employee> returnThese = new List<Employee>();
 
-            // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand("SELECT * FROM `employee`WHERE employee.id = @id", connection);
             command.Parameters.AddWithValue("@id", employeeId);
-
 
             using (MySqlDataReader reader = command.ExecuteReader())
             {

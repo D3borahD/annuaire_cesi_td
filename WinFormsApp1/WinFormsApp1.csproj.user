@@ -13,6 +13,9 @@
     <Compile Update="EmployeeCardView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UpdateDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UpdateEmployee.cs">
       <SubType>Form</SubType>
     </Compile>

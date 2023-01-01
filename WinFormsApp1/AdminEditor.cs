@@ -244,16 +244,13 @@ namespace WinFormsApp1
 
         private void deleteDepartment_Click(object sender, EventArgs e)
         {
-
             int rowClicked = dataGridViewDepartmentEdit.CurrentRow.Index;
-
             int idSelectedDepartment = int.Parse(dataGridViewDepartmentEdit.Rows[rowClicked].Cells[0].Value.ToString());
-            string nameSelectedDepartment = dataGridViewDepartmentEdit.Rows[rowClicked].Cells[1].Value.ToString();
+            String nameSelectedDepartment = dataGridViewDepartmentEdit.Rows[rowClicked].Cells[1].Value.ToString();
 
-            DialogResult dialogResult = MessageBox.Show("ATTENTION : \n\n" + "Si vous supprimez le service : \n" + nameSelectedDepartment + "\nles employé(e)s associé(e)s à ce service seront aussi supprimé(e)s.\nVoulez_vous vraiment supprimer ce service ?", "SUPPRESSION D'UN SERVICE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("ATTENTION : \n\n" + "Si vous supprimez le service : " + nameSelectedDepartment + "\nles employé(e)s associé(e)s à ce service seront aussi supprimé(e)s.\nVoulez-vous vraiment supprimer ce service ?", "SUPPRESSION D'UN SERVICE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if(dialogResult  == DialogResult.Yes)
             {
-                
                 DepartmentDAO departmentDAO = new DepartmentDAO();
                 int result = departmentDAO.deleteDepartment(idSelectedDepartment);
 
@@ -265,6 +262,21 @@ namespace WinFormsApp1
             {
                 return;
             }
+        }
+
+        private void updateDepartment_Click(object sender, EventArgs e)
+        {
+            int rowClicked = dataGridViewDepartmentEdit.CurrentRow.Index;
+            List<String> departmentInfo = new List<string>();
+
+            for (int i = 0; i < dataGridViewDepartmentEdit.ColumnCount; i++)
+            {
+                departmentInfo.Add(dataGridViewDepartmentEdit.Rows[rowClicked].Cells[i].Value.ToString());
+            }
+
+            UpdateDepartment updateDepartment = new UpdateDepartment(departmentInfo);
+            updateDepartment.Show();
+
         }
     }
 }
