@@ -40,6 +40,26 @@ namespace WinFormsApp1
             return returnThese;
         }
 
+        internal object getSiteById(int siteId)
+        {
+            Site site = new Site();
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `site`WHERE site.id = @id", connection);
+            command.Parameters.AddWithValue("@id", siteId);
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    site.name = reader.GetString(1);
+                }
+            }
+            connection.Close();
+            return site;
+        }
+
         internal int addOneSite(Site site)
         {
             // connect to the mysql server
@@ -61,6 +81,21 @@ namespace WinFormsApp1
             connection.Open();
             MySqlCommand command = new MySqlCommand("DELETE FROM `site` WHERE `site`.`id` = @id; ", connection);
             command.Parameters.AddWithValue("@id", idSelectedSite);
+
+            int result = command.ExecuteNonQuery();
+            connection.Close();
+            return result;
+        }
+
+        internal int updateSite(Site site)
+        {
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = "UPDATE `site` SET `name`= @name WHERE id = @id";
+            command.Connection = connection;
+            command.Parameters.AddWithValue("@name", site.name);
+            command.Parameters.AddWithValue("@id", site.id);
 
             int result = command.ExecuteNonQuery();
             connection.Close();

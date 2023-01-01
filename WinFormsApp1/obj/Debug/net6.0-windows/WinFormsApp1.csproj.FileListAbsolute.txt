@@ -55,3 +55,4 @@ C:\Users\vboxuser\Documents\td-dotNet\annuaire_cesi_td\WinFormsApp1\obj\Debug\ne
 C:\Users\vboxuser\Documents\td-dotNet\annuaire_cesi_td\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.AdminConnection.resources
 C:\Users\vboxuser\Documents\td-dotNet\annuaire_cesi_td\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.UpdateEmployee.resources
 C:\Users\vboxuser\Documents\td-dotNet\annuaire_cesi_td\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.UpdateDepartment.resources
+C:\Users\vboxuser\Documents\td-dotNet\annuaire_cesi_td\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.UpdateSite.resources

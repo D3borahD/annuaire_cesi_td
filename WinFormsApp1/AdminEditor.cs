@@ -312,7 +312,16 @@ namespace WinFormsApp1
 
         private void updateSite_Click(object sender, EventArgs e)
         {
+            int rowClicked = dataGridViewSiteEdit.CurrentRow.Index;
+            List<String> siteInfo = new List<string>();
 
+            for (int i = 0; i < dataGridViewSiteEdit.ColumnCount; i++)
+            {
+                siteInfo.Add(dataGridViewSiteEdit.Rows[rowClicked].Cells[i].Value.ToString());
+            }
+
+            UpdateSite updateSite = new UpdateSite(siteInfo);
+            updateSite.Show();
         }
     }
 }
