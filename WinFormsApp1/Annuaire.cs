@@ -56,17 +56,6 @@ namespace WinFormsApp1
             dataGridView1.Columns[7].HeaderText = "Service";
         }
 
-        // private void button1_Click(object sender, EventArgs e)
-        // {
-        //    EmployeeDAO employeeDAO = new EmployeeDAO();
-
-
-        // connect the list to the grid view control
-        //    employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
-
-        //    dataGridView1.DataSource = employeeBindingSource;
-        // }
-
 
         private void Annuaire_Load(object sender, EventArgs e)
         {
@@ -79,8 +68,6 @@ namespace WinFormsApp1
         private void button2_Click(object sender, EventArgs e)
         {
             EmployeeDAO employeeDAO = new EmployeeDAO();
-
-            // connect the list to the grid view control
             employeeBindingSource.DataSource = employeeDAO.searchName(textBox1.Text);
 
             dataGridView1.DataSource = employeeBindingSource;
@@ -99,8 +86,6 @@ namespace WinFormsApp1
             EmployeeDAO employeeDAO = new EmployeeDAO();
 
             int rowClicked = dataGridView.CurrentRow.Index;
-
-           // String idOfChoosen = dataGridView.Rows[rowClicked].Cells[0].Value.ToString();
 
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoin((int) dataGridView.Rows[rowClicked].Cells[0].Value);
 

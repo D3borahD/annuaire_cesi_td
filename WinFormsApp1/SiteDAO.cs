@@ -11,8 +11,6 @@ namespace WinFormsApp1
     {
         string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
-        // Version 1 only contains fake data. No connection to actual db yet.
-        // public List<Employee> employees = new List<Employee>();
 
         public List<Site> getAllSites()
         {
@@ -57,5 +55,16 @@ namespace WinFormsApp1
             return newRows;
         }
 
+        internal int deleteSite(int idSelectedSite)
+        {
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            MySqlCommand command = new MySqlCommand("DELETE FROM `site` WHERE `site`.`id` = @id; ", connection);
+            command.Parameters.AddWithValue("@id", idSelectedSite);
+
+            int result = command.ExecuteNonQuery();
+            connection.Close();
+            return result;
+        }
     }
 }

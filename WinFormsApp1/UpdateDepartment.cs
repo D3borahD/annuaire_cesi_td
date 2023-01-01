@@ -12,42 +12,56 @@ namespace WinFormsApp1
 {
     public partial class UpdateDepartment : Form
     {
-        BindingSource departmentBindingSource = new BindingSource();
         public int departmentId;
-       
+        public string oldName;
 
         private void loadDataDepartment(int departmentId)
         {
             DepartmentDAO departmentDAO = new DepartmentDAO();
-            List<Department> department = (List<Department>)departmentDAO.getDepartmentById(departmentId);
-            //String name = department.name;
-            labelDepartment.Text = department[0].name;
-           // MessageBox.Show("test" + department[0].name );
+            Department department = (Department)departmentDAO.getDepartmentById(departmentId);
+            labelDepartment.Text = department.name;
         }
 
         public UpdateDepartment(List<String> departmentInfo)
         {
             InitializeComponent();
             departmentId = int.Parse(departmentInfo[0]);
-
             loadDataDepartment(departmentId);
-           
+            oldName = departmentInfo[1];
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            String name = txt_department_update.Text;
+            name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
+
             Department department = new Department
             {
                 id = departmentId,
-                name = txt_department_update.Text,
+                name = name,
             };
-
 
             DepartmentDAO departmentDAO = new DepartmentDAO();
 
-            int result = departmentDAO.updateDepartment(department);
-
-           // MessageBox.Show("Le service " + nameSelectedDepartment + "a été modifié(e) en ");
+            DialogResult dialogResult = MessageBox.Show(
+                "ATTENTION : \n\n" +
+                "En modifiant ce service, vous allez modifier les employé(e)s qui y sont rattaché(e)s\n" +
+                "Voulez-vous  vraiment renommer le service " + oldName + " en " + department.name + "?", 
+                "MODIFICATION D'UN SERVICE",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                int result = departmentDAO.updateDepartment(department);
+           
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                this.Close();
+                return;
+            }
+            this.Close();
+           
         }
     }
 }

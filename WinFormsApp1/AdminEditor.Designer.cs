@@ -61,6 +61,7 @@
             this.dataGridViewEmployeeEdit = new System.Windows.Forms.DataGridView();
             this.updateEmployee = new System.Windows.Forms.Button();
             this.deleteEmployee = new System.Windows.Forms.Button();
+            this.refresh = new System.Windows.Forms.Button();
             this.addEmployee.SuspendLayout();
             this.addDepartment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDepartmentEdit)).BeginInit();
@@ -328,6 +329,7 @@
             this.updateSite.TabIndex = 7;
             this.updateSite.Text = "Modifier";
             this.updateSite.UseVisualStyleBackColor = false;
+            this.updateSite.Click += new System.EventHandler(this.updateSite_Click);
             // 
             // dataGridViewSiteEdit
             // 
@@ -347,6 +349,7 @@
             this.deleteSite.TabIndex = 6;
             this.deleteSite.Text = "Supprimer";
             this.deleteSite.UseVisualStyleBackColor = false;
+            this.deleteSite.Click += new System.EventHandler(this.deleteSite_Click);
             // 
             // addSite
             // 
@@ -407,12 +410,23 @@
             this.deleteEmployee.UseVisualStyleBackColor = false;
             this.deleteEmployee.Click += new System.EventHandler(this.deleteEmployee_Click);
             // 
+            // refresh
+            // 
+            this.refresh.Location = new System.Drawing.Point(645, 7);
+            this.refresh.Name = "refresh";
+            this.refresh.Size = new System.Drawing.Size(75, 23);
+            this.refresh.TabIndex = 8;
+            this.refresh.Text = "Raffraîchir";
+            this.refresh.UseVisualStyleBackColor = true;
+            this.refresh.Click += new System.EventHandler(this.refresh_Click);
+            // 
             // AdminEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(864, 741);
+            this.Controls.Add(this.refresh);
             this.Controls.Add(this.updateEmployee);
             this.Controls.Add(this.deleteEmployee);
             this.Controls.Add(this.dataGridViewEmployeeEdit);
@@ -471,5 +485,6 @@
         private Button deleteEmployee;
         private ListBox listBoxSite;
         private ListBox listBoxDepartment;
+        private Button refresh;
     }
 }

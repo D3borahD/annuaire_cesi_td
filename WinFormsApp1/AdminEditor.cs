@@ -159,10 +159,13 @@ namespace WinFormsApp1
             } 
             else
             {
+                String name = txt_department_name.Text;
+                name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
+
                 // add a new item to the database
                 Department department = new Department
                 {
-                name = txt_department_name.Text,
+                name = name,
                 };
 
                 DepartmentDAO departmentDAO = new DepartmentDAO();
@@ -258,8 +261,9 @@ namespace WinFormsApp1
                 loadDataEmployee();
                 loadDataDepartment();
             }
-            else if(dialogResult == DialogResult.Yes)
+            else if(dialogResult == DialogResult.No)
             {
+               // Application.OpenForms["UpdateDepartment"].Close();
                 return;
             }
         }
@@ -276,6 +280,38 @@ namespace WinFormsApp1
 
             UpdateDepartment updateDepartment = new UpdateDepartment(departmentInfo);
             updateDepartment.Show();
+        }
+
+        private void refresh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteSite_Click(object sender, EventArgs e)
+        {
+            int rowClicked = dataGridViewSiteEdit.CurrentRow.Index;
+            int idSelectedSite = int.Parse(dataGridViewSiteEdit.Rows[rowClicked].Cells[0].Value.ToString());
+            String nameSelectedSite = dataGridViewSiteEdit.Rows[rowClicked].Cells[1].Value.ToString();
+
+            DialogResult dialogResult = MessageBox.Show("ATTENTION : \n\n" + "Si vous supprimez le site : " + nameSelectedSite + "\nles employé(e)s associé(e)s à ce site seront aussi supprimé(e)s.\nVoulez-vous vraiment supprimer ce site ?", "SUPPRESSION D'UN SITE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                SiteDAO siteDAO = new SiteDAO();
+                int result = siteDAO.deleteSite(idSelectedSite);
+
+                MessageBox.Show("Le service " + nameSelectedSite + " a été supprimé(e)");
+                loadDataEmployee();
+                loadDataSite();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                // Application.OpenForms["UpdateDepartment"].Close();
+                return;
+            }
+        }
+
+        private void updateSite_Click(object sender, EventArgs e)
+        {
 
         }
     }

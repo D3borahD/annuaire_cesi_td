@@ -11,7 +11,6 @@ namespace WinFormsApp1
     {
         string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
-
         public List<Department> getAllDepartments()
         {
             // start with an empty list
@@ -40,12 +39,9 @@ namespace WinFormsApp1
 
         internal int addOneDepartment(Department department)
         {
-            // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-            // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand("INSERT INTO `department`(`name`) VALUES(@name)", connection);
-
             command.Parameters.AddWithValue("@name", department.name);
          
             int newRows = command.ExecuteNonQuery();
@@ -55,12 +51,9 @@ namespace WinFormsApp1
         
         internal int deleteDepartment(int departmentId)
         {
-             //connect to the mysql server
-             MySqlConnection connection = new MySqlConnection(connectionString);
-             connection.Open();
-            // define the sql statement to fetch all employees
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
             MySqlCommand command = new MySqlCommand("DELETE FROM `department` WHERE `department`.`id` = @id; ", connection);
-
             command.Parameters.AddWithValue("@id", departmentId);
 
             int result = command.ExecuteNonQuery();
@@ -70,8 +63,7 @@ namespace WinFormsApp1
 
         internal object getDepartmentById(int departmentId)
         {
-            List<Department> department = new List<Department>();
-
+            Department department = new Department();
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -80,16 +72,9 @@ namespace WinFormsApp1
 
             using (MySqlDataReader reader = command.ExecuteReader())
             {
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    Department dep = new Department
-
-                    {
-                        id = reader.GetInt32(0),
-                        name = reader.GetString(1),
-                      
-                    };
-                    department.Add(dep);
+                  department.name = reader.GetString(1);
                 }
             }
             connection.Close();
@@ -98,15 +83,11 @@ namespace WinFormsApp1
 
         internal int updateDepartment(Department department)
         {
-            // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-            // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
             command.CommandText = "UPDATE `department` SET `name`= @name WHERE id = @id";
-
             command.Connection = connection;
-
             command.Parameters.AddWithValue("@name", department.name);
             command.Parameters.AddWithValue("@id", department.id);
 
