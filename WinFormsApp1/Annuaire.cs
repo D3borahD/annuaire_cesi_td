@@ -28,6 +28,7 @@ namespace WinFormsApp1
             DepartmentDAO departmentDAO = new DepartmentDAO();
             departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
             dataGridViewDepartmentDisplay.DataSource = departmentBindingSource;
+            dataGridViewDepartmentDisplay.DefaultCellStyle.SelectionBackColor = Color.Navy;
             dataGridViewDepartmentDisplay.Columns["id"].Visible = false;
             dataGridViewDepartmentDisplay.Columns[1].HeaderText = "Nom du Service";
         }
@@ -37,21 +38,25 @@ namespace WinFormsApp1
             SiteDAO siteDAO = new SiteDAO();
             siteBindingSource.DataSource = siteDAO.getAllSites();
             dataGridViewSiteDisplay.DataSource = siteBindingSource;
+            dataGridViewSiteDisplay.DefaultCellStyle.SelectionBackColor = Color.Navy;
             dataGridViewSiteDisplay.Columns["id"].Visible = false;
             dataGridViewSiteDisplay.Columns[1].HeaderText = "Nom du Site";
         }
+
+     
 
         private void loadDataEmployee()
         {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
             dataGridView1.DataSource = employeeBindingSource; 
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridView1.Rows.Count.ToString());
             if (count != 0)
             {
                 dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Prénom";
-                dataGridView1.Columns[2].HeaderText = "Nom";
+                dataGridView1.Columns[1].HeaderText = "Nom";
+                dataGridView1.Columns[2].HeaderText = "Prénom";
                 dataGridView1.Columns[3].Visible = false;
                 dataGridView1.Columns[4].Visible = false;
                 dataGridView1.Columns[5].Visible = false;
@@ -82,8 +87,8 @@ namespace WinFormsApp1
             if (count != 0)
             {
                 dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Prénom";
-                dataGridView1.Columns[2].HeaderText = "Nom";
+                dataGridView1.Columns[1].HeaderText = "Nom";
+                dataGridView1.Columns[2].HeaderText = "Prénom";
                 dataGridView1.Columns[3].Visible = false;
                 dataGridView1.Columns[4].Visible = false;
                 dataGridView1.Columns[5].Visible = false;

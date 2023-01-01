@@ -49,14 +49,18 @@ namespace WinFormsApp1
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
             dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
-            dataGridViewEmployeeEdit.Columns[0].Visible = false;
-            dataGridViewEmployeeEdit.Columns[1].HeaderText = "Prénom";
-            dataGridViewEmployeeEdit.Columns[2].HeaderText = "Nom";
-            dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone fixe";
-            dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
-            dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
-            dataGridViewEmployeeEdit.Columns[6].HeaderText = "Site";
-            dataGridViewEmployeeEdit.Columns[7].HeaderText = "Service";
+            int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
+            if (count != 0)
+            {
+                dataGridViewEmployeeEdit.Columns[0].Visible = false;
+                dataGridViewEmployeeEdit.Columns[1].HeaderText = "Nom";
+                dataGridViewEmployeeEdit.Columns[2].HeaderText = "Prénom";
+                dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone fixe";
+                dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
+                dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
+                dataGridViewEmployeeEdit.Columns[6].HeaderText = "Site";
+                dataGridViewEmployeeEdit.Columns[7].HeaderText = "Service";
+            }
         }
 
         private void loadListBoxSite()

@@ -17,8 +17,8 @@ namespace WinFormsApp1
         {
             InitializeComponent();
 
-            lastname.Text = userInfo[2];
-            firstname.Text = userInfo[1];
+            lastname.Text = userInfo[1];
+            firstname.Text = userInfo[2];
             landline.Text = userInfo[3];
             mobile.Text = userInfo[4];
             email.Text = userInfo[5];
