@@ -45,16 +45,22 @@ namespace WinFormsApp1
         {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
-            dataGridView1.DataSource = employeeBindingSource;
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].HeaderText = "Prénom";
-            dataGridView1.Columns[2].HeaderText = "Nom";
-            dataGridView1.Columns[3].Visible = false;
-            dataGridView1.Columns[4].Visible = false;
-            dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].HeaderText = "Site";
-            dataGridView1.Columns[7].HeaderText = "Service";
+            dataGridView1.DataSource = employeeBindingSource; 
+            int count = int.Parse(dataGridView1.Rows.Count.ToString());
+            if (count != 0)
+            {
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[1].HeaderText = "Prénom";
+                dataGridView1.Columns[2].HeaderText = "Nom";
+                dataGridView1.Columns[3].Visible = false;
+                dataGridView1.Columns[4].Visible = false;
+                dataGridView1.Columns[5].Visible = false;
+                dataGridView1.Columns[6].HeaderText = "Site";
+                dataGridView1.Columns[7].HeaderText = "Service";
+            }
+       
         }
+     
 
 
         private void Annuaire_Load(object sender, EventArgs e)
@@ -71,6 +77,22 @@ namespace WinFormsApp1
             employeeBindingSource.DataSource = employeeDAO.searchName(textBox1.Text);
 
             dataGridView1.DataSource = employeeBindingSource;
+
+            int count = int.Parse(dataGridView1.Rows.Count.ToString());
+            if (count != 0)
+            {
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[1].HeaderText = "Prénom";
+                dataGridView1.Columns[2].HeaderText = "Nom";
+                dataGridView1.Columns[3].Visible = false;
+                dataGridView1.Columns[4].Visible = false;
+                dataGridView1.Columns[5].Visible = false;
+                dataGridView1.Columns[6].HeaderText = "Site";
+                dataGridView1.Columns[7].HeaderText = "Service";
+            }
+
+            textBox1.Clear();
+
         }
 
         // remove at the end project
@@ -88,8 +110,20 @@ namespace WinFormsApp1
             int rowClicked = dataGridView.CurrentRow.Index;
 
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoin((int) dataGridView.Rows[rowClicked].Cells[0].Value);
-
             dataGridView1.DataSource = employeeBindingSource;
+
+            int count = int.Parse(dataGridView1.Rows.Count.ToString());
+            if (count != 0)
+            {
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[1].HeaderText = "Prénom";
+                dataGridView1.Columns[2].HeaderText = "Nom";
+                dataGridView1.Columns[3].Visible = false;
+                dataGridView1.Columns[4].Visible = false;
+                dataGridView1.Columns[5].Visible = false;
+                dataGridView1.Columns[6].HeaderText = "Site";
+                dataGridView1.Columns[7].HeaderText = "Service";
+            }
         }
 
         private void dataGridViewDepartmentDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -101,6 +135,20 @@ namespace WinFormsApp1
 
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoinDepartment((int)dataGridView.Rows[rowClicked].Cells[0].Value);
             dataGridView1.DataSource = employeeBindingSource;
+
+           /* int count = int.Parse(dataGridView1.Rows.Count.ToString());
+            if (count != 0)
+            {
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[1].HeaderText = "Prénom";
+                dataGridView1.Columns[2].HeaderText = "Nom";
+                dataGridView1.Columns[3].Visible = false;
+                dataGridView1.Columns[4].Visible = false;
+                dataGridView1.Columns[5].Visible = false;
+                dataGridView1.Columns[6].HeaderText = "Site";
+                dataGridView1.Columns[7].HeaderText = "Service";
+            }*/
+
         }
 
         public void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
