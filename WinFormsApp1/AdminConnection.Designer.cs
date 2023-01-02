@@ -36,14 +36,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.Navy;
             this.label1.Location = new System.Drawing.Point(28, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 15);
+            this.label1.Size = new System.Drawing.Size(86, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Mot de passe :";
             // 
             // txt_password_box
             // 
+            this.txt_password_box.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txt_password_box.Location = new System.Drawing.Point(27, 81);
             this.txt_password_box.Name = "txt_password_box";
             this.txt_password_box.Size = new System.Drawing.Size(225, 23);
@@ -51,18 +54,21 @@
             // 
             // btn_check_password
             // 
-            this.btn_check_password.Location = new System.Drawing.Point(163, 139);
+            this.btn_check_password.BackColor = System.Drawing.Color.Navy;
+            this.btn_check_password.ForeColor = System.Drawing.Color.White;
+            this.btn_check_password.Location = new System.Drawing.Point(134, 136);
             this.btn_check_password.Name = "btn_check_password";
-            this.btn_check_password.Size = new System.Drawing.Size(75, 23);
+            this.btn_check_password.Size = new System.Drawing.Size(104, 26);
             this.btn_check_password.TabIndex = 2;
-            this.btn_check_password.Text = "Entrer";
-            this.btn_check_password.UseVisualStyleBackColor = true;
+            this.btn_check_password.Text = "Se connecter";
+            this.btn_check_password.UseVisualStyleBackColor = false;
             this.btn_check_password.Click += new System.EventHandler(this.btn_check_password_Click);
             // 
             // AdminConnection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(297, 202);
             this.Controls.Add(this.btn_check_password);
             this.Controls.Add(this.txt_password_box);

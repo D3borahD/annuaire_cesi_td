@@ -147,7 +147,7 @@ namespace WinFormsApp1
                 txt_employee_landline.Text = String.Empty;
                 txt_employee_mobile.Text = String.Empty;
 
-                MessageBox.Show("L'employé(e) " + employee.lastname + " " + employee.firstname+ " a été ajouté");
+                MessageBox.Show("L'employé(e) " + employee.lastname + " " + employee.firstname+ " a été ajouté(e)");
 
                 loadDataEmployee();
             }

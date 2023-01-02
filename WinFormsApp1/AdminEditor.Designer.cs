@@ -241,7 +241,7 @@
             this.addDepartment.Controls.Add(this.addService);
             this.addDepartment.Controls.Add(this.txt_department_name);
             this.addDepartment.Controls.Add(this.label8);
-            this.addDepartment.Location = new System.Drawing.Point(356, 193);
+            this.addDepartment.Location = new System.Drawing.Point(627, 193);
             this.addDepartment.Name = "addDepartment";
             this.addDepartment.Size = new System.Drawing.Size(240, 348);
             this.addDepartment.TabIndex = 2;
@@ -322,7 +322,7 @@
             this.groupBox1.Controls.Add(this.addSite);
             this.groupBox1.Controls.Add(this.txt_site_name);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Location = new System.Drawing.Point(621, 193);
+            this.groupBox1.Location = new System.Drawing.Point(357, 193);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(246, 348);
             this.groupBox1.TabIndex = 3;
@@ -410,7 +410,8 @@
             // 
             // updateEmployee
             // 
-            this.updateEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.updateEmployee.BackColor = System.Drawing.Color.Navy;
+            this.updateEmployee.ForeColor = System.Drawing.Color.White;
             this.updateEmployee.Location = new System.Drawing.Point(539, 36);
             this.updateEmployee.Name = "updateEmployee";
             this.updateEmployee.Size = new System.Drawing.Size(73, 27);
