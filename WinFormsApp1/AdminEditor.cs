@@ -89,42 +89,41 @@ namespace WinFormsApp1
             loadListBoxDepartment();
         }
 
-      
+
         private void add_employee_Click(object sender, EventArgs e)
         {
-           Regex numberRegex = new Regex("^[0-9]+$");
+            Regex numberRegex = new Regex(@"^\d{10}$");
             String fixNumber = txt_employee_landline.Text;
-            //int countNumber = fixNumber.Split().Length + 1;
             String mobileNumber = txt_employee_mobile.Text;
-
 
             String formatFirstname = txt_employee_firstname.Text;
             formatFirstname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatFirstname.ToLower());
 
             String getFirstletter = formatFirstname.Substring(0, 1);
             String createEmail = (getFirstletter + "." + txt_employee_lastname.Text + "@natural.product").ToLower();
-           
-            
 
-            if (!numberRegex.IsMatch(fixNumber) && !numberRegex.IsMatch(mobileNumber))
-                 {
-                MessageBox.Show("Le numéro de téléphone fixe doit comporter uniqument des chiffres");
-            }
-           // else if (countNumber != 10)
-            //{
-              //  MessageBox.Show("Le numéro ne comporte pas 10 chiffres");
-            //}
-           else 
             if (
-                String.IsNullOrEmpty(txt_employee_lastname.Text) ||
-                String.IsNullOrEmpty(txt_employee_firstname.Text) ||
-                String.IsNullOrEmpty(txt_employee_landline.Text) ||
-                String.IsNullOrEmpty(txt_employee_mobile.Text) 
-                )
+               String.IsNullOrEmpty(txt_employee_lastname.Text) ||
+               String.IsNullOrEmpty(txt_employee_firstname.Text) ||
+               String.IsNullOrEmpty(txt_employee_landline.Text) ||
+               String.IsNullOrEmpty(txt_employee_mobile.Text)
+               )
             {
                 MessageBox.Show("Erreur : au moins un champ est vide");
+                return;
             }
-            else
+
+            if (!numberRegex.IsMatch(fixNumber))
+                 {
+                MessageBox.Show("Le numéro de téléphone fixe n'est pas correct");
+                return;
+            }
+            if(!numberRegex.IsMatch(mobileNumber))
+            {
+                MessageBox.Show("Le numéro de téléphone mobile n'est pas correct");
+                return;
+            }
+            else 
             {
                 Employee employee = new Employee
                 {
@@ -136,19 +135,15 @@ namespace WinFormsApp1
                     site = listBoxSite.SelectedValue.ToString(),
                     department = listBoxDepartment.SelectedValue.ToString(),
                 };
-
                 EmployeeDAO employeeDAO = new EmployeeDAO();
                 int result = employeeDAO.addOneEmployee(employee);
 
-                // clear input form
-                // txt_employee_lastname.Clear();
-                txt_employee_lastname.Text = String.Empty;
-                txt_employee_firstname.Text = String.Empty;
-                txt_employee_landline.Text = String.Empty;
-                txt_employee_mobile.Text = String.Empty;
+                txt_employee_lastname.Clear();
+                txt_employee_firstname.Clear();
+                txt_employee_landline.Clear();
+                txt_employee_mobile.Clear();
 
                 MessageBox.Show("L'employé(e) " + employee.lastname + " " + employee.firstname+ " a été ajouté(e)");
-
                 loadDataEmployee();
             }
         }
