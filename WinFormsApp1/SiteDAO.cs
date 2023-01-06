@@ -11,7 +11,7 @@ namespace WinFormsApp1
     {
         string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
-
+        //test
         public List<Site> getAllSites()
         {
             // start with an empty list
