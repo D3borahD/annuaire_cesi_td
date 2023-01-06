@@ -35,7 +35,8 @@
             // 
             // saveUpdateDepartment
             // 
-            this.saveUpdateDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.saveUpdateDepartment.BackColor = System.Drawing.Color.Navy;
+            this.saveUpdateDepartment.ForeColor = System.Drawing.Color.White;
             this.saveUpdateDepartment.Location = new System.Drawing.Point(100, 138);
             this.saveUpdateDepartment.Name = "saveUpdateDepartment";
             this.saveUpdateDepartment.Size = new System.Drawing.Size(73, 27);

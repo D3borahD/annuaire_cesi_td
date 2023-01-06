@@ -31,16 +31,15 @@
             this.saveUpdateSite = new System.Windows.Forms.Button();
             this.txt_site_update = new System.Windows.Forms.TextBox();
             this.labelSite = new System.Windows.Forms.Label();
-            this.deleteSite = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // saveUpdateSite
             // 
             this.saveUpdateSite.BackColor = System.Drawing.Color.Navy;
             this.saveUpdateSite.ForeColor = System.Drawing.Color.White;
-            this.saveUpdateSite.Location = new System.Drawing.Point(48, 162);
+            this.saveUpdateSite.Location = new System.Drawing.Point(81, 168);
             this.saveUpdateSite.Name = "saveUpdateSite";
-            this.saveUpdateSite.Size = new System.Drawing.Size(73, 27);
+            this.saveUpdateSite.Size = new System.Drawing.Size(100, 31);
             this.saveUpdateSite.TabIndex = 11;
             this.saveUpdateSite.Text = "Modifier";
             this.saveUpdateSite.UseVisualStyleBackColor = false;
@@ -64,23 +63,11 @@
             this.labelSite.TabIndex = 9;
             this.labelSite.Text = "Nom du site";
             // 
-            // deleteSite
-            // 
-            this.deleteSite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.deleteSite.ForeColor = System.Drawing.Color.White;
-            this.deleteSite.Location = new System.Drawing.Point(149, 163);
-            this.deleteSite.Name = "deleteSite";
-            this.deleteSite.Size = new System.Drawing.Size(75, 27);
-            this.deleteSite.TabIndex = 12;
-            this.deleteSite.Text = "Supprimer";
-            this.deleteSite.UseVisualStyleBackColor = false;
-            // 
             // UpdateSite
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(272, 252);
-            this.Controls.Add(this.deleteSite);
             this.Controls.Add(this.saveUpdateSite);
             this.Controls.Add(this.txt_site_update);
             this.Controls.Add(this.labelSite);
@@ -96,6 +83,5 @@
         private Button saveUpdateSite;
         private TextBox txt_site_update;
         private Label labelSite;
-        private Button deleteSite;
     }
 }

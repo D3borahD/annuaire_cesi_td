@@ -49,11 +49,11 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(247, 204);
+            this.dataGridView1.Location = new System.Drawing.Point(273, 203);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(451, 383);
+            this.dataGridView1.Size = new System.Drawing.Size(560, 383);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.displayEmplyeeCard_CellClick);
             // 
@@ -61,18 +61,18 @@
             // 
             this.button2.BackColor = System.Drawing.Color.Navy;
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(504, 144);
+            this.button2.Location = new System.Drawing.Point(531, 132);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(85, 34);
             this.button2.TabIndex = 2;
-            this.button2.Text = "rechercher";
+            this.button2.Text = "Rechercher";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.textBox1.Location = new System.Drawing.Point(312, 151);
+            this.textBox1.Location = new System.Drawing.Point(339, 139);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(186, 23);
             this.textBox1.TabIndex = 3;
@@ -80,7 +80,7 @@
             // edition
             // 
             this.edition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.edition.Location = new System.Drawing.Point(570, 35);
+            this.edition.Location = new System.Drawing.Point(644, 32);
             this.edition.Name = "edition";
             this.edition.Size = new System.Drawing.Size(128, 43);
             this.edition.TabIndex = 4;
@@ -93,7 +93,7 @@
             this.dataGridViewSiteDisplay.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewSiteDisplay.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewSiteDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSiteDisplay.Location = new System.Drawing.Point(25, 204);
+            this.dataGridViewSiteDisplay.Location = new System.Drawing.Point(51, 203);
             this.dataGridViewSiteDisplay.Name = "dataGridViewSiteDisplay";
             this.dataGridViewSiteDisplay.ReadOnly = true;
             this.dataGridViewSiteDisplay.RowTemplate.Height = 25;
@@ -106,7 +106,7 @@
             this.dataGridViewDepartmentDisplay.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewDepartmentDisplay.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewDepartmentDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDepartmentDisplay.Location = new System.Drawing.Point(25, 412);
+            this.dataGridViewDepartmentDisplay.Location = new System.Drawing.Point(51, 411);
             this.dataGridViewDepartmentDisplay.Name = "dataGridViewDepartmentDisplay";
             this.dataGridViewDepartmentDisplay.ReadOnly = true;
             this.dataGridViewDepartmentDisplay.RowTemplate.Height = 25;
@@ -117,7 +117,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(25, 35);
+            this.pictureBox1.Location = new System.Drawing.Point(114, 32);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 104);
             this.pictureBox1.TabIndex = 7;
@@ -128,7 +128,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Malgun Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(146, 70);
+            this.label1.Location = new System.Drawing.Point(235, 67);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(380, 32);
             this.label1.TabIndex = 8;
@@ -139,7 +139,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.Navy;
-            this.label2.Location = new System.Drawing.Point(248, 153);
+            this.label2.Location = new System.Drawing.Point(275, 141);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 21);
             this.label2.TabIndex = 9;
@@ -150,7 +150,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(729, 626);
+            this.ClientSize = new System.Drawing.Size(839, 626);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);

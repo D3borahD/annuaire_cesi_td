@@ -23,6 +23,8 @@ namespace WinFormsApp1
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
 
+
+
         public int employeeId;
         public int departmentId;
         public int siteId;
@@ -47,8 +49,17 @@ namespace WinFormsApp1
             listBoxDepartmentUpdate.ValueMember = "id";
             listBoxDepartmentUpdate.SelectedValue = departmentId;
 
+        }
 
-
+        private void loadEmployee(int employeeId)
+        {
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            //Employee employee = (Employee)employeeDAO.getOneEmployee(employeeId);
+           /* txt_update_lastname = employee.lastname;
+            txt_update_firstname = employee.firstname;
+            txt_update_landline = employee.landline;
+            txt_update_mobile = employee.mobile;
+            txt_update_email = employee.email;*/
 
         }
 
@@ -59,10 +70,10 @@ namespace WinFormsApp1
             employeeId = int.Parse(userInfo[0]);
             
 
-
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getOneEmployee(employeeId);
-
+           
+            loadEmployee(employeeId);
            
 
 
@@ -76,8 +87,6 @@ namespace WinFormsApp1
             }
             departmentId = int.Parse(employeeSite[7]);
             siteId = int.Parse(employeeSite[6]);
-
-
 
             loadListBoxDepartment(departmentId);
             loadListBoxSite(siteId);
@@ -107,12 +116,12 @@ namespace WinFormsApp1
                 department = listBoxDepartmentUpdate.SelectedValue.ToString(),
             };
 
-
             EmployeeDAO employeeDAO = new EmployeeDAO();
 
             int result = employeeDAO.updateEmployee(employee);
 
             MessageBox.Show("L'employé(e) a été modifié(e)" + employeeId);
+            this.Close();
         }
 
         private void listBoxSite_SelectedIndexChanged(object sender, EventArgs e)

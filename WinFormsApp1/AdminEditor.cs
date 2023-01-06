@@ -32,6 +32,7 @@ namespace WinFormsApp1
             dataGridViewDepartmentEdit.DataSource = departmentBindingSource;
             dataGridViewDepartmentEdit.Columns["id"].Visible = false;
             dataGridViewDepartmentEdit.Columns[1].HeaderText = "Nom du Service";
+            dataGridViewDepartmentEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
         }
 
         private void loadDataSite()
@@ -41,6 +42,7 @@ namespace WinFormsApp1
             dataGridViewSiteEdit.DataSource = siteBindingSource;
             dataGridViewSiteEdit.Columns["id"].Visible = false;
             dataGridViewSiteEdit.Columns[1].HeaderText = "Nom du Site";
+            dataGridViewSiteEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
         }
 
         private void loadDataEmployee()
@@ -48,6 +50,7 @@ namespace WinFormsApp1
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
             dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
+            dataGridViewEmployeeEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
             if (count != 0)
             {
@@ -220,6 +223,7 @@ namespace WinFormsApp1
 
         private void updateEmployee_Click(object sender, EventArgs e)
         {
+
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
             List<String> userInfo = new List<string>();
 
@@ -232,12 +236,6 @@ namespace WinFormsApp1
 
             UpdateEmployee updateEmployee = new UpdateEmployee(userInfo);
             updateEmployee.Show();
-         
-        }
-
-        private void dataGridViewEmployeeEdit_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Reference click dataGrid
         }
 
         private void deleteDepartment_Click(object sender, EventArgs e)
@@ -358,5 +356,7 @@ namespace WinFormsApp1
 
             textBoxSearch.Clear();
         }
+
+      
     }
 }
