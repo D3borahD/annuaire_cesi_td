@@ -98,9 +98,9 @@ namespace WinFormsApp1
             return newRows;
         }
 
-        public List<Employee> getOneEmployee(int employeeId)
+        public Object getOneEmployee(int employeeId)
         {
-            List<Employee> returnThese = new List<Employee>();
+            Employee employee = new Employee();
 
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
@@ -110,25 +110,21 @@ namespace WinFormsApp1
 
             using (MySqlDataReader reader = command.ExecuteReader())
             {
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    Employee emp = new Employee
 
-                    {
-                        id = reader.GetInt32(0),
-                        firstname = reader.GetString(1),
-                        lastname = reader.GetString(2),
-                        landline = reader.GetString(3),
-                        mobile = reader.GetString(4),
-                        email = reader.GetString(5),
-                        site = reader.GetString(6),
-                        department = reader.GetString(7),
-                    };                   
-                    returnThese.Add(emp);
+                    employee.id = reader.GetInt32(0);
+                    employee.firstname = reader.GetString(1);
+                    employee.lastname = reader.GetString(2);
+                    employee.landline = reader.GetString(3);
+                    employee.mobile = reader.GetString(4);
+                    employee.email = reader.GetString(5);
+                    employee.site = reader.GetString(6);
+                    employee.department = reader.GetString(7);
                 }
             }
             connection.Close();
-            return returnThese;
+            return employee;
         }
 
         // Get employee with Site search
