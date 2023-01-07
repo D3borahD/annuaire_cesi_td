@@ -120,7 +120,7 @@ namespace WinFormsApp1
 
             int result = employeeDAO.updateEmployee(employee);
 
-            MessageBox.Show("L'employé(e) a été modifié(e)" + employeeId);
+            MessageBox.Show("L'employé(e)"+ employeeId + "a été modifié(e)");
             this.Close();
         }
 

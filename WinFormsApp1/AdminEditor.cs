@@ -214,10 +214,23 @@ namespace WinFormsApp1
             // cast don't work ??
             int idSelectedEmployee = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
 
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            int result = employeeDAO.deleteEmployee(idSelectedEmployee);
+            String nameSelectedEmployee = dataGridViewEmployeeEdit.Rows[rowClicked].Cells[1].Value.ToString();
+       
+            DialogResult dialogResult = MessageBox.Show("Etes-vous sûre de vouloir supprimer l'employé(e) " + nameSelectedEmployee + "?", "SUPPRESSION D'UN SERVICE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                EmployeeDAO employeeDAO = new EmployeeDAO();
+                int result = employeeDAO.deleteEmployee(idSelectedEmployee);
 
-            MessageBox.Show("L'employé(e) a été supprimé(e)");
+                MessageBox.Show("L'employé(e) " + nameSelectedEmployee + " a été supprimé(e)");
+                loadDataEmployee();
+    
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                // Application.OpenForms["UpdateDepartment"].Close();
+                return;
+            }
             loadDataEmployee();
         }
 
