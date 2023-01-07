@@ -196,6 +196,8 @@ namespace WinFormsApp1
                 name = name,
             };
 
+                
+
             SiteDAO siteDAO = new SiteDAO();
             int result = siteDAO.addOneSite(site);
 

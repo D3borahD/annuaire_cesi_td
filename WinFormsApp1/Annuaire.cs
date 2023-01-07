@@ -21,6 +21,7 @@ namespace WinFormsApp1
         {
             InitializeComponent();
             KeyPreview = true;
+
         }
 
         private void loadDataDepartment()
