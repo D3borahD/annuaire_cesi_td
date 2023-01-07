@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design.Serialization;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -14,20 +15,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Forms.Application;
 
 namespace WinFormsApp1
 {
 
     public partial class UpdateEmployee : Form
     {
-       // BindingSource employeeBindingSource = new BindingSource();
+
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
 
         public int employeeId;
         public int departmentId;
         public int siteId;
-       // public string name;
 
         private void loadListBoxSite(int siteId)
         {
@@ -65,42 +66,11 @@ namespace WinFormsApp1
         public UpdateEmployee(List<String> userInfo)
         {
             InitializeComponent();
-            
             employeeId = int.Parse(userInfo[0]);
             loadEmployee(employeeId);
             loadListBoxDepartment(departmentId);
             loadListBoxSite(siteId);
-
-            //EmployeeDAO employeeDAO = new EmployeeDAO();
-            // Employee employee = (Employee)employeeDAO.getOneEmployee(employeeId);
-            // List<Employee> employee = (List<Employee>)employeeDAO.getOneEmployee(employeeId);
-
-            // employeeBindingSource.DataSource = employeeDAO.getOneEmployee(employeeId);*/
-
-
-            //get id site and department 
-            /*testGrid.DataSource = employeeBindingSource;
-              testGrid.Visible = false;
-              List<string> employeeSite = new List<string>();
-              for (int i =0; i < testGrid.ColumnCount; i++)
-              {
-                employeeSite.Add(testGrid.Rows[0].Cells[i].Value.ToString());
-              }*/
-
-
-            // departmentId = int.Parse(employeeSite[7]);
-            //siteId = int.Parse(employeeSite[6]);
-
-
-
-            /*  
-              txt_update_lastname.Text = userInfo[1];
-              txt_update_firstname.Text = userInfo[2];
-              txt_update_landline.Text = userInfo[3];
-              txt_update_mobile.Text = userInfo[4];
-              txt_update_email.Text = userInfo[5];*/
         }
-
       
         private void update_employee_Click(object sender, EventArgs e)
         {
@@ -149,12 +119,12 @@ namespace WinFormsApp1
                 };
 
                 EmployeeDAO employeeDAO = new EmployeeDAO();
-
                 int result = employeeDAO.updateEmployee(employee);
 
                 MessageBox.Show("L'employé(e)" + employee.lastname + " a été modifié(e)");
                 this.Close();
             }
+
         }
 
         private void listBoxSite_SelectedIndexChanged(object sender, EventArgs e)

@@ -22,7 +22,7 @@ namespace WinFormsApp1
 
         public AdminEditor()
         {
-            InitializeComponent();
+            InitializeComponent();         
         }
 
         private void loadDataDepartment()
@@ -231,12 +231,10 @@ namespace WinFormsApp1
                 // Application.OpenForms["UpdateDepartment"].Close();
                 return;
             }
-            loadDataEmployee();
         }
 
         private void updateEmployee_Click(object sender, EventArgs e)
         {
-
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
             List<String> userInfo = new List<string>();
 
@@ -244,8 +242,6 @@ namespace WinFormsApp1
             {
                 userInfo.Add(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[i].Value.ToString());
             }
-
-            //int userId = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
 
             UpdateEmployee updateEmployee = new UpdateEmployee(userInfo);
             updateEmployee.Show();
@@ -288,9 +284,11 @@ namespace WinFormsApp1
             updateDepartment.Show();
         }
 
-        private void refresh_Click(object sender, EventArgs e)
+        public void refresh_Click(object sender, EventArgs e)
         {
-
+            loadDataEmployee();
+            loadDataDepartment();
+            loadDataSite();
         }
 
         private void deleteSite_Click(object sender, EventArgs e)

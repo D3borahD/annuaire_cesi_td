@@ -104,16 +104,16 @@
             // listBoxDepartment
             // 
             this.listBoxDepartment.FormattingEnabled = true;
-            this.listBoxDepartment.ItemHeight = 15;
+            this.listBoxDepartment.ItemHeight = 20;
             this.listBoxDepartment.Location = new System.Drawing.Point(134, 155);
             this.listBoxDepartment.Name = "listBoxDepartment";
-            this.listBoxDepartment.Size = new System.Drawing.Size(162, 49);
+            this.listBoxDepartment.Size = new System.Drawing.Size(162, 44);
             this.listBoxDepartment.TabIndex = 17;
             // 
             // listBoxSite
             // 
             this.listBoxSite.FormattingEnabled = true;
-            this.listBoxSite.ItemHeight = 15;
+            this.listBoxSite.ItemHeight = 20;
             this.listBoxSite.Items.AddRange(new object[] {
             "Test",
             "test1",
@@ -123,7 +123,7 @@
             "po"});
             this.listBoxSite.Location = new System.Drawing.Point(134, 97);
             this.listBoxSite.Name = "listBoxSite";
-            this.listBoxSite.Size = new System.Drawing.Size(162, 49);
+            this.listBoxSite.Size = new System.Drawing.Size(162, 44);
             this.listBoxSite.TabIndex = 16;
             // 
             // add_employee
@@ -142,28 +142,28 @@
             // 
             this.txt_employee_mobile.Location = new System.Drawing.Point(134, 245);
             this.txt_employee_mobile.Name = "txt_employee_mobile";
-            this.txt_employee_mobile.Size = new System.Drawing.Size(162, 23);
+            this.txt_employee_mobile.Size = new System.Drawing.Size(162, 27);
             this.txt_employee_mobile.TabIndex = 12;
             // 
             // txt_employee_landline
             // 
             this.txt_employee_landline.Location = new System.Drawing.Point(134, 213);
             this.txt_employee_landline.Name = "txt_employee_landline";
-            this.txt_employee_landline.Size = new System.Drawing.Size(162, 23);
+            this.txt_employee_landline.Size = new System.Drawing.Size(162, 27);
             this.txt_employee_landline.TabIndex = 11;
             // 
             // txt_employee_firstname
             // 
             this.txt_employee_firstname.Location = new System.Drawing.Point(134, 65);
             this.txt_employee_firstname.Name = "txt_employee_firstname";
-            this.txt_employee_firstname.Size = new System.Drawing.Size(162, 23);
+            this.txt_employee_firstname.Size = new System.Drawing.Size(162, 27);
             this.txt_employee_firstname.TabIndex = 8;
             // 
             // txt_employee_lastname
             // 
             this.txt_employee_lastname.Location = new System.Drawing.Point(134, 33);
             this.txt_employee_lastname.Name = "txt_employee_lastname";
-            this.txt_employee_lastname.Size = new System.Drawing.Size(162, 23);
+            this.txt_employee_lastname.Size = new System.Drawing.Size(162, 27);
             this.txt_employee_lastname.TabIndex = 7;
             // 
             // label6
@@ -173,7 +173,7 @@
             this.label6.ForeColor = System.Drawing.Color.Navy;
             this.label6.Location = new System.Drawing.Point(16, 244);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 15);
+            this.label6.Size = new System.Drawing.Size(57, 20);
             this.label6.TabIndex = 5;
             this.label6.Text = "Mobile";
             // 
@@ -184,7 +184,7 @@
             this.label5.ForeColor = System.Drawing.Color.Navy;
             this.label5.Location = new System.Drawing.Point(16, 209);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 15);
+            this.label5.Size = new System.Drawing.Size(113, 20);
             this.label5.TabIndex = 4;
             this.label5.Text = "Téléphone Fixe";
             // 
@@ -195,7 +195,7 @@
             this.label4.ForeColor = System.Drawing.Color.Navy;
             this.label4.Location = new System.Drawing.Point(16, 155);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 15);
+            this.label4.Size = new System.Drawing.Size(59, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Service";
             // 
@@ -206,7 +206,7 @@
             this.label3.ForeColor = System.Drawing.Color.Navy;
             this.label3.Location = new System.Drawing.Point(16, 106);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 15);
+            this.label3.Size = new System.Drawing.Size(35, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Site";
             // 
@@ -217,7 +217,7 @@
             this.label2.ForeColor = System.Drawing.Color.Navy;
             this.label2.Location = new System.Drawing.Point(16, 71);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 15);
+            this.label2.Size = new System.Drawing.Size(64, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Prénom";
             // 
@@ -228,7 +228,7 @@
             this.name.ForeColor = System.Drawing.Color.Navy;
             this.name.Location = new System.Drawing.Point(16, 36);
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(34, 15);
+            this.name.Size = new System.Drawing.Size(44, 20);
             this.name.TabIndex = 0;
             this.name.Text = "Nom";
             // 
@@ -279,6 +279,7 @@
             this.dataGridViewDepartmentEdit.Location = new System.Drawing.Point(27, 106);
             this.dataGridViewDepartmentEdit.Name = "dataGridViewDepartmentEdit";
             this.dataGridViewDepartmentEdit.ReadOnly = true;
+            this.dataGridViewDepartmentEdit.RowHeadersWidth = 51;
             this.dataGridViewDepartmentEdit.RowTemplate.Height = 25;
             this.dataGridViewDepartmentEdit.Size = new System.Drawing.Size(230, 177);
             this.dataGridViewDepartmentEdit.TabIndex = 3;
@@ -299,7 +300,7 @@
             // 
             this.txt_department_name.Location = new System.Drawing.Point(14, 68);
             this.txt_department_name.Name = "txt_department_name";
-            this.txt_department_name.Size = new System.Drawing.Size(121, 23);
+            this.txt_department_name.Size = new System.Drawing.Size(121, 27);
             this.txt_department_name.TabIndex = 1;
             // 
             // label8
@@ -309,7 +310,7 @@
             this.label8.ForeColor = System.Drawing.Color.Navy;
             this.label8.Location = new System.Drawing.Point(14, 35);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(94, 15);
+            this.label8.Size = new System.Drawing.Size(119, 20);
             this.label8.TabIndex = 0;
             this.label8.Text = "Nom du service";
             // 
@@ -349,6 +350,7 @@
             this.dataGridViewSiteEdit.Location = new System.Drawing.Point(29, 106);
             this.dataGridViewSiteEdit.Name = "dataGridViewSiteEdit";
             this.dataGridViewSiteEdit.ReadOnly = true;
+            this.dataGridViewSiteEdit.RowHeadersWidth = 51;
             this.dataGridViewSiteEdit.RowTemplate.Height = 25;
             this.dataGridViewSiteEdit.Size = new System.Drawing.Size(243, 177);
             this.dataGridViewSiteEdit.TabIndex = 4;
@@ -381,7 +383,7 @@
             // 
             this.txt_site_name.Location = new System.Drawing.Point(19, 68);
             this.txt_site_name.Name = "txt_site_name";
-            this.txt_site_name.Size = new System.Drawing.Size(121, 23);
+            this.txt_site_name.Size = new System.Drawing.Size(121, 27);
             this.txt_site_name.TabIndex = 1;
             // 
             // label9
@@ -391,7 +393,7 @@
             this.label9.ForeColor = System.Drawing.Color.Navy;
             this.label9.Location = new System.Drawing.Point(19, 39);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(74, 15);
+            this.label9.Size = new System.Drawing.Size(95, 20);
             this.label9.TabIndex = 0;
             this.label9.Text = "Nom du site";
             // 
@@ -403,6 +405,7 @@
             this.dataGridViewEmployeeEdit.Location = new System.Drawing.Point(16, 86);
             this.dataGridViewEmployeeEdit.Name = "dataGridViewEmployeeEdit";
             this.dataGridViewEmployeeEdit.ReadOnly = true;
+            this.dataGridViewEmployeeEdit.RowHeadersWidth = 51;
             this.dataGridViewEmployeeEdit.RowTemplate.Height = 25;
             this.dataGridViewEmployeeEdit.Size = new System.Drawing.Size(923, 256);
             this.dataGridViewEmployeeEdit.TabIndex = 4;
@@ -432,12 +435,14 @@
             // 
             // refresh
             // 
-            this.refresh.Location = new System.Drawing.Point(902, 144);
+            this.refresh.BackColor = System.Drawing.Color.Navy;
+            this.refresh.ForeColor = System.Drawing.Color.White;
+            this.refresh.Location = new System.Drawing.Point(895, 138);
             this.refresh.Name = "refresh";
-            this.refresh.Size = new System.Drawing.Size(85, 29);
+            this.refresh.Size = new System.Drawing.Size(92, 36);
             this.refresh.TabIndex = 8;
             this.refresh.Text = "Raffraîchir";
-            this.refresh.UseVisualStyleBackColor = true;
+            this.refresh.UseVisualStyleBackColor = false;
             this.refresh.Click += new System.EventHandler(this.refresh_Click);
             // 
             // label1
@@ -447,7 +452,7 @@
             this.label1.ForeColor = System.Drawing.Color.Navy;
             this.label1.Location = new System.Drawing.Point(290, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(380, 32);
+            this.label1.Size = new System.Drawing.Size(471, 41);
             this.label1.TabIndex = 10;
             this.label1.Text = "NATURAL PRODUCT - Annuaire";
             // 
@@ -467,7 +472,7 @@
             this.label7.ForeColor = System.Drawing.Color.Navy;
             this.label7.Location = new System.Drawing.Point(375, 87);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(210, 32);
+            this.label7.Size = new System.Drawing.Size(262, 41);
             this.label7.TabIndex = 11;
             this.label7.Text = "Fenêtre d\'édition";
             // 
@@ -478,7 +483,7 @@
             this.label10.ForeColor = System.Drawing.Color.Navy;
             this.label10.Location = new System.Drawing.Point(14, 39);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(48, 21);
+            this.label10.Size = new System.Drawing.Size(58, 28);
             this.label10.TabIndex = 14;
             this.label10.Text = "Nom";
             // 
@@ -487,7 +492,7 @@
             this.textBoxSearch.BackColor = System.Drawing.Color.White;
             this.textBoxSearch.Location = new System.Drawing.Point(78, 38);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(186, 23);
+            this.textBoxSearch.Size = new System.Drawing.Size(186, 27);
             this.textBoxSearch.TabIndex = 13;
             // 
             // searchEmployee
@@ -520,7 +525,7 @@
             // 
             // AdminEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1041, 978);
