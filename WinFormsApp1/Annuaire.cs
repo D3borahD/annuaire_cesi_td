@@ -142,7 +142,7 @@ namespace WinFormsApp1
             employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoinDepartment((int)dataGridView.Rows[rowClicked].Cells[0].Value);
             dataGridView1.DataSource = employeeBindingSource;
 
-           /* int count = int.Parse(dataGridView1.Rows.Count.ToString());
+            int count = int.Parse(dataGridView1.Rows.Count.ToString());
             if (count != 0)
             {
                 dataGridView1.Columns[0].Visible = false;
@@ -153,7 +153,7 @@ namespace WinFormsApp1
                 dataGridView1.Columns[5].Visible = false;
                 dataGridView1.Columns[6].HeaderText = "Site";
                 dataGridView1.Columns[7].HeaderText = "Service";
-            }*/
+            }
 
         }
 

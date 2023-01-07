@@ -16,7 +16,7 @@ namespace WinFormsApp1
     internal class EmployeeDAO
     {
         string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
-
+        //private MySqlConnection connection;
 
         public List<JObject> getAllEmployees()
         {
@@ -26,6 +26,7 @@ namespace WinFormsApp1
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
+            
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand();
             command.CommandText = "SELECT employee.id as employee_id, `lastname`,`firstname`,  `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id;";
@@ -43,6 +44,7 @@ namespace WinFormsApp1
                     returnThese.Add(emp);
                 }
             }
+           
             connection.Close();
             return returnThese;
         }

@@ -60,19 +60,32 @@ namespace WinFormsApp1
             return site;
         }
 
-        internal int addOneSite(Site site)
+        internal int addOneSite(Site site) 
         {
             // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-            // define the sql statement to fetch all employees
-            MySqlCommand command = new MySqlCommand("INSERT INTO `site`(`name`) VALUES(@name)", connection);
 
-            command.Parameters.AddWithValue("@name", site.name);
+            try
+            {
+              
+                // define the sql statement to fetch all employees
+                MySqlCommand command = new MySqlCommand("INSERT INTO `site`(`name`) VALUES(@name)", connection);
 
-            int newRows = command.ExecuteNonQuery();
-            connection.Close();
-            return newRows;
+                command.Parameters.AddWithValue("@name", site.name);
+
+                int newRows = command.ExecuteNonQuery();
+                connection.Close();
+                MessageBox.Show("Le site a été ajouté");
+                return newRows;
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Le site existe déjà");
+                return 0;
+            }
+       
+
         }
 
         internal int deleteSite(int idSelectedSite)

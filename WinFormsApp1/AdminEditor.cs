@@ -174,7 +174,11 @@ namespace WinFormsApp1
 
                 txt_department_name.Clear();
 
-                MessageBox.Show("Le service " + department.name + " a été ajouté");
+               /* if (result != 0)
+                {
+                    MessageBox.Show("Le service " + department.name + " a été ajouté");
+                } */
+              
 
                 loadDataDepartment();
             }
