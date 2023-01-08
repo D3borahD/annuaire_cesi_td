@@ -104,7 +104,7 @@ namespace WinFormsApp1
 
             try
             {
-                MySqlCommand command = new MySqlCommand("INSERT INTO `employee`(`firstname`, `lastname`, `landline`, `mobile`, `email`, `site_id`, `department_id`) VALUES(@firstname, @lastname, @landline, @mobile, @email, @site, @department)", connection);
+                MySqlCommand command = new MySqlCommand("INSERT INTO `employee`( `lastname`,`firstname`, `landline`, `mobile`, `email`, `site_id`, `department_id`) VALUES(@firstname, @lastname, @landline, @mobile, @email, @site, @department)", connection);
                 command.Parameters.AddWithValue("@firstname", employee.firstname);
                 command.Parameters.AddWithValue("@lastname", employee.lastname);
                 command.Parameters.AddWithValue("@landline", employee.landline);
@@ -177,7 +177,7 @@ namespace WinFormsApp1
             {
                 MySqlCommand command = new MySqlCommand();
 
-                command.CommandText = "SELECT employee.id as employee_id, `firstname`,`lastname`,  `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE site_id = @site_id;";
+                command.CommandText = "SELECT employee.id as employee_id, `lastname`, `firstname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE site_id = @site_id;";
                 command.Parameters.AddWithValue("@site_id", site_id);
                 command.Connection = connection;
 
@@ -217,7 +217,7 @@ namespace WinFormsApp1
             try
             {
                 MySqlCommand command = new MySqlCommand();
-                command.CommandText = "SELECT employee.id as employee_id,  `lastname`, `firstname`,  `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE department_id = @department_id;";
+                command.CommandText = "SELECT employee.id as employee_id,  `lastname`, `firstname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE department_id = @department_id;";
 
                 command.Parameters.AddWithValue("@department_id", department_id);
                 command.Connection = connection;

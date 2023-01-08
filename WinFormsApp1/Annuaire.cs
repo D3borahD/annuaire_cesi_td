@@ -122,8 +122,8 @@ namespace WinFormsApp1
             if (count != 0)
             {
                 dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Prénom";
-                dataGridView1.Columns[2].HeaderText = "Nom";
+                dataGridView1.Columns[1].HeaderText = "Nom";
+                dataGridView1.Columns[2].HeaderText = "Prénom";
                 dataGridView1.Columns[3].Visible = false;
                 dataGridView1.Columns[4].Visible = false;
                 dataGridView1.Columns[5].Visible = false;
@@ -146,8 +146,8 @@ namespace WinFormsApp1
             if (count != 0)
             {
                 dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Prénom";
-                dataGridView1.Columns[2].HeaderText = "Nom";
+                dataGridView1.Columns[1].HeaderText = "Nom";
+                dataGridView1.Columns[2].HeaderText = "Prénom";
                 dataGridView1.Columns[3].Visible = false;
                 dataGridView1.Columns[4].Visible = false;
                 dataGridView1.Columns[5].Visible = false;
