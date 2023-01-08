@@ -13,28 +13,34 @@ namespace WinFormsApp1
 
         public List<Department> getAllDepartments()
         {
-            // start with an empty list
             List<Department> returnThese = new List<Department>();
 
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM department", connection);
-
-            using (MySqlDataReader reader = command.ExecuteReader())
+            try
             {
-                while (reader.Read())
+                MySqlCommand command = new MySqlCommand("SELECT * FROM department", connection);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    Department dep = new Department
+                    while (reader.Read())
                     {
-                        id = reader.GetInt32(0),
-                        name = reader.GetString(1)
-                    };
-                    returnThese.Add(dep);
+                        Department dep = new Department
+                        {
+                            id = reader.GetInt32(0),
+                            name = reader.GetString(1)
+                        };
+                        returnThese.Add(dep);
+                    }
                 }
+                connection.Close();
+                return returnThese;
             }
-            connection.Close();
-            return returnThese;
+            catch (MySqlException ex)
+            {
+                throw;
+            }
         }
 
         internal int addOneDepartment(Department department)
@@ -62,12 +68,20 @@ namespace WinFormsApp1
         {
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-            MySqlCommand command = new MySqlCommand("DELETE FROM `department` WHERE `department`.`id` = @id; ", connection);
-            command.Parameters.AddWithValue("@id", departmentId);
 
-            int result = command.ExecuteNonQuery();
-            connection.Close();
-            return result;
+            try
+            {
+                MySqlCommand command = new MySqlCommand("DELETE FROM `department` WHERE `department`.`id` = @id; ", connection);
+                command.Parameters.AddWithValue("@id", departmentId);
+
+                int result = command.ExecuteNonQuery();
+                connection.Close();
+                return result;
+            }
+            catch (MySqlException ex)
+            {
+                throw;
+            }
         }
 
         internal object getDepartmentById(int departmentId)
@@ -76,18 +90,26 @@ namespace WinFormsApp1
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `department`WHERE department.id = @id", connection);
-            command.Parameters.AddWithValue("@id", departmentId);
-
-            using (MySqlDataReader reader = command.ExecuteReader())
+            try
             {
-                if (reader.Read())
+                MySqlCommand command = new MySqlCommand("SELECT * FROM `department`WHERE department.id = @id", connection);
+                command.Parameters.AddWithValue("@id", departmentId);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                  department.name = reader.GetString(1);
+                    if (reader.Read())
+                    {
+                        department.name = reader.GetString(1);
+                    }
                 }
+                connection.Close();
+                return department;
             }
-            connection.Close();
-            return department;
+            catch (MySqlException ex)
+            {
+                throw;
+            }
+
         }
 
         internal int updateDepartment(Department department)

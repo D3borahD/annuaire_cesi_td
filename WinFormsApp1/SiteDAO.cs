@@ -11,33 +11,36 @@ namespace WinFormsApp1
     {
         string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
-        //test
         public List<Site> getAllSites()
         {
-            // start with an empty list
             List<Site> returnThese = new List<Site>();
 
-            // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            // define the sql statement to fetch all employees
-            MySqlCommand command = new MySqlCommand("SELECT * FROM site", connection);
-
-            using (MySqlDataReader reader = command.ExecuteReader())
+            try
             {
-                while (reader.Read())
+                MySqlCommand command = new MySqlCommand("SELECT * FROM site", connection);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    Site site = new Site
+                    while (reader.Read())
                     {
-                        id = reader.GetInt32(0),
-                        name = reader.GetString(1)
-                    };
-                    returnThese.Add(site);
+                        Site site = new Site
+                        {
+                            id = reader.GetInt32(0),
+                            name = reader.GetString(1)
+                        };
+                        returnThese.Add(site);
+                    }
                 }
+                connection.Close();
+                return returnThese;
             }
-            connection.Close();
-            return returnThese;
+            catch(Exception ex) {
+                throw;
+            }
+          
         }
 
         internal object getSiteById(int siteId)
@@ -46,37 +49,41 @@ namespace WinFormsApp1
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `site`WHERE site.id = @id", connection);
-            command.Parameters.AddWithValue("@id", siteId);
-
-            using (MySqlDataReader reader = command.ExecuteReader())
+            try
             {
-                if (reader.Read())
+                MySqlCommand command = new MySqlCommand("SELECT * FROM `site`WHERE site.id = @id", connection);
+                command.Parameters.AddWithValue("@id", siteId);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    site.name = reader.GetString(1);
+                    if (reader.Read())
+                    {
+                        site.name = reader.GetString(1);
+                    }
                 }
+                connection.Close();
+                return site;
             }
-            connection.Close();
-            return site;
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         internal int addOneSite(Site site) 
         {
-            // connect to the mysql server
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             try
             {
-              
-                // define the sql statement to fetch all employees
                 MySqlCommand command = new MySqlCommand("INSERT INTO `site`(`name`) VALUES(@name)", connection);
 
                 command.Parameters.AddWithValue("@name", site.name);
 
                 int newRows = command.ExecuteNonQuery();
                 connection.Close();
-              //  MessageBox.Show("Le site a été ajouté");
+
                 return newRows;
             }
             catch (MySqlException ex)
@@ -84,8 +91,6 @@ namespace WinFormsApp1
                 MessageBox.Show("Le site existe déjà");
                 return 0;
             }
-       
-
         }
 
         internal int deleteSite(int idSelectedSite)
@@ -93,18 +98,23 @@ namespace WinFormsApp1
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            MySqlCommand command = new MySqlCommand("DELETE FROM `site` WHERE `site`.`id` = @id; ", connection);
-            command.Parameters.AddWithValue("@id", idSelectedSite);
+            try
+            {
+                MySqlCommand command = new MySqlCommand("DELETE FROM `site` WHERE `site`.`id` = @id; ", connection);
+                command.Parameters.AddWithValue("@id", idSelectedSite);
 
-            int result = command.ExecuteNonQuery();
-            connection.Close();
-            return result;
+                int result = command.ExecuteNonQuery();
+                connection.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         internal int updateSite(Site site)
         {
-
-
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
