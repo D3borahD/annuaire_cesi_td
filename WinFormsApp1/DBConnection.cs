@@ -14,10 +14,9 @@ namespace WinFormsApp1
         // IT WORK !!!
            static MySqlConnection db = null;
 
-           static MySqlConnection CreateConnection()
+           public static MySqlConnection CreateConnection()
            {
                var db = new MySqlConnection(connnectionString);
-                //db.Open();
                return db;
            }
 
@@ -28,15 +27,31 @@ namespace WinFormsApp1
 
            public static MySqlConnection Connection { 
                get { 
-                   if (db == null)
-                   {
-                       LazyInitializer.EnsureInitialized(ref db, CreateConnection);
-                   }
-                   return db; }
+                try
+                {
+                    if (db == null)
+                    {
+                        //MySqlConnection connection = new MySqlConnection(connectionString);
+                        LazyInitializer.EnsureInitialized(ref db, CreateConnection);
+                    }
+                    return db;
+
+                }
+                catch(Exception ex)
+                {
+                    CloseConnection();
+                    throw ex;
+                }
+                finally
+                {
+                    db.Close();
+                }
+                   
+                }
            }
 
 
-
+      
 
         
         

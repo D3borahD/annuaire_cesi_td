@@ -19,8 +19,8 @@ namespace WinFormsApp1
             // MySqlConnection test = new MySqlConnection(connectionString);
             // test.DoThat();
 
-            var db = DBConnection.Connection;
-            
+             var db = DBConnection.Connection;
+           // var test = DBConnection.Instance;
 
             // start with an empty list
             List<Site> returnThese = new List<Site>();
@@ -31,7 +31,7 @@ namespace WinFormsApp1
             // connect to the mysql server
            // MySqlConnection connection = new MySqlConnection(connectionString);
            // connection.Open();
-           db.Open();
+             db.Open();
             // define the sql statement to fetch all employees
             MySqlCommand command = new MySqlCommand("SELECT * FROM site", db);
 
