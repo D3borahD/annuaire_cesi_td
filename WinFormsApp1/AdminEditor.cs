@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Bcpg;
+﻿using MySqlX.XDevAPI.Common;
+using Org.BouncyCastle.Bcpg;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -99,22 +100,24 @@ namespace WinFormsApp1
             String fixNumber = txt_employee_landline.Text;
             String mobileNumber = txt_employee_mobile.Text;
 
+            if (
+              String.IsNullOrEmpty(txt_employee_lastname.Text) ||
+              String.IsNullOrEmpty(txt_employee_firstname.Text) ||
+              String.IsNullOrEmpty(txt_employee_landline.Text) ||
+              String.IsNullOrEmpty(txt_employee_mobile.Text)
+              )
+            {
+                MessageBox.Show("Erreur : au moins un champ est vide");
+                return;
+            }
+
             String formatFirstname = txt_employee_firstname.Text;
             formatFirstname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatFirstname.ToLower());
 
             String getFirstletter = formatFirstname.Substring(0, 1);
             String createEmail = (getFirstletter + "." + txt_employee_lastname.Text + "@natural.product").ToLower();
 
-            if (
-               String.IsNullOrEmpty(txt_employee_lastname.Text) ||
-               String.IsNullOrEmpty(txt_employee_firstname.Text) ||
-               String.IsNullOrEmpty(txt_employee_landline.Text) ||
-               String.IsNullOrEmpty(txt_employee_mobile.Text)
-               )
-            {
-                MessageBox.Show("Erreur : au moins un champ est vide");
-                return;
-            }
+
 
             if (!numberRegex.IsMatch(fixNumber))
                  {
@@ -207,10 +210,10 @@ namespace WinFormsApp1
 
             txt_site_name.Clear();
 
-                if (result != 0)
-                {
-                    MessageBox.Show("Le service " + site.name + " a été ajouté");
-                }
+            if (result != 0)
+            {
+               MessageBox.Show("Le service " + site.name + " a été ajouté");
+            }
             //    MessageBox.Show("Le site " + site.name + " a été ajouté");
 
             loadDataSite();
@@ -335,7 +338,10 @@ namespace WinFormsApp1
             }
 
             UpdateSite updateSite = new UpdateSite(siteInfo);
+
             updateSite.Show();
+         
+
         }
 
 

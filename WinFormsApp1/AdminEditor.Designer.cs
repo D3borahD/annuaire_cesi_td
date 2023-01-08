@@ -501,7 +501,7 @@
             this.searchEmployee.ForeColor = System.Drawing.Color.White;
             this.searchEmployee.Location = new System.Drawing.Point(270, 32);
             this.searchEmployee.Name = "searchEmployee";
-            this.searchEmployee.Size = new System.Drawing.Size(85, 34);
+            this.searchEmployee.Size = new System.Drawing.Size(97, 34);
             this.searchEmployee.TabIndex = 12;
             this.searchEmployee.Text = "Rechercher";
             this.searchEmployee.UseVisualStyleBackColor = false;

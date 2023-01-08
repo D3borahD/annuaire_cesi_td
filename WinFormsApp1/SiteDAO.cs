@@ -92,6 +92,7 @@ namespace WinFormsApp1
         {
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
+
             MySqlCommand command = new MySqlCommand("DELETE FROM `site` WHERE `site`.`id` = @id; ", connection);
             command.Parameters.AddWithValue("@id", idSelectedSite);
 
@@ -102,17 +103,29 @@ namespace WinFormsApp1
 
         internal int updateSite(Site site)
         {
+
+
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-            MySqlCommand command = new MySqlCommand();
-            command.CommandText = "UPDATE `site` SET `name`= @name WHERE id = @id";
-            command.Connection = connection;
-            command.Parameters.AddWithValue("@name", site.name);
-            command.Parameters.AddWithValue("@id", site.id);
 
-            int result = command.ExecuteNonQuery();
-            connection.Close();
-            return result;
+            try
+            {
+                MySqlCommand command = new MySqlCommand();
+                command.CommandText = "UPDATE `site` SET `name`= @name WHERE id = @id";
+                command.Connection = connection;
+                command.Parameters.AddWithValue("@name", site.name);
+                command.Parameters.AddWithValue("@id", site.id);
+
+                int result = command.ExecuteNonQuery();
+                connection.Close();
+                return result;
+            }
+            catch(MySqlException ex)
+            {
+                MessageBox.Show("Le site existe déjà");
+                return 0;
+            }
+            
         }
     }
 }

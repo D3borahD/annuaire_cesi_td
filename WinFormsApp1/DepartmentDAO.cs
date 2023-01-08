@@ -94,15 +94,25 @@ namespace WinFormsApp1
         {
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-            MySqlCommand command = new MySqlCommand();
-            command.CommandText = "UPDATE `department` SET `name`= @name WHERE id = @id";
-            command.Connection = connection;
-            command.Parameters.AddWithValue("@name", department.name);
-            command.Parameters.AddWithValue("@id", department.id);
 
-            int result = command.ExecuteNonQuery();
-            connection.Close();
-            return result;
+            try
+            {
+                MySqlCommand command = new MySqlCommand();
+                command.CommandText = "UPDATE `department` SET `name`= @name WHERE id = @id";
+                command.Connection = connection;
+                command.Parameters.AddWithValue("@name", department.name);
+                command.Parameters.AddWithValue("@id", department.id);
+
+                int result = command.ExecuteNonQuery();
+                connection.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Le service existe déjà");
+                return 0;
+            }
+          
         }
     }
 }
