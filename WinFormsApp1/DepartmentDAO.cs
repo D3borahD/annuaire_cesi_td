@@ -9,13 +9,15 @@ namespace WinFormsApp1
 {
     internal class DepartmentDAO
     {
-        string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
+        //string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
         public List<Department> getAllDepartments()
         {
             List<Department> returnThese = new List<Department>();
 
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            // MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -45,10 +47,13 @@ namespace WinFormsApp1
 
         internal int addOneDepartment(Department department)
         {
+            //MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+            var connection = DBConnection.Connection;
+            connection.Open(); 
+
             try
             {
-                MySqlConnection connection = new MySqlConnection(connectionString);
-                connection.Open();
                 MySqlCommand command = new MySqlCommand("INSERT INTO `department`(`name`) VALUES(@name)", connection);
                 command.Parameters.AddWithValue("@name", department.name);
 
@@ -66,7 +71,10 @@ namespace WinFormsApp1
         
         internal int deleteDepartment(int departmentId)
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            //MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -87,7 +95,10 @@ namespace WinFormsApp1
         internal object getDepartmentById(int departmentId)
         {
             Department department = new Department();
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            //MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -114,7 +125,10 @@ namespace WinFormsApp1
 
         internal int updateDepartment(Department department)
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            //MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try

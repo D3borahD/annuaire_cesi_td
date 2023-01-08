@@ -15,13 +15,16 @@ namespace WinFormsApp1
 {
     internal class EmployeeDAO
     {
-        string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
+        //string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
         public List<JObject> getAllEmployees()
         {
             List<JObject> returnThese = new List<JObject>();
 
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            //MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -55,8 +58,12 @@ namespace WinFormsApp1
         public List<JObject> searchName(String searchName)
         {
             List<JObject> returnThese = new List<JObject>();
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            //MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
+
             try
             {
                 String searchWildPhrase = "%" + searchName + "%";
@@ -89,7 +96,10 @@ namespace WinFormsApp1
 
         internal int addOneEmployee(Employee employee)
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            // MySqlConnection connection = new MySqlConnection(connectionString);
+            // connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -117,7 +127,10 @@ namespace WinFormsApp1
         {
             Employee employee = new Employee();
 
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            // MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -154,7 +167,10 @@ namespace WinFormsApp1
         {           
             List<JObject> returnThese = new List<JObject>();
 
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            // MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -192,7 +208,10 @@ namespace WinFormsApp1
         {
             List<JObject> returnThese = new List<JObject>();
 
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            //MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -226,7 +245,10 @@ namespace WinFormsApp1
 
         internal int deleteEmployee(int idSelectedEmployee)
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            // MySqlConnection connection = new MySqlConnection(connectionString);
+            // connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -247,7 +269,10 @@ namespace WinFormsApp1
 
         internal int updateEmployee(Employee employee)
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            //MySqlConnection connection = new MySqlConnection(connectionString);
+            // connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try

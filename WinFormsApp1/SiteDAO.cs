@@ -9,13 +9,16 @@ namespace WinFormsApp1
 {
     internal class SiteDAO
     {
-        string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
+       //string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
         public List<Site> getAllSites()
         {
             List<Site> returnThese = new List<Site>();
 
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            // MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -46,7 +49,10 @@ namespace WinFormsApp1
         internal object getSiteById(int siteId)
         {
             Site site = new Site();
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            // MySqlConnection connection = new MySqlConnection(connectionString);
+            //  connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -72,7 +78,10 @@ namespace WinFormsApp1
 
         internal int addOneSite(Site site) 
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            // MySqlConnection connection = new MySqlConnection(connectionString);
+            // connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -95,7 +104,10 @@ namespace WinFormsApp1
 
         internal int deleteSite(int idSelectedSite)
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            // MySqlConnection connection = new MySqlConnection(connectionString);
+            // connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -115,7 +127,10 @@ namespace WinFormsApp1
 
         internal int updateSite(Site site)
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
+           // MySqlConnection connection = new MySqlConnection(connectionString);
+            //connection.Open();
+
+            var connection = DBConnection.Connection;
             connection.Open();
 
             try

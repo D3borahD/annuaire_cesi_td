@@ -9,44 +9,46 @@ namespace WinFormsApp1
 {
     internal class DBConnection
     {
-        private static MySqlConnection connection;
+        private static string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
+        static MySqlConnection connection = null;
 
-        public static MySqlConnection GetConnection()
+        public static MySqlConnection CreateConnection()
         {
-            string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
-
-          try
-         {
-                if (connection == null)
-                {
-                    // Connection = new MySqlConnection(connectionString);
-
-                    MySqlConnection connection = new MySqlConnection(connectionString);
-                    connection.Open();
-                };
-                return connection;
-            // MySqlConnection MaConnexion = new(connectionString);
-            /* MySqlDataAdapter adapter = new MySqlDataAdapter();
-
-             MySqlCommand cmd = MaConnexion.CreateCommand();
-             cmd.CommandText = "SELECT * FROM site";
-
-             adapter.SelectCommand = cmd;
-
-             DataSet dataset = new DataSet();
-
-             adapter.Fill(dataset);
-             int nbligne = adapter.Fill(dataset, "site");
-
-             Console.WriteLine($"{nbligne} site ont été trouvé");*/
-         }
-         catch (Exception e)
-         {
-             Console.WriteLine(e.Message);
-             throw;
-         }
+            var connection = new MySqlConnection(connectionString);
+            return connection;
         }
 
+        static void CloseConnection()
+        {
+            if(connection != null) {
+                connection.Close();
+                connection = null;
+            }
+        }
+
+        public static MySqlConnection Connection
+        {
+            get
+            {
+                try
+                {
+                    if (connection == null)
+                    {
+                        LazyInitializer.EnsureInitialized(ref connection, CreateConnection);
+                    }
+                    return connection;
+                }
+                catch (Exception ex)
+                {
+                    CloseConnection();
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
     }
 }
