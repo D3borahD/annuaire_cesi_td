@@ -101,11 +101,12 @@ namespace WinFormsApp1
 
         }
 
-        // remove at the end project
+        // remove at the end project => button to acces on admin windows during conception
+        // remove on Annuaire conception on 08/01/2023
         private void edition_Click(object sender, EventArgs e)
         {
-            var adminForm = new AdminEditor();
-            adminForm.Show();
+           // var adminForm = new AdminEditor();
+           // adminForm.Show();
         }
 
         private void dataGridViewSiteDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
