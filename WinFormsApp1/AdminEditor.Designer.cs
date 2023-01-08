@@ -246,7 +246,7 @@
             this.addDepartment.Size = new System.Drawing.Size(287, 348);
             this.addDepartment.TabIndex = 2;
             this.addDepartment.TabStop = false;
-            this.addDepartment.Text = "Ajouter un service";
+            this.addDepartment.Text = "Services";
             // 
             // updateDepartment
             // 
@@ -328,7 +328,7 @@
             this.groupBox1.Size = new System.Drawing.Size(295, 348);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Ajouter un site";
+            this.groupBox1.Text = "Sites";
             // 
             // updateSite
             // 
@@ -521,7 +521,7 @@
             this.groupBox2.Size = new System.Drawing.Size(956, 370);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Employés";
             // 
             // AdminEditor
             // 

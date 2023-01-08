@@ -76,7 +76,7 @@ namespace WinFormsApp1
 
                 int newRows = command.ExecuteNonQuery();
                 connection.Close();
-                MessageBox.Show("Le site a été ajouté");
+              //  MessageBox.Show("Le site a été ajouté");
                 return newRows;
             }
             catch (MySqlException ex)

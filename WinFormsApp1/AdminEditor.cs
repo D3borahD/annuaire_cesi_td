@@ -174,10 +174,10 @@ namespace WinFormsApp1
 
                 txt_department_name.Clear();
 
-               /* if (result != 0)
+                if (result != 0)
                 {
                     MessageBox.Show("Le service " + department.name + " a été ajouté");
-                } */
+                } 
               
 
                 loadDataDepartment();
@@ -207,7 +207,11 @@ namespace WinFormsApp1
 
             txt_site_name.Clear();
 
-            MessageBox.Show("Le site " + site.name + " a été ajouté");
+                if (result != 0)
+                {
+                    MessageBox.Show("Le service " + site.name + " a été ajouté");
+                }
+            //    MessageBox.Show("Le site " + site.name + " a été ajouté");
 
             loadDataSite();
             }
@@ -309,7 +313,7 @@ namespace WinFormsApp1
                 SiteDAO siteDAO = new SiteDAO();
                 int result = siteDAO.deleteSite(idSelectedSite);
 
-                MessageBox.Show("Le service " + nameSelectedSite + " a été supprimé(e)");
+                MessageBox.Show("Le site " + nameSelectedSite + " a été supprimé(e)");
                 loadDataEmployee();
                 loadDataSite();
             }

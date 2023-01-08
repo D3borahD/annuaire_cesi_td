@@ -39,14 +39,23 @@ namespace WinFormsApp1
 
         internal int addOneDepartment(Department department)
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
-            connection.Open();
-            MySqlCommand command = new MySqlCommand("INSERT INTO `department`(`name`) VALUES(@name)", connection);
-            command.Parameters.AddWithValue("@name", department.name);
-         
-            int newRows = command.ExecuteNonQuery();
-            connection.Close();
-            return newRows;
+            try
+            {
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+                MySqlCommand command = new MySqlCommand("INSERT INTO `department`(`name`) VALUES(@name)", connection);
+                command.Parameters.AddWithValue("@name", department.name);
+
+                int newRows = command.ExecuteNonQuery();
+                connection.Close();
+                return newRows;
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Le service existe déjà");
+                return 0;
+            }
+           
         }
         
         internal int deleteDepartment(int departmentId)
