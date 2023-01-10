@@ -66,6 +66,58 @@ namespace WinFormsApp1
             }
         }
 
+        private void listBoxDepartment_DrawItem(object sender, DrawItemEventArgs e)
+        {
+
+            // SOLUTION 1 => output WinformApp1
+            if (e.Index < 0) return;
+            //if the item state is selected them change the back color
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                e = new DrawItemEventArgs(e.Graphics,
+                                          e.Font,
+                                          e.Bounds,
+                                          e.Index,
+                                          e.State ^ DrawItemState.Selected,
+                                          e.ForeColor,
+                                          Color.Yellow);//Choose the color
+
+           // string selectedItem = listBoxDepartment.Items[listBoxDepartment]
+            // Draw the background of the ListBox control for each item.
+            e.DrawBackground();
+            // Draw the current item text
+            e.Graphics.DrawString(listBoxDepartment.Items[e.Index].ToString(), e.Font, Brushes.Black, e.Bounds, StringFormat.GenericDefault);
+            // If the ListBox has focus, draw a focus rectangle around the selected item.
+            e.DrawFocusRectangle();
+            MessageBox.Show("test " + listBoxDepartment.Items[e.Index].ToString());
+            /* e.DrawBackground();
+             * 
+            
+
+
+            //SOLUTION 2 output WinformApp1
+               bool isItemSelected = ((e.State & DrawItemState.Selected) == DrawItemState.Selected);
+               int itemIndex = e.Index;
+               if (itemIndex >= 0 && itemIndex < listBoxDepartment.Items.Count)
+               {
+                   Graphics g = e.Graphics;
+
+                   // Background Color
+                   SolidBrush backgroundColorBrush = new SolidBrush((isItemSelected) ? Color.Navy : Color.White);
+                   g.FillRectangle(backgroundColorBrush, e.Bounds);
+
+                   // Set text color
+                  /* string itemText = listBoxDepartment.Items[itemIndex].ToString();
+
+                   SolidBrush itemTextColorBrush = (isItemSelected) ? new SolidBrush(Color.White) : new SolidBrush(Color.Black);
+                   g.DrawString(itemText, e.Font, itemTextColorBrush, listBoxDepartment.GetItemRectangle(itemIndex).Location);*/
+            // listBoxDepartment.DisplayMember = "name";
+            // Clean up
+            //  backgroundColorBrush.Dispose();
+            //   itemTextColorBrush.Dispose();
+            //  }
+
+            // e.DrawFocusRectangle();*/
+        }
         private void loadListBoxSite()
         {
             SiteDAO siteDAO = new SiteDAO();
@@ -73,6 +125,8 @@ namespace WinFormsApp1
             listBoxSite.DataSource = siteBindingSource;
             listBoxSite.DisplayMember = "name";
             listBoxSite.ValueMember = "id";
+         
+
         }
 
         private void loadListBoxDepartment()
@@ -82,7 +136,12 @@ namespace WinFormsApp1
             listBoxDepartment.DataSource = departmentBindingSource;
             listBoxDepartment.DisplayMember = "name";
             listBoxDepartment.ValueMember = "id";
+            listBoxDepartment.DrawMode= DrawMode.OwnerDrawFixed;
+ 
         }
+
+        
+
 
         private void AdminEditor_Load_1(object sender, EventArgs e)
         {

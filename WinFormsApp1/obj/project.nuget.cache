@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6MKJbH82xaQb+LrU8qesac011WMe4jigZloKrZOJyF6q6ehZqLkQGjclx1PIEesdyydw6VC0a4hZMn5oW06cug==",
+  "dgSpecHash": "XEVnbewot7FeGpHN8ZhXuH1FaURb56hSgziBUBCKjpVHf65OLxXDeSrC9hGUWlMIo/sNKrgZk/2Xw6OETcjl/Q==",
   "success": true,
-  "projectFilePath": "C:\\deborah\\annuaire_cesi_td\\WinFormsApp1\\WinFormsApp1.csproj",
+  "projectFilePath": "C:\\deborah\\v2_annuaire\\annuaire_cesi_td\\WinFormsApp1\\WinFormsApp1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Athenais\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",
     "C:\\Users\\Athenais\\.nuget\\packages\\k4os.compression.lz4\\1.2.6\\k4os.compression.lz4.1.2.6.nupkg.sha512",

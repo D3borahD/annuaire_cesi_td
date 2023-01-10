@@ -109,6 +109,7 @@
             this.listBoxDepartment.Name = "listBoxDepartment";
             this.listBoxDepartment.Size = new System.Drawing.Size(162, 44);
             this.listBoxDepartment.TabIndex = 17;
+            this.listBoxDepartment.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxDepartment_DrawItem);
             // 
             // listBoxSite
             // 
