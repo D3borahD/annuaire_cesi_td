@@ -17,7 +17,7 @@ namespace WinFormsApp1
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
 
-
+       
 
  
         public Annuaire()
@@ -25,6 +25,7 @@ namespace WinFormsApp1
             InitializeComponent();
             KeyPreview = true;
 
+           
         }
 
         private void loadDataDepartment()
@@ -43,7 +44,7 @@ namespace WinFormsApp1
 
 
            // var siteName = await SiteDAO.getSiteById(siteId)
-            IList<Site> siteList = await SiteDAO.getSites();
+            IList<Site> siteList = await siteDAO.getSites();
 
             siteBindingSource.DataSource = siteList.ToList();
 
@@ -84,6 +85,8 @@ namespace WinFormsApp1
             loadDataEmployee();
             loadDataDepartment();
             loadDataSite();
+
+           
         }
 
         // SearchName function 

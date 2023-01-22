@@ -40,7 +40,7 @@ namespace WinFormsApp1
         {
             //SiteDAO siteDAO = new SiteDAO();
            // IList<Site> siteList = new List<Site>();
-            IList<Site> siteList = await SiteDAO.getSites();
+            IList<Site> siteList = await siteDAO.getSites();
 
             siteBindingSource.DataSource = siteList.ToList();
 
@@ -77,7 +77,7 @@ namespace WinFormsApp1
             siteBindingSource.DataSource = siteDAO.getAllSites();*/
 
           //  IList<Site> siteList = new List<Site>();
-            IList<Site> siteList = await SiteDAO.getSites();
+            IList<Site> siteList = await siteDAO.getSites();
 
             siteBindingSource.DataSource = siteList.ToList();
 
@@ -198,6 +198,8 @@ namespace WinFormsApp1
             }
         }
 
+      
+
         private void addSite_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(txt_site_name.Text))
@@ -214,18 +216,42 @@ namespace WinFormsApp1
                 name = name,
             };
 
-                
+                // var result = site;
+                // siteDAO siteDAO = new siteDAO();
+                //SiteDAO site = new SiteDAO();
+                //  siteDAO.addSite();
+               /* private async void loadDataSite(int siteId)
+                {
+                   
+                    var siteName = await siteDAO.getSiteById(siteId);
+                    String siteN = siteName.name;
 
-            SiteDAO siteDAO = new SiteDAO();
-            int result = siteDAO.addOneSite(site);
+                    labelSite.Text = $"{siteN}";
+                }*/
+
+
+                siteDAO.addSite(site);
+                //  response.Content = new StringContent(site.name);
+                //MessageBox.Show(response.name);
+                //Task.FromResult(response);
+                // String siteN = siteName.name;
+
+                // labelSite.Text = $"{siteN}";
+
+
+
+                //var siteName = await SiteDAO.getSiteById(siteId);
+               // int result = siteDAO.addOneSite(site);
 
             txt_site_name.Clear();
 
-            if (result != 0)
+            
+
+            if (site != null)
             {
                MessageBox.Show("Le service " + site.name + " a été ajouté");
             }
-            //    MessageBox.Show("Le site " + site.name + " a été ajouté");
+            //    MesageBox.Show("Le site " + site.name + " a été ajouté");
 
             loadDataSite();
             }
@@ -324,7 +350,7 @@ namespace WinFormsApp1
             DialogResult dialogResult = MessageBox.Show("ATTENTION : \n\n" + "Si vous supprimez le site : " + nameSelectedSite + "\nles employé(e)s associé(e)s à ce site seront aussi supprimé(e)s.\nVoulez-vous vraiment supprimer ce site ?", "SUPPRESSION D'UN SITE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
-                SiteDAO siteDAO = new SiteDAO();
+                siteDAO siteDAO = new siteDAO();
                 int result = siteDAO.deleteSite(idSelectedSite);
 
                 MessageBox.Show("Le site " + nameSelectedSite + " a été supprimé(e)");

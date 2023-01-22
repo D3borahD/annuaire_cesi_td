@@ -21,7 +21,7 @@ namespace WinFormsApp1
             // SiteDAO siteDAO = new SiteDAO();
             // Site site = (Site)siteDAO.getSiteById(siteId);
 
-            var siteName = await SiteDAO.getSiteById(siteId);
+            var siteName = await siteDAO.getSiteById(siteId);
             String siteN = siteName.name;
 
             labelSite.Text = $"{siteN}";
@@ -45,7 +45,7 @@ namespace WinFormsApp1
                 name = name,
             };
 
-            SiteDAO siteDAO = new SiteDAO();
+            siteDAO siteDAO = new siteDAO();
 
             DialogResult dialogResult = MessageBox.Show(
                 "ATTENTION : \n\n" +

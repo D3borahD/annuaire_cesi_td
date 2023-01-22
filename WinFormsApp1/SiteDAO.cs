@@ -1,39 +1,29 @@
 ﻿using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WinFormsApp1
 {
-    internal class SiteDAO
-
-       
+    internal class siteDAO
     {
-
         public static async Task<List<Site>> getSites()
         {
             var url = "Sites";
            
             using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
             {
-               // MessageBox.Show("mon site" );
                 if (response.IsSuccessStatusCode)
                 {
-                    List<Site> sites = await response.Content.ReadAsAsync<List<Site>>();
-                    // MessageBox.Show("succes");
-                   // foreach (Site s in sites )
-                   // {
-                     //   MessageBox.Show("succes");
-                      //  s = await response.Content.ReadAsAsync<Site>();
-                       // sites.Add(s);
-                      //  MessageBox.Show("mon site" + s);
-                  //  }
-                   
+                    List<Site> sites = await response.Content.ReadAsAsync<List<Site>>();    
                     return sites.ToList();
                 }
                 else
@@ -41,44 +31,7 @@ namespace WinFormsApp1
                     throw new Exception(response.ReasonPhrase);
                 }
             }
-
         }
-
-       /* public List<Site> getAllSites()
-        {
-            List<Site> returnThese = new List<Site>();
-
-            // MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
-            {
-                MySqlCommand command = new MySqlCommand("SELECT * FROM site", connection);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Site site = new Site
-                        {
-                            id = reader.GetInt32(0),
-                            name = reader.GetString(1)
-                        };
-                        returnThese.Add(site);
-                    }
-                }
-                connection.Close();
-                return returnThese;
-            }
-            catch(Exception ex) {
-                throw;
-            }
-          
-        }*/
-
      
         public static async Task<Site> getSiteById(int id)
         {
@@ -96,9 +49,35 @@ namespace WinFormsApp1
                     throw new Exception(response.ReasonPhrase);
                 }
             }
-
         }
+        public static async Task addSite(Site site)
+        {
 
+            var url = "http://127.0.0.1:5163/api/Sites";
+
+            var client = new HttpClient();
+
+           /* var site = new Site{
+                id = 100,
+                name =  "nouveauSite" 
+            };*/
+
+            var stringValues = JsonConvert.SerializeObject(site);
+
+            var httpContent = new StringContent(stringValues, Encoding.UTF8, "application/json");
+
+            var httpClient = new HttpClient();
+
+            var httpResponse = await httpClient.PostAsync("http://127.0.0.1:5163/api/Sites", httpContent);
+
+            if(httpResponse.Content != null)
+            {
+                var responseContent = await httpResponse.Content.ReadAsStringAsync();
+            }
+
+
+         
+        }
 
 
         internal int addOneSite(Site site) 

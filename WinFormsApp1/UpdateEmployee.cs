@@ -35,7 +35,7 @@ namespace WinFormsApp1
            // SiteDAO siteDAO = new SiteDAO();
            // siteBindingSource.DataSource = siteDAO.getAllSites();
 
-            IList<Site> siteList = await SiteDAO.getSites();
+            IList<Site> siteList = await siteDAO.getSites();
 
             siteBindingSource.DataSource = siteList.ToList();
 
