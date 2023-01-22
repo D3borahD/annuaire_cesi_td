@@ -16,11 +16,15 @@ namespace WinFormsApp1
         public int siteId;
         public string oldName;
 
-        private void loadDataSite(int siteId)
+        private async void loadDataSite(int siteId)
         {
-            SiteDAO siteDAO = new SiteDAO();
-            Site site = (Site)siteDAO.getSiteById(siteId);
-            labelSite.Text = site.name;
+            // SiteDAO siteDAO = new SiteDAO();
+            // Site site = (Site)siteDAO.getSiteById(siteId);
+
+            var siteName = await SiteDAO.getSiteById(siteId);
+            String siteN = siteName.name;
+
+            labelSite.Text = $"{siteN}";
         }
         public UpdateSite(List<String> siteInfo)
         {

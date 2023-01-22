@@ -1,17 +1,25 @@
 ﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WinFormsApp1
 {
     internal class SiteDAO
-    {
-       //string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
 
-        public List<Site> getAllSites()
+       
+    {
+        //string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
+    
+     
+    
+
+       public List<Site> getAllSites()
         {
             List<Site> returnThese = new List<Site>();
 
@@ -46,7 +54,7 @@ namespace WinFormsApp1
           
         }
 
-        internal object getSiteById(int siteId)
+      /*  internal object getSiteById(int siteId)
         {
             Site site = new Site();
             // MySqlConnection connection = new MySqlConnection(connectionString);
@@ -74,7 +82,33 @@ namespace WinFormsApp1
             {
                 throw;
             }
+        }*/
+
+        public static async Task<Site> getSiteById(int id)
+        {
+            var url = "Sites/" + id;
+
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    Site site = await response.Content.ReadAsAsync<Site>();
+                    return site;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+
         }
+
+
+
+        /* static async Task<Uri> addOneSite(Site site)
+         {
+             Http
+         }*/
 
         internal int addOneSite(Site site) 
         {

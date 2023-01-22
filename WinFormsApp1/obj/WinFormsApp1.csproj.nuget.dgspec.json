@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\deborah\\annuaire_cesi_td\\WinFormsApp1\\WinFormsApp1.csproj": {}
+    "C:\\deborah\\v2_annuaire\\annuaire_cesi_td\\WinFormsApp1\\WinFormsApp1.csproj": {}
   },
   "projects": {
-    "C:\\deborah\\annuaire_cesi_td\\WinFormsApp1\\WinFormsApp1.csproj": {
+    "C:\\deborah\\v2_annuaire\\annuaire_cesi_td\\WinFormsApp1\\WinFormsApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\deborah\\annuaire_cesi_td\\WinFormsApp1\\WinFormsApp1.csproj",
+        "projectUniqueName": "C:\\deborah\\v2_annuaire\\annuaire_cesi_td\\WinFormsApp1\\WinFormsApp1.csproj",
         "projectName": "WinFormsApp1",
-        "projectPath": "C:\\deborah\\annuaire_cesi_td\\WinFormsApp1\\WinFormsApp1.csproj",
+        "projectPath": "C:\\deborah\\v2_annuaire\\annuaire_cesi_td\\WinFormsApp1\\WinFormsApp1.csproj",
         "packagesPath": "C:\\Users\\Athenais\\.nuget\\packages\\",
-        "outputPath": "C:\\deborah\\annuaire_cesi_td\\WinFormsApp1\\obj\\",
+        "outputPath": "C:\\deborah\\v2_annuaire\\annuaire_cesi_td\\WinFormsApp1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -47,6 +47,10 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
             "MySql.Data": {
               "target": "Package",
               "version": "[8.0.31, )"
