@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -36,10 +37,17 @@ namespace WinFormsApp1
             dataGridViewDepartmentDisplay.Columns[1].HeaderText = "Nom du Service";
         }
 
-        private void loadDataSite()
+        private async void loadDataSite()
         {
-            SiteDAO siteDAO = new SiteDAO();
-            siteBindingSource.DataSource = siteDAO.getAllSites();
+           // SiteDAO siteDAO = new SiteDAO();
+
+
+           // var siteName = await SiteDAO.getSiteById(siteId)
+            IList<Site> siteList = await SiteDAO.getSites();
+
+            siteBindingSource.DataSource = siteList.ToList();
+
+
             dataGridViewSiteDisplay.DataSource = siteBindingSource;
             dataGridViewSiteDisplay.DefaultCellStyle.SelectionBackColor = Color.Navy;
             dataGridViewSiteDisplay.Columns["id"].Visible = false;

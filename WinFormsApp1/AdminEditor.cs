@@ -36,10 +36,15 @@ namespace WinFormsApp1
             dataGridViewDepartmentEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
         }
 
-        private void loadDataSite()
+        private async void loadDataSite()
         {
-            SiteDAO siteDAO = new SiteDAO();
-            siteBindingSource.DataSource = siteDAO.getAllSites();
+            //SiteDAO siteDAO = new SiteDAO();
+           // IList<Site> siteList = new List<Site>();
+            IList<Site> siteList = await SiteDAO.getSites();
+
+            siteBindingSource.DataSource = siteList.ToList();
+
+           // siteBindingSource.DataSource = siteDAO.getAllSites();
             dataGridViewSiteEdit.DataSource = siteBindingSource;
             dataGridViewSiteEdit.Columns["id"].Visible = false;
             dataGridViewSiteEdit.Columns[1].HeaderText = "Nom du Site";
@@ -66,13 +71,19 @@ namespace WinFormsApp1
             }
         }
 
-        private void loadListBoxSite()
+        private async void loadListBoxSite()
         {
-            SiteDAO siteDAO = new SiteDAO();
-            siteBindingSource.DataSource = siteDAO.getAllSites();
+           /* SiteDAO siteDAO = new SiteDAO();
+            siteBindingSource.DataSource = siteDAO.getAllSites();*/
+
+          //  IList<Site> siteList = new List<Site>();
+            IList<Site> siteList = await SiteDAO.getSites();
+
+            siteBindingSource.DataSource = siteList.ToList();
+
             listBoxSite.DataSource = siteBindingSource;
             listBoxSite.DisplayMember = "name";
-            listBoxSite.ValueMember = "id";
+            listBoxSite.ValueMember = "Id";
         }
 
         private void loadListBoxDepartment()

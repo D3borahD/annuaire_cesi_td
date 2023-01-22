@@ -30,10 +30,15 @@ namespace WinFormsApp1
         public int departmentId;
         public int siteId;
 
-        private void loadListBoxSite(int siteId)
+        private async Task loadListBoxSiteAsync(int siteId)
         {
-            SiteDAO siteDAO = new SiteDAO();
-            siteBindingSource.DataSource = siteDAO.getAllSites();
+           // SiteDAO siteDAO = new SiteDAO();
+           // siteBindingSource.DataSource = siteDAO.getAllSites();
+
+            IList<Site> siteList = await SiteDAO.getSites();
+
+            siteBindingSource.DataSource = siteList.ToList();
+
             listBoxSiteUpdate.DataSource = siteBindingSource;
             listBoxSiteUpdate.DisplayMember = "name";
             listBoxSiteUpdate.ValueMember = "id";
@@ -69,7 +74,7 @@ namespace WinFormsApp1
             employeeId = int.Parse(userInfo[0]);
             loadEmployee(employeeId);
             loadListBoxDepartment(departmentId);
-            loadListBoxSite(siteId);
+            loadListBoxSiteAsync(siteId);
         }
       
         private void update_employee_Click(object sender, EventArgs e)

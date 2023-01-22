@@ -14,12 +14,37 @@ namespace WinFormsApp1
 
        
     {
-        //string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
-    
-     
-    
 
-       public List<Site> getAllSites()
+        public static async Task<List<Site>> getSites()
+        {
+            var url = "Sites";
+           
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
+            {
+               // MessageBox.Show("mon site" );
+                if (response.IsSuccessStatusCode)
+                {
+                    List<Site> sites = await response.Content.ReadAsAsync<List<Site>>();
+                    // MessageBox.Show("succes");
+                   // foreach (Site s in sites )
+                   // {
+                     //   MessageBox.Show("succes");
+                      //  s = await response.Content.ReadAsAsync<Site>();
+                       // sites.Add(s);
+                      //  MessageBox.Show("mon site" + s);
+                  //  }
+                   
+                    return sites.ToList();
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+
+        }
+
+       /* public List<Site> getAllSites()
         {
             List<Site> returnThese = new List<Site>();
 
@@ -52,38 +77,9 @@ namespace WinFormsApp1
                 throw;
             }
           
-        }
-
-      /*  internal object getSiteById(int siteId)
-        {
-            Site site = new Site();
-            // MySqlConnection connection = new MySqlConnection(connectionString);
-            //  connection.Open();
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
-            {
-                MySqlCommand command = new MySqlCommand("SELECT * FROM `site`WHERE site.id = @id", connection);
-                command.Parameters.AddWithValue("@id", siteId);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        site.name = reader.GetString(1);
-                    }
-                }
-                connection.Close();
-                return site;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
         }*/
 
+     
         public static async Task<Site> getSiteById(int id)
         {
             var url = "Sites/" + id;
@@ -104,11 +100,6 @@ namespace WinFormsApp1
         }
 
 
-
-        /* static async Task<Uri> addOneSite(Site site)
-         {
-             Http
-         }*/
 
         internal int addOneSite(Site site) 
         {
