@@ -322,7 +322,7 @@ namespace WinFormsApp1
                 //siteDAO.deleteSite(idSelectedSite);
 
                 // var response = await siteDAO.getAll();
-                var response = await siteDAO.deleteSiteTest(id);
+                var response = await siteDAO.deleteSite(id);
 
                 MessageBox.Show("Le site " + nameSelectedSite + " a été supprimé(e)");
                    loadDataEmployee();

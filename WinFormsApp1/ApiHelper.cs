@@ -11,7 +11,7 @@ namespace WinFormsApp1
     {
         public static HttpClient ApiClient { get; set; }
 
-        public static String url = "http://127.0.0.1:5163/api/Sites";
+        public static String url = "http://127.0.0.1:5163/api/";
 
         public static void InitializeClient()
         {

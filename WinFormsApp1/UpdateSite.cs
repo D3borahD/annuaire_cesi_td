@@ -34,7 +34,7 @@ namespace WinFormsApp1
             oldName = siteInfo[1];
         }
 
-        private void saveUpdateSite_Click(object sender, EventArgs e)
+        private async void saveUpdateSite_Click(object sender, EventArgs e)
         {
             String name = txt_site_update.Text;
             name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
@@ -56,8 +56,7 @@ namespace WinFormsApp1
                 MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
-                int result = siteDAO.updateSite(site);
-
+                await siteDAO.updateSite(site.id, site);
             }
             else if (dialogResult == DialogResult.No)
             {
