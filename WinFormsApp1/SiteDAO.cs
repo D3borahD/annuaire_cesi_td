@@ -73,9 +73,8 @@ namespace WinFormsApp1
                 {
                     MessageBox.Show(ex.ToString());
                 }
-
             }
-         
+
         }
 
         public async Task<string> deleteSite(string id)
@@ -113,18 +112,12 @@ namespace WinFormsApp1
                 try
                 {
                     var responseContent = await httpResponse.Content.ReadAsStringAsync();
-                    if (responseContent == null)
-                    {
-                        MessageBox.Show("Le site existe déjà");
-                    }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
                 }
-
             }
-
         }
     }
 }
