@@ -85,8 +85,7 @@ namespace WinFormsApp1
             loadDataEmployee();
             loadDataDepartment();
             loadDataSite();
-
-           
+   
         }
 
         // SearchName function 

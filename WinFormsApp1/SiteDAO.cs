@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
+using MySqlX.XDevAPI.Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +17,36 @@ namespace WinFormsApp1
 {
     internal class siteDAO
     {
+
+        private static readonly string baseUrl = "http://127.0.0.1:5163/api/Sites";
+        public static async Task<string> getAll()
+        {
+
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage res = await client.GetAsync(baseUrl))
+                {
+                    using (HttpContent content = res.Content)
+                    {
+                        string data = await content.ReadAsStringAsync();
+                        if (data != null)
+                        {
+                            return data;
+                        }
+                    }
+                }
+            }
+            return string.Empty;
+        }
+
+    
+
+        public static string BeautifyJson(string jsonstr)
+        {
+            JToken parseJson = JToken.Parse(jsonstr);
+            return parseJson.ToString(Formatting.Indented);
+        }
+
         public static async Task<List<Site>> getSites()
         {
             var url = "Sites";
@@ -52,81 +84,46 @@ namespace WinFormsApp1
         }
         public static async Task addSite(Site site)
         {
-
-            var url = "http://127.0.0.1:5163/api/Sites";
-
-            var client = new HttpClient();
-
-           /* var site = new Site{
-                id = 100,
-                name =  "nouveauSite" 
-            };*/
-
             var stringValues = JsonConvert.SerializeObject(site);
 
             var httpContent = new StringContent(stringValues, Encoding.UTF8, "application/json");
 
             var httpClient = new HttpClient();
 
-            var httpResponse = await httpClient.PostAsync("http://127.0.0.1:5163/api/Sites", httpContent);
+            var httpResponse = await httpClient.PostAsync(ApiHelper.url, httpContent);
 
             if(httpResponse.Content != null)
             {
-                var responseContent = await httpResponse.Content.ReadAsStringAsync();
+                try
+                {
+                     var responseContent = await httpResponse.Content.ReadAsStringAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+
             }
-
-
          
         }
 
-
-        internal int addOneSite(Site site) 
+        public async Task<string> deleteSiteTest(string id)
         {
-            // MySqlConnection connection = new MySqlConnection(connectionString);
-            // connection.Open();
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
+            using (HttpClient client = new HttpClient())
             {
-                MySqlCommand command = new MySqlCommand("INSERT INTO `site`(`name`) VALUES(@name)", connection);
-
-                command.Parameters.AddWithValue("@name", site.name);
-
-                int newRows = command.ExecuteNonQuery();
-                connection.Close();
-
-                return newRows;
+                using (HttpResponseMessage res = await client.DeleteAsync("http://127.0.0.1:5163/api/Sites/" + id))
+                {
+                    using (HttpContent content = res.Content)
+                    {
+                        string data = await content.ReadAsStringAsync();
+                        if (data != null)
+                        {
+                            return data;
+                        }
+                    }
+                }
             }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show("Le site existe déjà");
-                return 0;
-            }
-        }
-
-        internal int deleteSite(int idSelectedSite)
-        {
-            // MySqlConnection connection = new MySqlConnection(connectionString);
-            // connection.Open();
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
-            {
-                MySqlCommand command = new MySqlCommand("DELETE FROM `site` WHERE `site`.`id` = @id; ", connection);
-                command.Parameters.AddWithValue("@id", idSelectedSite);
-
-                int result = command.ExecuteNonQuery();
-                connection.Close();
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return string.Empty;
         }
 
         internal int updateSite(Site site)
