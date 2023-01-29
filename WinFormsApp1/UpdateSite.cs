@@ -18,9 +18,6 @@ namespace WinFormsApp1
 
         private async void loadDataSite(int siteId)
         {
-            // SiteDAO siteDAO = new SiteDAO();
-            // Site site = (Site)siteDAO.getSiteById(siteId);
-
             var siteName = await siteDAO.getSiteById(siteId);
             String siteN = siteName.name;
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsApp1.Model;
 
 namespace WinFormsApp1
 {
@@ -16,11 +19,16 @@ namespace WinFormsApp1
         BindingSource employeeBindingSource = new BindingSource();
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
+
+       
+
  
         public Annuaire()
         {
             InitializeComponent();
             KeyPreview = true;
+
+
         }
 
         private async void loadDataDepartment()
@@ -45,11 +53,38 @@ namespace WinFormsApp1
             dataGridViewSiteDisplay.Columns[1].HeaderText = "Nom du Site";
         }
 
-        private void loadDataEmployee()
+
+
+        private async void loadDataEmployee()
         {
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
-            dataGridView1.DataSource = employeeBindingSource; 
+            var response = await EmployeeDAO.getAllEmployees();
+
+            var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
+
+            List<EmployeeFormated> employees = new List<EmployeeFormated>();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                var employee = new EmployeeFormated();
+
+                var siteName = await siteDAO.getSiteById(result[i].SiteId);
+                String siteN = siteName.name;
+
+                var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
+                String departmentN = departmentName.name;
+
+                employee.Firstname = result[i].Firstname;
+                employee.Lastname = result[i].Lastname;
+                //employee.landline= result[0].Landline;
+                // employee.mobile= result[0].Mobile;
+                // employee.email = result[0].Email;
+                employee.Site = siteN;
+                employee.Department = departmentN;
+                employees.Add(employee);
+             }
+
+            dataGridView1.DataSource = employees;
+
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridView1.Rows.Count.ToString());
             if (count != 0)
@@ -60,16 +95,22 @@ namespace WinFormsApp1
                 dataGridView1.Columns[3].Visible = false;
                 dataGridView1.Columns[4].Visible = false;
                 dataGridView1.Columns[5].Visible = false;
-                dataGridView1.Columns[6].HeaderText = "Site";
-                dataGridView1.Columns[7].HeaderText = "Service";
+                dataGridView1.Columns[6].Visible = false;
+                dataGridView1.Columns[7].HeaderText = "Site";
+                dataGridView1.Columns[8].Visible = false;
+                dataGridView1.Columns[8].HeaderText = "Service";
             }
+       
         }
+     
+
 
         private void Annuaire_Load(object sender, EventArgs e)
         {
             loadDataEmployee();
             loadDataDepartment();
             loadDataSite();
+   
         }
 
         // SearchName function 
@@ -156,7 +197,7 @@ namespace WinFormsApp1
 
         public void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int rowClicked = dataGridView1.CurrentRow.Index;           
+           /* int rowClicked = dataGridView1.CurrentRow.Index;           
             List<String> userInfo = new List<string>();
 
             for (int i = 0; i< dataGridView1.ColumnCount; i++)
@@ -165,7 +206,7 @@ namespace WinFormsApp1
             }
 
             EmployeeCardView employeeCardView = new EmployeeCardView(userInfo);
-            employeeCardView.Show(); 
+            employeeCardView.Show(); */
         }
 
         private void AdminAcces_KeyDown(object sender, KeyEventArgs e)

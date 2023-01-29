@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -15,51 +16,31 @@ namespace WinFormsApp1
 {
     internal class EmployeeDAO
     {
-        //string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
-
-        public List<JObject> getAllEmployees()
+        public static async Task<String> getAllEmployees()
         {
-            List<JObject> returnThese = new List<JObject>();
+          //  var url = "Employees";
 
-            //MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
+            using (HttpClient client = new HttpClient())
             {
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = "SELECT employee.id as employee_id, `lastname`,`firstname`,  `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id;";
-                command.Connection = connection;
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                using (HttpResponseMessage res = await client.GetAsync("http://127.0.0.1:5163/api/Employees"))
                 {
-                    while (reader.Read())
+                    using (HttpContent content = res.Content)
                     {
-                        JObject emp = new JObject();
-                        for (int i = 0; i < reader.FieldCount; i++)
+                        string data = await content.ReadAsStringAsync();
+                        if (data != null)
                         {
-                            emp.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                            return data;
                         }
-                        returnThese.Add(emp);
                     }
                 }
-
-                connection.Close();
-                return returnThese;
             }
-            catch (MySqlException ex)
-            {
-                throw;
-            }
+            return string.Empty;
         }
 
         public List<JObject> searchName(String searchName)
         {
             List<JObject> returnThese = new List<JObject>();
-            //MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
+
 
             var connection = DBConnection.Connection;
             connection.Open();

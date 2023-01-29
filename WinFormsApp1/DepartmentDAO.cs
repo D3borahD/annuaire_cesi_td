@@ -28,7 +28,6 @@ namespace WinFormsApp1
             }
         }
 
-
         public static async Task<Department> getDepartmentById(int id)
         {
             var url = "Departments/" + id;

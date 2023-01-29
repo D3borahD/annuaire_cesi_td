@@ -1,4 +1,6 @@
 ﻿using MySqlX.XDevAPI.Common;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Bcpg;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsApp1.Model;
 
 namespace WinFormsApp1
 {
@@ -48,12 +51,45 @@ namespace WinFormsApp1
             dataGridViewSiteEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
         }
 
-        private void loadDataEmployee()
+        private async void loadDataEmployee()
         {
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
+            //  EmployeeDAO employeeDAO = new EmployeeDAO();
+            // employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
 
-            dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
+            //  IList<Employee> employeeList = (IList<Employee>)await EmployeeDAO.getAllEmployees();
+            //  employeeBindingSource.DataSource = employeeList.ToList();
+
+            var response = await EmployeeDAO.getAllEmployees();
+
+            var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
+
+            MessageBox.Show("test" + result);
+
+            List<EmployeeFormated> employees = new List<EmployeeFormated>();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                var employee = new EmployeeFormated();
+
+                var siteName = await siteDAO.getSiteById(result[i].SiteId);
+                String siteN = siteName.name;
+
+                var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
+                String departmentN = departmentName.name;
+
+                employee.Firstname = result[i].Firstname;
+                employee.Lastname = result[i].Lastname;
+                employee.Landline= result[0].Landline;
+                employee.Mobile= result[0].Mobile;
+                employee.Email = result[0].Email;
+                employee.Site = siteN;
+                employee.Department = departmentN;
+                employees.Add(employee);
+            }
+
+            dataGridViewEmployeeEdit.DataSource = employees;
+
+           // dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
             dataGridViewEmployeeEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
             if (count != 0)
@@ -64,8 +100,10 @@ namespace WinFormsApp1
                 dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone fixe";
                 dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
                 dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
-                dataGridViewEmployeeEdit.Columns[6].HeaderText = "Site";
-                dataGridViewEmployeeEdit.Columns[7].HeaderText = "Service";
+                dataGridViewEmployeeEdit.Columns[6].Visible = false;
+                dataGridViewEmployeeEdit.Columns[7].HeaderText = "Site";
+                dataGridViewEmployeeEdit.Columns[8].Visible = false;
+                dataGridViewEmployeeEdit.Columns[9].HeaderText = "Service";
             }
         }
 
@@ -291,6 +329,7 @@ namespace WinFormsApp1
             UpdateDepartment updateDepartment = new UpdateDepartment(departmentInfo);
             updateDepartment.Show();
         }
+
 
         public void refresh_Click(object sender, EventArgs e)
         {
