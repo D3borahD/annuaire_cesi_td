@@ -79,18 +79,16 @@ namespace WinFormsApp1
             }
         }
 
-        public static async Task addOneEmployee(Employee employee)
+        public async Task addEmployee(Employee employee)
         {
-
-          //  string idEmployee = id.ToString();
-
+            
             var stringValues = JsonConvert.SerializeObject(employee);
 
             var httpContent = new StringContent(stringValues, Encoding.UTF8, "application/json");
 
             var httpClient = new HttpClient();
 
-            var httpResponse = await httpClient.PutAsync("http://127.0.0.1:5163/api/Employees/", httpContent);
+            var httpResponse = await httpClient.PostAsync("http://127.0.0.1:5163/api/Employees/", httpContent);
 
             if (httpResponse.Content != null)
             {
@@ -104,33 +102,6 @@ namespace WinFormsApp1
                 }
             }
 
-
-
-            // MySqlConnection connection = new MySqlConnection(connectionString);
-            // connection.Open();
-
-            /*  var connection = DBConnection.Connection;
-              connection.Open();
-
-              try
-              {
-                  MySqlCommand command = new MySqlCommand("INSERT INTO `employee`( `lastname`,`firstname`, `landline`, `mobile`, `email`, `site_id`, `department_id`) VALUES(@firstname, @lastname, @landline, @mobile, @email, @site, @department)", connection);
-                  command.Parameters.AddWithValue("@firstname", employee.firstname);
-                  command.Parameters.AddWithValue("@lastname", employee.lastname);
-                  command.Parameters.AddWithValue("@landline", employee.landline);
-                  command.Parameters.AddWithValue("@mobile", employee.mobile);
-                  command.Parameters.AddWithValue("@email", employee.email);
-                  command.Parameters.AddWithValue("@site", employee.site);
-                  command.Parameters.AddWithValue("@department", employee.department);
-
-                  int newRows = command.ExecuteNonQuery();
-                  connection.Close();
-                  return newRows;
-              }
-              catch (MySqlException ex)
-              {
-                  throw;
-              }*/
         }
 
         public static async Task<String> getOneEmployee(int employeeId)
@@ -279,44 +250,7 @@ namespace WinFormsApp1
                     MessageBox.Show(ex.ToString());
                 }
             }
-            //MySqlConnection connection = new MySqlConnection(connectionString);
-            // connection.Open();
-
-            /*  var connection = DBConnection.Connection;
-              connection.Open();
-
-              try
-              {
-                  MySqlCommand command = new MySqlCommand();
-                  command.CommandText = "UPDATE `employee` " +
-                      "SET " +
-                      "`lastname`= @lastname," +
-                      "`firstname`= @firstname," +
-                      "`landline`= @landline," +
-                      "`mobile`= @mobile," +
-                      "`email`= @email," +
-                      "`site_id`= @site," +
-                      "`department_id`= @department" +
-                      " WHERE `id`= @id";
-
-                  command.Connection = connection;
-                  command.Parameters.AddWithValue("@firstname", employee.firstname);
-                  command.Parameters.AddWithValue("@lastname", employee.lastname);
-                  command.Parameters.AddWithValue("@landline", employee.landline);
-                  command.Parameters.AddWithValue("@mobile", employee.mobile);
-                  command.Parameters.AddWithValue("@email", employee.email);
-                  command.Parameters.AddWithValue("@site", employee.site);
-                  command.Parameters.AddWithValue("@department", employee.department);
-                  command.Parameters.AddWithValue("@id", employee.id);
-
-                  int result = command.ExecuteNonQuery();
-                  connection.Close();
-                  return result;
-              }
-              catch (MySqlException ex)
-              {
-                  throw;
-              }*/
+          
         }
 
      

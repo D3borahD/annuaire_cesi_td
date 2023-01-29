@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminEditor));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.addEmployee = new System.Windows.Forms.GroupBox();
             this.listBoxDepartment = new System.Windows.Forms.ListBox();
             this.listBoxSite = new System.Windows.Forms.ListBox();
@@ -74,8 +68,6 @@
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.searchEmployee = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridDepartment = new System.Windows.Forms.DataGridView();
-            this.dataGridSite = new System.Windows.Forms.DataGridView();
             this.addEmployee.SuspendLayout();
             this.addDepartment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDepartmentEdit)).BeginInit();
@@ -84,15 +76,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridDepartment)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridSite)).BeginInit();
             this.SuspendLayout();
             // 
             // addEmployee
             // 
             this.addEmployee.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.addEmployee.Controls.Add(this.dataGridDepartment);
-            this.addEmployee.Controls.Add(this.dataGridSite);
             this.addEmployee.Controls.Add(this.listBoxDepartment);
             this.addEmployee.Controls.Add(this.listBoxSite);
             this.addEmployee.Controls.Add(this.add_employee);
@@ -535,74 +523,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Employés";
             // 
-            // dataGridDepartment
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridDepartment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridDepartment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridDepartment.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridDepartment.Location = new System.Drawing.Point(163, 97);
-            this.dataGridDepartment.Name = "dataGridDepartment";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridDepartment.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridDepartment.RowHeadersWidth = 51;
-            this.dataGridDepartment.RowTemplate.Height = 29;
-            this.dataGridDepartment.Size = new System.Drawing.Size(156, 78);
-            this.dataGridDepartment.TabIndex = 16;
-            // 
-            // dataGridSite
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridSite.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridSite.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridSite.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridSite.Location = new System.Drawing.Point(163, 193);
-            this.dataGridSite.Name = "dataGridSite";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridSite.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridSite.RowHeadersWidth = 51;
-            this.dataGridSite.RowTemplate.Height = 29;
-            this.dataGridSite.Size = new System.Drawing.Size(156, 79);
-            this.dataGridSite.TabIndex = 17;
-            // 
             // AdminEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -634,8 +554,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridDepartment)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridSite)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -683,7 +601,5 @@
         private Button searchEmployee;
         private GroupBox groupBox2;
         private Button updateSite;
-        private DataGridView dataGridDepartment;
-        private DataGridView dataGridSite;
     }
 }

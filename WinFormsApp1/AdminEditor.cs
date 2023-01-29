@@ -69,12 +69,12 @@ namespace WinFormsApp1
                 var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
                 String departmentN = departmentName.name;
 
-                employee.Id = result[i].Id; 
-                employee.Lastname = result[i].Lastname;
+                employee.Id = result[i].Id;
                 employee.Firstname = result[i].Firstname;
-                employee.Landline= result[0].Landline;
-                employee.Mobile= result[0].Mobile;
-                employee.Email = result[0].Email;
+                employee.Lastname = result[i].Lastname;
+                employee.Landline = result[i].Landline;
+                employee.Mobile = result[i].Mobile;
+                employee.Email = result[i].Email;
                 employee.Site = siteN;
                 employee.Department = departmentN;
                 employees.Add(employee);
@@ -101,41 +101,22 @@ namespace WinFormsApp1
 
         private async void loadListBoxSite()
         {
-            /* IList<Site> siteList = await siteDAO.getSites();
+             IList<Site> siteList = await siteDAO.getSites();
              siteBindingSource.DataSource = siteList.ToList();
 
              listBoxSite.DataSource = siteBindingSource;
              listBoxSite.DisplayMember = "name";
-             listBoxSite.ValueMember = "Id";*/
-
-            IList<Site> siteList = await siteDAO.getSites();
-            siteBindingSource.DataSource = siteList.ToList();
-
-            dataGridSite.DataSource = siteBindingSource;
-            dataGridSite.Columns["id"].Visible = false;
-            dataGridSite.Columns[1].HeaderText = "Nom du Site";
-            dataGridSite.DefaultCellStyle.SelectionBackColor = Color.Navy;
-            dataGridSite.ColumnHeadersVisible = false;
+             listBoxSite.ValueMember = "Id";
         }
 
         private async void loadListBoxDepartment()
         {
-            IList<Department> departmentList = await DepartmentDAO.getDepartments();
-            departmentBindingSource.DataSource = departmentList.ToList();
-
-            dataGridDepartment.DataSource = departmentBindingSource;
-            dataGridDepartment.Columns["id"].Visible = false;
-            dataGridDepartment.Columns[1].HeaderText = "Nom du Service";
-            dataGridDepartment.DefaultCellStyle.SelectionBackColor = Color.Navy;
-            dataGridDepartment.ColumnHeadersVisible = false;
-          
-
-            /*  IList<Department> departmentList = await DepartmentDAO.getDepartments();
+              IList<Department> departmentList = await DepartmentDAO.getDepartments();
               departmentBindingSource.DataSource = departmentList.ToList();
 
               listBoxDepartment.DataSource = departmentBindingSource;
               listBoxDepartment.DisplayMember = "name";
-              listBoxDepartment.ValueMember = "id";*/
+              listBoxDepartment.ValueMember = "id";
         }
 
         private void AdminEditor_Load_1(object sender, EventArgs e)
@@ -164,10 +145,10 @@ namespace WinFormsApp1
                 return;
             }
 
-            String formatFirstname = txt_employee_firstname.Text;
-            formatFirstname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatFirstname.ToLower());
+            String formatLastname = txt_employee_firstname.Text;
+            formatLastname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatLastname.ToLower());
 
-            String getFirstletter = formatFirstname.Substring(0, 1);
+            String getFirstletter = formatLastname.Substring(0, 1);
             String createEmail = (getFirstletter + "." + txt_employee_lastname.Text + "@natural.product").ToLower();
 
 
@@ -183,18 +164,12 @@ namespace WinFormsApp1
             }
             else 
             {
-                int rowClicked = dataGridDepartment.CurrentRow.Index;
-                int departmentID = int.Parse(dataGridDepartment.Rows[rowClicked].Cells[0].Value.ToString());
-
-                int rowClickedSite = dataGridSite.CurrentRow.Index;
-                int siteID = int.Parse(dataGridSite.Rows[rowClickedSite].Cells[0].Value.ToString());
-
-
+   
                 Employee employee = new Employee
                 {
-                    
-                    lastname = txt_employee_lastname.Text.ToUpper(),
-                    firstname = formatFirstname,
+
+                    firstname = txt_employee_lastname.Text.ToUpper(),
+                    lastname = formatLastname,
                     landline = txt_employee_landline.Text,
                     mobile = txt_employee_mobile.Text,
                     email = createEmail,
@@ -202,23 +177,14 @@ namespace WinFormsApp1
                     departmentId = 2,
                 };
                 EmployeeDAO employeeDAO = new EmployeeDAO();
-                // int result = employeeDAO.updateEmployee(employee);
-
-               //await employeeDAO.updateEmployee(employee.id, employee);
-
-
-             // EmployeeDAO employeeDAO = new EmployeeDAO();
-                // int result = employeeDAO.addOneEmployee(employee);
-
-                //MessageBox.Show("test n  " + employee.siteId + "service  " + employee.departmentId);
-              //  await employeeDAO.addOneEmployee(employee);
+                await employeeDAO.addEmployee(employee);
 
                 txt_employee_lastname.Clear();
                 txt_employee_firstname.Clear();
                 txt_employee_landline.Clear();
                 txt_employee_mobile.Clear();
 
-                MessageBox.Show("L'employé(e) " + employee.lastname + " " + employee.firstname+ " a été ajouté(e)");
+                MessageBox.Show("L'employé(e) " + employee.firstname + " " + employee.lastname+ " a été ajouté(e)");
                 loadDataEmployee();
             }
         }
@@ -355,11 +321,13 @@ namespace WinFormsApp1
         }
 
 
-        public void refresh_Click(object sender, EventArgs e)
+        public async void refresh_Click(object sender, EventArgs e)
         {
             loadDataEmployee();
             loadDataDepartment();
             loadDataSite();
+
+
         }
 
         public async void deleteSite_Click(object sender, EventArgs e)
