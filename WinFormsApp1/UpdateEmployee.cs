@@ -135,14 +135,5 @@ namespace WinFormsApp1
 
         }
 
-        private void listBoxSite_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBoxDepartment_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

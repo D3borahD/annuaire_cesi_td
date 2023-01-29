@@ -354,7 +354,6 @@
             this.dataGridViewSiteEdit.RowTemplate.Height = 25;
             this.dataGridViewSiteEdit.Size = new System.Drawing.Size(243, 177);
             this.dataGridViewSiteEdit.TabIndex = 4;
-            this.dataGridViewSiteEdit.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSiteEdit_CellContentClick);
             // 
             // deleteSite
             // 

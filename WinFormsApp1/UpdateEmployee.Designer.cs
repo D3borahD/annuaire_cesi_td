@@ -177,7 +177,6 @@
             this.listBoxDepartmentUpdate.Name = "listBoxDepartmentUpdate";
             this.listBoxDepartmentUpdate.Size = new System.Drawing.Size(196, 64);
             this.listBoxDepartmentUpdate.TabIndex = 36;
-            this.listBoxDepartmentUpdate.SelectedIndexChanged += new System.EventHandler(this.listBoxDepartment_SelectedIndexChanged);
             // 
             // listBoxSiteUpdate
             // 
@@ -195,7 +194,6 @@
             this.listBoxSiteUpdate.Name = "listBoxSiteUpdate";
             this.listBoxSiteUpdate.Size = new System.Drawing.Size(196, 64);
             this.listBoxSiteUpdate.TabIndex = 35;
-            this.listBoxSiteUpdate.SelectedIndexChanged += new System.EventHandler(this.listBoxSite_SelectedIndexChanged);
             // 
             // UpdateEmployee
             // 

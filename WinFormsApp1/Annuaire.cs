@@ -287,29 +287,6 @@ namespace WinFormsApp1
             catch (Exception ex)
             {
             }
-
-
-            /*  DataGridView dataGridView = (DataGridView)sender;
-              EmployeeDAO employeeDAO = new EmployeeDAO();
-
-              int rowClicked = dataGridView.CurrentRow.Index;
-
-              employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoinDepartment((int)dataGridView.Rows[rowClicked].Cells[0].Value);
-              dataGridView1.DataSource = employeeBindingSource;
-
-              int count = int.Parse(dataGridView1.Rows.Count.ToString());
-              if (count != 0)
-              {
-                  dataGridView1.Columns[0].Visible = false;
-                  dataGridView1.Columns[1].HeaderText = "Nom";
-                  dataGridView1.Columns[2].HeaderText = "Prénom";
-                  dataGridView1.Columns[3].Visible = false;
-                  dataGridView1.Columns[4].Visible = false;
-                  dataGridView1.Columns[5].Visible = false;
-                  dataGridView1.Columns[6].HeaderText = "Site";
-                  dataGridView1.Columns[7].HeaderText = "Service";
-              }*/
-
           }
 
           public void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)

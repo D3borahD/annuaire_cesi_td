@@ -1,26 +1,26 @@
-﻿using MySqlX.XDevAPI.Common;
+﻿//using MySqlX.XDevAPI.Common;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Org.BouncyCastle.Bcpg;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Policy;
-using System.Text;
+//using Newtonsoft.Json.Linq;
+//using Org.BouncyCastle.Bcpg;
+//using System;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Data;
+//using System.Drawing;
+//using System.Linq;
+//using System.Runtime.CompilerServices;
+//using System.Security.Policy;
+//using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+//using System.Threading.Tasks;
+//using System.Windows.Forms;
 using WinFormsApp1.Model;
 
 namespace WinFormsApp1
 {
     public partial class AdminEditor : Form
     {
-        BindingSource employeeBindingSource = new BindingSource();
+        //BindingSource employeeBindingSource = new BindingSource();
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
 
@@ -188,7 +188,7 @@ namespace WinFormsApp1
             }
         }
 
-        //rename this to AddDepartment_Click
+        //Add department
         private async void addService_Click(object sender, EventArgs e)
         {
             if(String.IsNullOrEmpty(txt_department_name.Text))
@@ -258,7 +258,6 @@ namespace WinFormsApp1
             if (dialogResult == DialogResult.Yes)
             {
                 EmployeeDAO employeeDAO = new EmployeeDAO();
-               // int result = employeeDAO.deleteEmployee(idSelectedEmployee);
                 var response = await employeeDAO.deleteEmployee(idSelectedEmployee);
     
                 MessageBox.Show("L'employé(e) " + nameSelectedEmployee + " a été supprimé(e)");
@@ -267,7 +266,6 @@ namespace WinFormsApp1
             }
             else if (dialogResult == DialogResult.No)
             {
-                // Application.OpenForms["UpdateDepartment"].Close();
                 return;
             }
         }
@@ -291,8 +289,7 @@ namespace WinFormsApp1
             if(dialogResult  == DialogResult.Yes)
             {
                 var departmentDAO = new DepartmentDAO();
-                //int result = departmentDAO.deleteDepartment(idSelectedDepartment);
-                var response = await departmentDAO.deleteDepartment(id);
+                await departmentDAO.deleteDepartment(id);
 
                 MessageBox.Show("Le service " + nameSelectedDepartment + " a été supprimé(e)");
                 loadDataEmployee();
@@ -300,7 +297,6 @@ namespace WinFormsApp1
             }
             else if(dialogResult == DialogResult.No)
             {
-               // Application.OpenForms["UpdateDepartment"].Close();
                 return;
             }
         }
@@ -372,23 +368,6 @@ namespace WinFormsApp1
             UpdateSite updateSite = new UpdateSite(siteInfo);
 
             updateSite.Show();
-        }
-
-
-        private void dataGridViewSiteEdit_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-           /* int rowClicked = dataGridViewSiteEdit.CurrentRow.Index;
-            List<String> siteInfo = new List<string>();
-
-            for (int i = 0; i < dataGridViewSiteEdit.ColumnCount; i++)
-            {
-                siteInfo.Add(dataGridViewSiteEdit.Rows[rowClicked].Cells[i].Value.ToString());
-            }
-
-            UpdateSite updateSite = new UpdateSite(siteInfo);
-            updateSite.Show();*/
-           // loadDataEmployee();
-           // loadDataSite();
         }
 
         private async void searchEmployee_Click(object sender, EventArgs e)
