@@ -1,20 +1,21 @@
-﻿using Microsoft.VisualBasic;
-using MySql.Data.MySqlClient;
+﻿//using Microsoft.VisualBasic;
+//using MySql.Data.MySqlClient;
+//using MySqlX.XDevAPI;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Org.BouncyCastle.Utilities.Collections;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Data;
-using System.Linq;
-using System.Net.Http;
-using System.Net.NetworkInformation;
-using System.Reflection;
+//using Newtonsoft.Json.Linq;
+//using Org.BouncyCastle.Utilities.Collections;
+//using System;
+//using System.Collections.Generic;
+//using System.Collections.Immutable;
+//using System.Data;
+//using System.Linq;
+//using System.Net.Http;
+//using System.Net.NetworkInformation;
+//using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using WinFormsApp1.Model;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+//using System.Threading.Tasks;
+//using WinFormsApp1.Model;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace WinFormsApp1
 {
@@ -40,42 +41,24 @@ namespace WinFormsApp1
             }
             return string.Empty;
         }
-
-        public List<JObject> searchName(String searchName)
+        
+        public static async Task<string> getEmployeesByName(string name)
         {
-            List<JObject> returnThese = new List<JObject>();
-
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
+            using (HttpClient client = new HttpClient())
             {
-                String searchWildPhrase = "%" + searchName + "%";
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = "SELECT employee.id as employee_id, `lastname`, `firstname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE lastname LIKE @search;";
-                command.Parameters.AddWithValue("@search", searchWildPhrase);
-                command.Connection = connection;
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                using (HttpResponseMessage res = await client.GetAsync("http://127.0.0.1:5163/api/Employees/lastname/" + name))
                 {
-                    while (reader.Read())
+                    using (HttpContent content = res.Content)
                     {
-                        JObject emp = new JObject();
-
-                        for (int i = 0; i < reader.FieldCount; i++)
+                        string data = await content.ReadAsStringAsync();
+                        if (data != null)
                         {
-                            emp.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                            return data;
                         }
-                        returnThese.Add(emp);
                     }
                 }
-                connection.Close();
-                return returnThese;
-            }
-            catch (MySqlException ex)
-            {
-                throw;
+            
+                return string.Empty;
             }
         }
 
@@ -125,85 +108,47 @@ namespace WinFormsApp1
 
         }
 
-        // Get employee with Site search
-        public List<JObject> getEmployeesUsingJoin(int site_id)
-        {           
-            List<JObject> returnThese = new List<JObject>();
+        public static async Task<string> getEmployeesBySite(int site_id)
+        {
 
-            // MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
+            using (HttpClient client = new HttpClient())
             {
-                MySqlCommand command = new MySqlCommand();
-
-                command.CommandText = "SELECT employee.id as employee_id, `lastname`, `firstname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE site_id = @site_id;";
-                command.Parameters.AddWithValue("@site_id", site_id);
-                command.Connection = connection;
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                using (HttpResponseMessage res = await client.GetAsync("http://127.0.0.1:5163/api/Employees/site/" + site_id))
                 {
-                    while (reader.Read())
+                    using (HttpContent content = res.Content)
                     {
-                        JObject newEmployee = new JObject();
-
-                        for (int i = 0; i < reader.FieldCount; i++)
+                        string data = await content.ReadAsStringAsync();
+                        if (data != null)
                         {
-                            newEmployee.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                            return data;
                         }
-                        returnThese.Add(newEmployee);
                     }
                 }
-                connection.Close();
-                return returnThese;
+
+                return string.Empty;
             }
-            catch (MySqlException ex)
-            {
-                throw;
-            }
+
         }
 
-        // get employee with department search 
-        public List<JObject> getEmployeesUsingJoinDepartment(int department_id)
+        public static async Task<string> getEmployeesByDepartment(int department_id)
         {
-            List<JObject> returnThese = new List<JObject>();
-
-            //MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
+            using (HttpClient client = new HttpClient())
             {
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = "SELECT employee.id as employee_id,  `lastname`, `firstname`, `landline`, `mobile`, `email`, site.name as site_name, department.name FROM `employee` JOIN site on site_id = site.id JOIN department on department_id = department.id  WHERE department_id = @department_id;";
-
-                command.Parameters.AddWithValue("@department_id", department_id);
-                command.Connection = connection;
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                using (HttpResponseMessage res = await client.GetAsync("http://127.0.0.1:5163/api/Employees/department/" + department_id))
                 {
-                    while (reader.Read())
+                    using (HttpContent content = res.Content)
                     {
-                        JObject newEmployee = new JObject();
-                        for (int i = 0; i < reader.FieldCount; i++)
+                        string data = await content.ReadAsStringAsync();
+                        if (data != null)
                         {
-                            newEmployee.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                            return data;
                         }
-                        returnThese.Add(newEmployee);
                     }
                 }
-                connection.Close();
-                return returnThese;
+
+                return string.Empty;
             }
-            catch(MySqlException ex)
-            {
-                throw;
-            }
+
         }
 
         public async Task<String> deleteEmployee(int idSelectedEmployee)

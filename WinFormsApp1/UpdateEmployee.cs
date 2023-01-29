@@ -84,7 +84,7 @@ namespace WinFormsApp1
             String fixnumber = txt_update_landline.Text;
             String mobilenumber = txt_update_mobile.Text;
 
-            String formatFirstname = txt_update_firstname.Text;
+            String formatFirstname = txt_update_lastname.Text;
             formatFirstname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatFirstname.ToLower());
 
             String getFirstLetter = formatFirstname.Substring(0, 1);
@@ -116,8 +116,8 @@ namespace WinFormsApp1
                 Employee employee = new Employee
                 {
                     id = employeeId,
-                    lastname = txt_update_lastname.Text.ToUpper(),
-                    firstname = formatFirstname,
+                    firstname = txt_update_firstname.Text.ToUpper(),
+                    lastname = formatFirstname,
                     landline = txt_update_landline.Text,
                     mobile = txt_update_mobile.Text,
                     email = txt_update_email.Text.ToLower(),
@@ -129,7 +129,7 @@ namespace WinFormsApp1
 
                 await employeeDAO.updateEmployee(employee.id, employee);
 
-                MessageBox.Show("L'employé(e)" + employee.lastname + " a été modifié(e)");
+                MessageBox.Show("L'employé(e)" + employee.firstname + " a été modifié(e)");
                 this.Close();
             }
 

@@ -164,7 +164,6 @@ namespace WinFormsApp1
             }
             else 
             {
-   
                 Employee employee = new Employee
                 {
 
@@ -326,8 +325,6 @@ namespace WinFormsApp1
             loadDataEmployee();
             loadDataDepartment();
             loadDataSite();
-
-
         }
 
         public async void deleteSite_Click(object sender, EventArgs e)
@@ -350,10 +347,6 @@ namespace WinFormsApp1
 
             if (dialogResult == DialogResult.Yes)
              {
-                // siteDAO siteDAO = new siteDAO();
-                //siteDAO.deleteSite(idSelectedSite);
-
-                // var response = await siteDAO.getAll();
                 var response = await siteDAO.deleteSite(id);
 
                 MessageBox.Show("Le site " + nameSelectedSite + " a été supprimé(e)");
@@ -362,7 +355,6 @@ namespace WinFormsApp1
             }
             else if (dialogResult == DialogResult.No)
             {
-               // Application.OpenForms["UpdateDepartment"].Close();
                return;
             }
         }
@@ -399,29 +391,61 @@ namespace WinFormsApp1
            // loadDataSite();
         }
 
-        private void searchEmployee_Click(object sender, EventArgs e)
+        private async void searchEmployee_Click(object sender, EventArgs e)
         {
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            employeeBindingSource.DataSource = employeeDAO.searchName(textBoxSearch.Text);
-
-            dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
-
-            int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
-            if (count != 0)
+            try
             {
-                dataGridViewEmployeeEdit.Columns[0].Visible = false;
-                dataGridViewEmployeeEdit.Columns[1].HeaderText = "Nom";
-                dataGridViewEmployeeEdit.Columns[2].HeaderText = "Prénom";
-                dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone Fixe";
-                dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
-                dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
-                dataGridViewEmployeeEdit.Columns[6].HeaderText = "Site";
-                dataGridViewEmployeeEdit.Columns[7].HeaderText = "Service";
-            }
+                var response = await EmployeeDAO.getEmployeesByName(textBoxSearch.Text);
 
-            textBoxSearch.Clear();
+                var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
+
+                List<EmployeeFormated> employees = new List<EmployeeFormated>();
+
+                for (int i = 0; i < result.Count; i++)
+                {
+                    var employee = new EmployeeFormated();
+
+                    var siteName = await siteDAO.getSiteById(result[i].SiteId);
+                    String siteN = siteName.name;
+
+                    var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
+                    String departmentN = departmentName.name;
+
+                    employee.Id = result[i].Id;
+                    employee.Firstname = result[i].Firstname;
+                    employee.Lastname = result[i].Lastname;
+                    employee.Landline = result[i].Landline;
+                    employee.Mobile = result[i].Mobile;
+                    employee.Email = result[i].Email;
+                    employee.Site = siteN;
+                    employee.Department = departmentN;
+                    employees.Add(employee);
+                }
+
+                dataGridViewEmployeeEdit.DataSource = employees;
+
+                dataGridViewEmployeeEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
+                int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
+                if (count != 0)
+                {
+                    dataGridViewEmployeeEdit.Columns[0].Visible = false;
+                    dataGridViewEmployeeEdit.Columns[1].HeaderText = "Nom";
+                    dataGridViewEmployeeEdit.Columns[2].HeaderText = "Prénom";
+                    dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone fixe";
+                    dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
+                    dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
+                    dataGridViewEmployeeEdit.Columns[6].Visible = false;
+                    dataGridViewEmployeeEdit.Columns[7].HeaderText = "Site";
+                    dataGridViewEmployeeEdit.Columns[8].Visible = false;
+                    dataGridViewEmployeeEdit.Columns[9].HeaderText = "Service";
+                }
+                textBoxSearch.Clear();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
-      
-    }
+       }
 }

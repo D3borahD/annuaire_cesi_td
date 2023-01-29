@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+//using System.Windows.Forms;
+//using System.Xml.Linq;
 //using Newtonsoft.Json.Linq;
 //using System;
 //using System.Collections.Generic;
@@ -102,28 +104,59 @@ namespace WinFormsApp1
         }
 
         // SearchName function 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            employeeBindingSource.DataSource = employeeDAO.searchName(textBox1.Text);
+            try
+            {
 
-            dataGridView1.DataSource = employeeBindingSource;
+            var response = await EmployeeDAO.getEmployeesByName(textBox1.Text);
 
+            var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
+
+            List<EmployeeFormated> employees = new List<EmployeeFormated>();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                var employee = new EmployeeFormated();
+
+                var siteName = await siteDAO.getSiteById(result[i].SiteId);
+                String siteN = siteName.name;
+
+                var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
+                String departmentN = departmentName.name;
+
+                employee.Id = result[i].Id;
+                employee.Firstname = result[i].Firstname;
+                employee.Lastname = result[i].Lastname;
+                employee.Landline = result[i].Landline;
+                employee.Mobile = result[i].Mobile;
+                employee.Email = result[i].Email;
+                employee.Site = siteN;
+                employee.Department = departmentN;
+                employees.Add(employee);
+            }
+
+            dataGridView1.DataSource = employees;
+
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridView1.Rows.Count.ToString());
             if (count != 0)
             {
                 dataGridView1.Columns[0].Visible = false;
                 dataGridView1.Columns[1].HeaderText = "Nom";
                 dataGridView1.Columns[2].HeaderText = "Prénom";
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[5].Visible = false;
-                dataGridView1.Columns[6].HeaderText = "Site";
-                dataGridView1.Columns[7].HeaderText = "Service";
+                dataGridView1.Columns[3].HeaderText = "Téléphone fixe";
+                dataGridView1.Columns[4].HeaderText = "Mobile";
+                dataGridView1.Columns[5].HeaderText = "Email";
+                dataGridView1.Columns[6].Visible = false;
+                dataGridView1.Columns[7].HeaderText = "Site";
+                dataGridView1.Columns[8].Visible = false;
+                dataGridView1.Columns[9].HeaderText = "Service";
             }
-
             textBox1.Clear();
-
+            }
+            catch(Exception ex) {
+            }    
         }
 
         // remove at the end project => button to acces on admin windows during conception
@@ -134,71 +167,173 @@ namespace WinFormsApp1
            // adminForm.Show();
         }
 
-        private void dataGridViewSiteDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //Search employee by site
+        private async void dataGridViewSiteDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridView dataGridView = (DataGridView)sender;
-            EmployeeDAO employeeDAO = new EmployeeDAO();
+            int rowClicked = dataGridViewSiteDisplay.CurrentRow.Index;
+            int idSite = (int)dataGridViewSiteDisplay.Rows[rowClicked].Cells[0].Value;
 
-            int rowClicked = dataGridView.CurrentRow.Index;
-
-            employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoin((int) dataGridView.Rows[rowClicked].Cells[0].Value);
-            dataGridView1.DataSource = employeeBindingSource;
-
-            int count = int.Parse(dataGridView1.Rows.Count.ToString());
-            if (count != 0)
+            try
             {
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Nom";
-                dataGridView1.Columns[2].HeaderText = "Prénom";
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[5].Visible = false;
-                dataGridView1.Columns[6].HeaderText = "Site";
-                dataGridView1.Columns[7].HeaderText = "Service";
+
+                var response = await EmployeeDAO.getEmployeesBySite(idSite);
+
+                var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
+
+                List<EmployeeFormated> employees = new List<EmployeeFormated>();
+
+                for (int i = 0; i < result.Count; i++)
+                {
+                    var employee = new EmployeeFormated();
+
+                    var siteName = await siteDAO.getSiteById(result[i].SiteId);
+                    String siteN = siteName.name;
+
+                    var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
+                    String departmentN = departmentName.name;
+
+                    employee.Id = result[i].Id;
+                    employee.Firstname = result[i].Firstname;
+                    employee.Lastname = result[i].Lastname;
+                    employee.Landline = result[i].Landline;
+                    employee.Mobile = result[i].Mobile;
+                    employee.Email = result[i].Email;
+                    employee.Site = siteN;
+                    employee.Department = departmentN;
+                    employees.Add(employee);
+                }
+
+                dataGridView1.DataSource = employees;
+
+                dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Navy;
+                int count = int.Parse(dataGridView1.Rows.Count.ToString());
+                if (count != 0)
+                {
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[1].HeaderText = "Nom";
+                    dataGridView1.Columns[2].HeaderText = "Prénom";
+                    dataGridView1.Columns[3].HeaderText = "Téléphone fixe";
+                    dataGridView1.Columns[4].HeaderText = "Mobile";
+                    dataGridView1.Columns[5].HeaderText = "Email";
+                    dataGridView1.Columns[6].Visible = false;
+                    dataGridView1.Columns[7].HeaderText = "Site";
+                    dataGridView1.Columns[8].Visible = false;
+                    dataGridView1.Columns[9].HeaderText = "Service";
+                }
             }
+            catch (Exception ex)
+            {
+            }
+
+
         }
 
-        private void dataGridViewDepartmentDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //search employee by department
+        private async void dataGridViewDepartmentDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridView dataGridView = (DataGridView)sender;
-            EmployeeDAO employeeDAO = new EmployeeDAO();
 
-            int rowClicked = dataGridView.CurrentRow.Index;
+            int rowClicked = dataGridViewDepartmentDisplay.CurrentRow.Index;
+            int idDepartment = (int)dataGridViewDepartmentDisplay.Rows[rowClicked].Cells[0].Value;
 
-            employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoinDepartment((int)dataGridView.Rows[rowClicked].Cells[0].Value);
-            dataGridView1.DataSource = employeeBindingSource;
-
-            int count = int.Parse(dataGridView1.Rows.Count.ToString());
-            if (count != 0)
+            try
             {
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Nom";
-                dataGridView1.Columns[2].HeaderText = "Prénom";
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[5].Visible = false;
-                dataGridView1.Columns[6].HeaderText = "Site";
-                dataGridView1.Columns[7].HeaderText = "Service";
+
+                var response = await EmployeeDAO.getEmployeesByDepartment(idDepartment);
+
+                var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
+
+                List<EmployeeFormated> employees = new List<EmployeeFormated>();
+
+                for (int i = 0; i < result.Count; i++)
+                {
+                    var employee = new EmployeeFormated();
+
+                    var siteName = await siteDAO.getSiteById(result[i].SiteId);
+                    String siteN = siteName.name;
+
+                    var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
+                    String departmentN = departmentName.name;
+
+                    employee.Id = result[i].Id;
+                    employee.Firstname = result[i].Firstname;
+                    employee.Lastname = result[i].Lastname;
+                    employee.Landline = result[i].Landline;
+                    employee.Mobile = result[i].Mobile;
+                    employee.Email = result[i].Email;
+                    employee.Site = siteN;
+                    employee.Department = departmentN;
+                    employees.Add(employee);
+                }
+
+                dataGridView1.DataSource = employees;
+
+                dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Navy;
+                int count = int.Parse(dataGridView1.Rows.Count.ToString());
+                if (count != 0)
+                {
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[1].HeaderText = "Nom";
+                    dataGridView1.Columns[2].HeaderText = "Prénom";
+                    dataGridView1.Columns[3].HeaderText = "Téléphone fixe";
+                    dataGridView1.Columns[4].HeaderText = "Mobile";
+                    dataGridView1.Columns[5].HeaderText = "Email";
+                    dataGridView1.Columns[6].Visible = false;
+                    dataGridView1.Columns[7].HeaderText = "Site";
+                    dataGridView1.Columns[8].Visible = false;
+                    dataGridView1.Columns[9].HeaderText = "Service";
+                }
+              //  textBox1.Clear();
+            }
+            catch (Exception ex)
+            {
             }
 
-        }
 
-        public void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int rowClicked = dataGridView1.CurrentRow.Index;
-            int userId = int.Parse(dataGridView1.Rows[rowClicked].Cells[0].Value.ToString());
-             
+            /*  DataGridView dataGridView = (DataGridView)sender;
+              EmployeeDAO employeeDAO = new EmployeeDAO();
+
+              int rowClicked = dataGridView.CurrentRow.Index;
+
+              employeeBindingSource.DataSource = employeeDAO.getEmployeesUsingJoinDepartment((int)dataGridView.Rows[rowClicked].Cells[0].Value);
+              dataGridView1.DataSource = employeeBindingSource;
+
+              int count = int.Parse(dataGridView1.Rows.Count.ToString());
+              if (count != 0)
+              {
+                  dataGridView1.Columns[0].Visible = false;
+                  dataGridView1.Columns[1].HeaderText = "Nom";
+                  dataGridView1.Columns[2].HeaderText = "Prénom";
+                  dataGridView1.Columns[3].Visible = false;
+                  dataGridView1.Columns[4].Visible = false;
+                  dataGridView1.Columns[5].Visible = false;
+                  dataGridView1.Columns[6].HeaderText = "Site";
+                  dataGridView1.Columns[7].HeaderText = "Service";
+              }*/
+
+          }
+
+          public void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
+          {
+              int rowClicked = dataGridView1.CurrentRow.Index;
+              int userId = int.Parse(dataGridView1.Rows[rowClicked].Cells[0].Value.ToString());
+
               EmployeeCardView employeeCardView = new EmployeeCardView(userId);
               employeeCardView.Show(); 
-        }
+          }
 
-        private void AdminAcces_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Shift && e.Control && e.KeyCode == Keys.E)
-            {
-                var adminConnection = new AdminConnection();
-                adminConnection.Show();
-            }
+          private void AdminAcces_KeyDown(object sender, KeyEventArgs e)
+          {
+              if (e.Shift && e.Control && e.KeyCode == Keys.E)
+              {
+                  var adminConnection = new AdminConnection();
+                  adminConnection.Show();
+              }
+          }
+
+          //Refreash Datas
+          private void button1_Click(object sender, EventArgs e)
+          {
+              loadDataEmployee();
+          }
         }
-    }
 }

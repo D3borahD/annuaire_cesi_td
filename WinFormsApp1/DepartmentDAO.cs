@@ -73,7 +73,7 @@ namespace WinFormsApp1
         {
             using (HttpClient client = new HttpClient())
             {
-                using (HttpResponseMessage res = await client.DeleteAsync(ApiHelper.url + "Sites/" + id))
+                using (HttpResponseMessage res = await client.DeleteAsync(ApiHelper.url + "Departments/" + id))
                 {
                     using (HttpContent content = res.Content)
                     {

@@ -125,7 +125,7 @@
             // 
             // txt_update_firstname
             // 
-            this.txt_update_firstname.Location = new System.Drawing.Point(195, 105);
+            this.txt_update_firstname.Location = new System.Drawing.Point(195, 46);
             this.txt_update_firstname.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_update_firstname.Name = "txt_update_firstname";
             this.txt_update_firstname.Size = new System.Drawing.Size(196, 27);
@@ -149,7 +149,7 @@
             // 
             // txt_update_lastname
             // 
-            this.txt_update_lastname.Location = new System.Drawing.Point(195, 48);
+            this.txt_update_lastname.Location = new System.Drawing.Point(195, 108);
             this.txt_update_lastname.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_update_lastname.Name = "txt_update_lastname";
             this.txt_update_lastname.Size = new System.Drawing.Size(196, 27);
