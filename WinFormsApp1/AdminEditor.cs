@@ -69,6 +69,7 @@ namespace WinFormsApp1
                 var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
                 String departmentN = departmentName.name;
 
+                employee.Id = result[i].Id; 
                 employee.Firstname = result[i].Firstname;
                 employee.Lastname = result[i].Lastname;
                 employee.Landline= result[0].Landline;
@@ -275,14 +276,7 @@ namespace WinFormsApp1
         private void updateEmployee_Click(object sender, EventArgs e)
         {
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
-            List<String> userInfo = new List<string>();
             int employeeId = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
-
-            /* for (int i = 0; i < dataGridViewEmployeeEdit.ColumnCount; i++)
-             {
-                 userInfo.Add(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[i].Value.ToString());
-             }*/
-            MessageBox.Show("id  " + employeeId);
 
             UpdateEmployee updateEmployee = new UpdateEmployee(employeeId);
             updateEmployee.Show();

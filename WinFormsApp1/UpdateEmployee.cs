@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MySqlX.XDevAPI.Common;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -31,11 +32,8 @@ namespace WinFormsApp1
         public int departmentId;
         public int siteId;
 
-        private async Task loadListBoxSiteAsync(int siteId)
+        private async void loadListBoxSite(int siteId)
         {
-           // SiteDAO siteDAO = new SiteDAO();
-           // siteBindingSource.DataSource = siteDAO.getAllSites();
-
             IList<Site> siteList = await siteDAO.getSites();
             siteBindingSource.DataSource = siteList.ToList();
 
@@ -47,6 +45,9 @@ namespace WinFormsApp1
 
         private async void loadListBoxDepartment(int departmentId)
         {
+           
+            //MessageBox.Show("test dep " + departmentId);
+
             IList<Department> departmentList = await DepartmentDAO.getDepartments();
             departmentBindingSource.DataSource = departmentList.ToList();
 
@@ -58,32 +59,19 @@ namespace WinFormsApp1
 
         private async void loadEmployee(int employeeId)
         {
-           // EmployeeDAO employeeDAO = new EmployeeDAO();
-           // Employee employee = (Employee)employeeDAO.getOneEmployee(employeeId);
-
             var response = await EmployeeDAO.getOneEmployee(employeeId);
-
             var result = JsonConvert.DeserializeObject<EmployeeFormated>(response);
+     
+            txt_update_lastname.Text = result.Lastname;
+            txt_update_firstname.Text = result.Firstname;
+            txt_update_landline.Text = result.Landline;
+            txt_update_mobile.Text = result.Mobile;
+            txt_update_email.Text = result.Email;
+            departmentId = result.DepartmentId;
+            siteId = result.SiteId;
 
-            var employee = new EmployeeFormated();
-
-           // var siteName = await siteDAO.getSiteById(result.SiteId);
-            //String siteN = siteName.name;
-
-            //var departmentName = await DepartmentDAO.getDepartmentById(result.DepartmentId);
-           // String departmentN = departmentName.name;
-
-
-            MessageBox.Show("test " + result.SiteId + "employee id " + employeeId);
-
-
-            txt_update_lastname.Text = employee.Lastname;
-            txt_update_firstname.Text = employee.Firstname;
-            txt_update_landline.Text = employee.Landline;
-            txt_update_mobile.Text = employee.Mobile;
-            txt_update_email.Text = employee.Email;
-           // departmentId = siteN;
-          //  siteId = employee.Site;
+             loadListBoxDepartment(departmentId);
+             loadListBoxSite(siteId);
         }
 
         public UpdateEmployee(int userInfo)
@@ -91,8 +79,6 @@ namespace WinFormsApp1
             InitializeComponent();
             employeeId = userInfo;
             loadEmployee(employeeId);
-            loadListBoxDepartment(departmentId);
-            loadListBoxSiteAsync(siteId);
         }
       
         private void update_employee_Click(object sender, EventArgs e)
