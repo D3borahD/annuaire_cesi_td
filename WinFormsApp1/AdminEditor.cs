@@ -70,8 +70,8 @@ namespace WinFormsApp1
                 String departmentN = departmentName.name;
 
                 employee.Id = result[i].Id; 
-                employee.Firstname = result[i].Firstname;
                 employee.Lastname = result[i].Lastname;
+                employee.Firstname = result[i].Firstname;
                 employee.Landline= result[0].Landline;
                 employee.Mobile= result[0].Mobile;
                 employee.Email = result[0].Email;
@@ -101,12 +101,21 @@ namespace WinFormsApp1
 
         private async void loadListBoxSite()
         {
+            /* IList<Site> siteList = await siteDAO.getSites();
+             siteBindingSource.DataSource = siteList.ToList();
+
+             listBoxSite.DataSource = siteBindingSource;
+             listBoxSite.DisplayMember = "name";
+             listBoxSite.ValueMember = "Id";*/
+
             IList<Site> siteList = await siteDAO.getSites();
             siteBindingSource.DataSource = siteList.ToList();
 
-            listBoxSite.DataSource = siteBindingSource;
-            listBoxSite.DisplayMember = "name";
-            listBoxSite.ValueMember = "Id";
+            dataGridSite.DataSource = siteBindingSource;
+            dataGridSite.Columns["id"].Visible = false;
+            dataGridSite.Columns[1].HeaderText = "Nom du Site";
+            dataGridSite.DefaultCellStyle.SelectionBackColor = Color.Navy;
+            dataGridSite.ColumnHeadersVisible = false;
         }
 
         private async void loadListBoxDepartment()
@@ -114,9 +123,19 @@ namespace WinFormsApp1
             IList<Department> departmentList = await DepartmentDAO.getDepartments();
             departmentBindingSource.DataSource = departmentList.ToList();
 
-            listBoxDepartment.DataSource = departmentBindingSource;
-            listBoxDepartment.DisplayMember = "name";
-            listBoxDepartment.ValueMember = "id";
+            dataGridDepartment.DataSource = departmentBindingSource;
+            dataGridDepartment.Columns["id"].Visible = false;
+            dataGridDepartment.Columns[1].HeaderText = "Nom du Service";
+            dataGridDepartment.DefaultCellStyle.SelectionBackColor = Color.Navy;
+            dataGridDepartment.ColumnHeadersVisible = false;
+          
+
+            /*  IList<Department> departmentList = await DepartmentDAO.getDepartments();
+              departmentBindingSource.DataSource = departmentList.ToList();
+
+              listBoxDepartment.DataSource = departmentBindingSource;
+              listBoxDepartment.DisplayMember = "name";
+              listBoxDepartment.ValueMember = "id";*/
         }
 
         private void AdminEditor_Load_1(object sender, EventArgs e)
@@ -128,9 +147,9 @@ namespace WinFormsApp1
             loadListBoxDepartment();
         }
 
-        private void add_employee_Click(object sender, EventArgs e)
+        private async void add_employee_Click(object sender, EventArgs e)
         {
-            Regex numberRegex = new Regex(@"^\d{10}$");
+           Regex numberRegex = new Regex(@"^\d{10}$");
             String fixNumber = txt_employee_landline.Text;
             String mobileNumber = txt_employee_mobile.Text;
 
@@ -164,21 +183,35 @@ namespace WinFormsApp1
             }
             else 
             {
+                int rowClicked = dataGridDepartment.CurrentRow.Index;
+                int departmentID = int.Parse(dataGridDepartment.Rows[rowClicked].Cells[0].Value.ToString());
+
+                int rowClickedSite = dataGridSite.CurrentRow.Index;
+                int siteID = int.Parse(dataGridSite.Rows[rowClickedSite].Cells[0].Value.ToString());
+
+
                 Employee employee = new Employee
                 {
+                    
                     lastname = txt_employee_lastname.Text.ToUpper(),
                     firstname = formatFirstname,
                     landline = txt_employee_landline.Text,
                     mobile = txt_employee_mobile.Text,
                     email = createEmail,
-                    site = listBoxSite.SelectedValue.ToString(),
-                    department = listBoxDepartment.SelectedValue.ToString(),
+                    siteId = 10,
+                    departmentId = 2,
                 };
                 EmployeeDAO employeeDAO = new EmployeeDAO();
-                int result = employeeDAO.addOneEmployee(employee);
+                // int result = employeeDAO.updateEmployee(employee);
+
+               //await employeeDAO.updateEmployee(employee.id, employee);
 
 
+             // EmployeeDAO employeeDAO = new EmployeeDAO();
+                // int result = employeeDAO.addOneEmployee(employee);
 
+                //MessageBox.Show("test n  " + employee.siteId + "service  " + employee.departmentId);
+              //  await employeeDAO.addOneEmployee(employee);
 
                 txt_employee_lastname.Clear();
                 txt_employee_firstname.Clear();

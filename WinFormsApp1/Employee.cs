@@ -10,8 +10,9 @@ namespace WinFormsApp1
     {
         public int id { get; set; }
 
-        public String firstname { get; set; }
+       
         public String lastname { get; set; }
+        public String firstname { get; set; }
 
         public String landline { get; set; }
 
@@ -19,8 +20,8 @@ namespace WinFormsApp1
 
         public String email { get; set; }
 
-        public String site { get; set; }
+        public int siteId { get; set; }
 
-        public String department { get; set; }
+        public int departmentId { get; set; }
     }
 }

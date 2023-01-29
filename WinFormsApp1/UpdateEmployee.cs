@@ -37,10 +37,10 @@ namespace WinFormsApp1
             IList<Site> siteList = await siteDAO.getSites();
             siteBindingSource.DataSource = siteList.ToList();
 
-            listBoxSiteUpdate.DataSource = siteBindingSource;
-            listBoxSiteUpdate.DisplayMember = "name";
-            listBoxSiteUpdate.ValueMember = "id";
-            listBoxSiteUpdate.SelectedValue = siteId;
+             listBoxSiteUpdate.DataSource = siteBindingSource;
+             listBoxSiteUpdate.DisplayMember = "name";
+             listBoxSiteUpdate.ValueMember = "id";
+             listBoxSiteUpdate.SelectedValue = siteId;
         }
 
         private async void loadListBoxDepartment(int departmentId)
@@ -48,10 +48,10 @@ namespace WinFormsApp1
             IList<Department> departmentList = await DepartmentDAO.getDepartments();
             departmentBindingSource.DataSource = departmentList.ToList();
 
-            listBoxDepartmentUpdate.DataSource = departmentBindingSource;
-            listBoxDepartmentUpdate.DisplayMember = "name";
-            listBoxDepartmentUpdate.ValueMember = "id";
-            listBoxDepartmentUpdate.SelectedValue = departmentId;
+             listBoxDepartmentUpdate.DataSource = departmentBindingSource;
+             listBoxDepartmentUpdate.DisplayMember = "name";
+             listBoxDepartmentUpdate.ValueMember = "id";
+             listBoxDepartmentUpdate.SelectedValue = departmentId;
         }
 
         private async void loadEmployee(int employeeId)
@@ -78,7 +78,7 @@ namespace WinFormsApp1
             loadEmployee(employeeId);
         }
       
-        private void update_employee_Click(object sender, EventArgs e)
+        private async void update_employee_Click(object sender, EventArgs e)
         {
             Regex numberRegex = new Regex(@"^\d{10}$");
             String fixnumber = txt_update_landline.Text;
@@ -112,6 +112,7 @@ namespace WinFormsApp1
             }
             else
             {
+           
                 Employee employee = new Employee
                 {
                     id = employeeId,
@@ -120,12 +121,13 @@ namespace WinFormsApp1
                     landline = txt_update_landline.Text,
                     mobile = txt_update_mobile.Text,
                     email = txt_update_email.Text.ToLower(),
-                    site = listBoxSiteUpdate.SelectedValue.ToString(),
-                    department = listBoxDepartmentUpdate.SelectedValue.ToString(),
+                    siteId = (int)listBoxSiteUpdate.SelectedValue,
+                    departmentId = (int)listBoxDepartmentUpdate.SelectedValue,
                 };
-
+               
                 EmployeeDAO employeeDAO = new EmployeeDAO();
-                int result = employeeDAO.updateEmployee(employee);
+
+                await employeeDAO.updateEmployee(employee.id, employee);
 
                 MessageBox.Show("L'employé(e)" + employee.lastname + " a été modifié(e)");
                 this.Close();

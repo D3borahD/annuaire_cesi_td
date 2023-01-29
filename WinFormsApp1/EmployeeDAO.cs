@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Utilities.Collections;
 using System;
@@ -7,9 +8,12 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Data;
 using System.Linq;
+using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using WinFormsApp1.Model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace WinFormsApp1
@@ -75,37 +79,58 @@ namespace WinFormsApp1
             }
         }
 
-        internal int addOneEmployee(Employee employee)
+        public static async Task addOneEmployee(Employee employee)
         {
 
+          //  string idEmployee = id.ToString();
+
+            var stringValues = JsonConvert.SerializeObject(employee);
+
+            var httpContent = new StringContent(stringValues, Encoding.UTF8, "application/json");
+
+            var httpClient = new HttpClient();
+
+            var httpResponse = await httpClient.PutAsync("http://127.0.0.1:5163/api/Employees/", httpContent);
+
+            if (httpResponse.Content != null)
+            {
+                try
+                {
+                    var responseContent = await httpResponse.Content.ReadAsStringAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
 
 
 
             // MySqlConnection connection = new MySqlConnection(connectionString);
             // connection.Open();
 
-            var connection = DBConnection.Connection;
-            connection.Open();
+            /*  var connection = DBConnection.Connection;
+              connection.Open();
 
-            try
-            {
-                MySqlCommand command = new MySqlCommand("INSERT INTO `employee`( `lastname`,`firstname`, `landline`, `mobile`, `email`, `site_id`, `department_id`) VALUES(@firstname, @lastname, @landline, @mobile, @email, @site, @department)", connection);
-                command.Parameters.AddWithValue("@firstname", employee.firstname);
-                command.Parameters.AddWithValue("@lastname", employee.lastname);
-                command.Parameters.AddWithValue("@landline", employee.landline);
-                command.Parameters.AddWithValue("@mobile", employee.mobile);
-                command.Parameters.AddWithValue("@email", employee.email);
-                command.Parameters.AddWithValue("@site", employee.site);
-                command.Parameters.AddWithValue("@department", employee.department);
+              try
+              {
+                  MySqlCommand command = new MySqlCommand("INSERT INTO `employee`( `lastname`,`firstname`, `landline`, `mobile`, `email`, `site_id`, `department_id`) VALUES(@firstname, @lastname, @landline, @mobile, @email, @site, @department)", connection);
+                  command.Parameters.AddWithValue("@firstname", employee.firstname);
+                  command.Parameters.AddWithValue("@lastname", employee.lastname);
+                  command.Parameters.AddWithValue("@landline", employee.landline);
+                  command.Parameters.AddWithValue("@mobile", employee.mobile);
+                  command.Parameters.AddWithValue("@email", employee.email);
+                  command.Parameters.AddWithValue("@site", employee.site);
+                  command.Parameters.AddWithValue("@department", employee.department);
 
-                int newRows = command.ExecuteNonQuery();
-                connection.Close();
-                return newRows;
-            }
-            catch (MySqlException ex)
-            {
-                throw;
-            }
+                  int newRows = command.ExecuteNonQuery();
+                  connection.Close();
+                  return newRows;
+              }
+              catch (MySqlException ex)
+              {
+                  throw;
+              }*/
         }
 
         public static async Task<String> getOneEmployee(int employeeId)
@@ -229,69 +254,72 @@ namespace WinFormsApp1
                 }
             }
             return string.Empty;
-            // MySqlConnection connection = new MySqlConnection(connectionString);
-            // connection.Open();
-
-           /* var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
-            {
-                MySqlCommand command = new MySqlCommand("DELETE FROM `employee` WHERE `employee`.`id` = @id;", connection);
-
-                command.Parameters.AddWithValue("@id", idSelectedEmployee);
-
-                int result = command.ExecuteNonQuery();
-                connection.Close();
-                return result;
-            }
-            catch (MySqlException ex)
-            {
-                throw;
-            }*/
         }
 
-        internal int updateEmployee(Employee employee)
+        public async Task updateEmployee(int id, Employee employee)
         {
+            string idEmployee = id.ToString();
+
+            var stringValues = JsonConvert.SerializeObject(employee);
+
+            var httpContent = new StringContent(stringValues, Encoding.UTF8, "application/json");
+
+            var httpClient = new HttpClient();
+
+            var httpResponse = await httpClient.PutAsync("http://127.0.0.1:5163/api/Employees/" + idEmployee, httpContent);
+
+            if (httpResponse.Content != null)
+            {
+                try
+                {
+                    var responseContent = await httpResponse.Content.ReadAsStringAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
             //MySqlConnection connection = new MySqlConnection(connectionString);
             // connection.Open();
 
-            var connection = DBConnection.Connection;
-            connection.Open();
+            /*  var connection = DBConnection.Connection;
+              connection.Open();
 
-            try
-            {
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = "UPDATE `employee` " +
-                    "SET " +
-                    "`lastname`= @lastname," +
-                    "`firstname`= @firstname," +
-                    "`landline`= @landline," +
-                    "`mobile`= @mobile," +
-                    "`email`= @email," +
-                    "`site_id`= @site," +
-                    "`department_id`= @department" +
-                    " WHERE `id`= @id";
+              try
+              {
+                  MySqlCommand command = new MySqlCommand();
+                  command.CommandText = "UPDATE `employee` " +
+                      "SET " +
+                      "`lastname`= @lastname," +
+                      "`firstname`= @firstname," +
+                      "`landline`= @landline," +
+                      "`mobile`= @mobile," +
+                      "`email`= @email," +
+                      "`site_id`= @site," +
+                      "`department_id`= @department" +
+                      " WHERE `id`= @id";
 
-                command.Connection = connection;
-                command.Parameters.AddWithValue("@firstname", employee.firstname);
-                command.Parameters.AddWithValue("@lastname", employee.lastname);
-                command.Parameters.AddWithValue("@landline", employee.landline);
-                command.Parameters.AddWithValue("@mobile", employee.mobile);
-                command.Parameters.AddWithValue("@email", employee.email);
-                command.Parameters.AddWithValue("@site", employee.site);
-                command.Parameters.AddWithValue("@department", employee.department);
-                command.Parameters.AddWithValue("@id", employee.id);
+                  command.Connection = connection;
+                  command.Parameters.AddWithValue("@firstname", employee.firstname);
+                  command.Parameters.AddWithValue("@lastname", employee.lastname);
+                  command.Parameters.AddWithValue("@landline", employee.landline);
+                  command.Parameters.AddWithValue("@mobile", employee.mobile);
+                  command.Parameters.AddWithValue("@email", employee.email);
+                  command.Parameters.AddWithValue("@site", employee.site);
+                  command.Parameters.AddWithValue("@department", employee.department);
+                  command.Parameters.AddWithValue("@id", employee.id);
 
-                int result = command.ExecuteNonQuery();
-                connection.Close();
-                return result;
-            }
-            catch (MySqlException ex)
-            {
-                throw;
-            }
+                  int result = command.ExecuteNonQuery();
+                  connection.Close();
+                  return result;
+              }
+              catch (MySqlException ex)
+              {
+                  throw;
+              }*/
         }
+
+     
     }
 }
  
