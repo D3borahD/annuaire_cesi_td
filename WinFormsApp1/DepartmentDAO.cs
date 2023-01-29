@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,146 +10,106 @@ namespace WinFormsApp1
 {
     internal class DepartmentDAO
     {
-        //string connectionString = "datasource=localhost;port=3306;username=root;password=root;database=annuaire;";
-
-        public List<Department> getAllDepartments()
+        public static async Task<List<Department>> getDepartments()
         {
-            List<Department> returnThese = new List<Department>();
+            var url = "Departments";
 
-            // MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
             {
-                MySqlCommand command = new MySqlCommand("SELECT * FROM department", connection);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                if (response.IsSuccessStatusCode)
                 {
-                    while (reader.Read())
-                    {
-                        Department dep = new Department
-                        {
-                            id = reader.GetInt32(0),
-                            name = reader.GetString(1)
-                        };
-                        returnThese.Add(dep);
-                    }
+                    List<Department> departments = await response.Content.ReadAsAsync<List<Department>>();
+                    return departments.ToList();
                 }
-                connection.Close();
-                return returnThese;
-            }
-            catch (MySqlException ex)
-            {
-                throw;
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
             }
         }
 
-        internal int addOneDepartment(Department department)
+
+        public static async Task<Department> getDepartmentById(int id)
         {
-            //MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
-            var connection = DBConnection.Connection;
-            connection.Open(); 
+            var url = "Departments/" + id;
 
-            try
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
             {
-                MySqlCommand command = new MySqlCommand("INSERT INTO `department`(`name`) VALUES(@name)", connection);
-                command.Parameters.AddWithValue("@name", department.name);
+                if (response.IsSuccessStatusCode)
+                {
+                    Department department = await response.Content.ReadAsAsync<Department>();
+                    return department;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
 
-                int newRows = command.ExecuteNonQuery();
-                connection.Close();
-                return newRows;
-            }
-            catch (MySqlException ex)
+        public static async Task addDepartment(Department department)
+        {
+            var stringValues = JsonConvert.SerializeObject(department);
+
+            var httpContent = new StringContent(stringValues, Encoding.UTF8, "application/json");
+
+            var httpClient = new HttpClient();
+
+            var httpResponse = await httpClient.PostAsync(ApiHelper.url + "Departments", httpContent);
+
+            if (httpResponse.Content != null)
             {
-                MessageBox.Show("Le service existe déjà");
-                return 0;
+                try
+                {
+                    var responseContent = await httpResponse.Content.ReadAsStringAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
-           
         }
         
-        internal int deleteDepartment(int departmentId)
+        public async Task<String> deleteDepartment(int id)
         {
-            //MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
+            using (HttpClient client = new HttpClient())
             {
-                MySqlCommand command = new MySqlCommand("DELETE FROM `department` WHERE `department`.`id` = @id; ", connection);
-                command.Parameters.AddWithValue("@id", departmentId);
-
-                int result = command.ExecuteNonQuery();
-                connection.Close();
-                return result;
-            }
-            catch (MySqlException ex)
-            {
-                throw;
-            }
-        }
-
-        internal object getDepartmentById(int departmentId)
-        {
-            Department department = new Department();
-            //MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
-            {
-                MySqlCommand command = new MySqlCommand("SELECT * FROM `department`WHERE department.id = @id", connection);
-                command.Parameters.AddWithValue("@id", departmentId);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                using (HttpResponseMessage res = await client.DeleteAsync(ApiHelper.url + "Sites/" + id))
                 {
-                    if (reader.Read())
+                    using (HttpContent content = res.Content)
                     {
-                        department.name = reader.GetString(1);
+                        string data = await content.ReadAsStringAsync();
+                        if (data != null)
+                        {
+                            return data;
+                        }
                     }
                 }
-                connection.Close();
-                return department;
             }
-            catch (MySqlException ex)
-            {
-                throw;
-            }
-
+            return string.Empty;
         }
 
-        internal int updateDepartment(Department department)
+        public async Task updateDepartment(int id, Department department)
         {
-            //MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
+            var stringValues = JsonConvert.SerializeObject(department);
 
-            var connection = DBConnection.Connection;
-            connection.Open();
+            var httpContent = new StringContent(stringValues, Encoding.UTF8, "application/json");
 
-            try
+            var httpClient = new HttpClient();
+
+            var httpResponse = await httpClient.PutAsync(ApiHelper.url + "Departments/" + id, httpContent);
+
+            if (httpResponse.Content != null)
             {
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = "UPDATE `department` SET `name`= @name WHERE id = @id";
-                command.Connection = connection;
-                command.Parameters.AddWithValue("@name", department.name);
-                command.Parameters.AddWithValue("@id", department.id);
-
-                int result = command.ExecuteNonQuery();
-                connection.Close();
-                return result;
+                try
+                {
+                    var responseContent = await httpResponse.Content.ReadAsStringAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Le service existe déjà");
-                return 0;
-            }
-          
         }
     }
 }

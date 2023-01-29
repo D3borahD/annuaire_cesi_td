@@ -26,10 +26,11 @@ namespace WinFormsApp1
             InitializeComponent();         
         }
 
-        private void loadDataDepartment()
+        private async void loadDataDepartment()
         {
-            DepartmentDAO departmentDAO = new DepartmentDAO();
-            departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
+            IList<Department> departmentList = await DepartmentDAO.getDepartments();
+            departmentBindingSource.DataSource = departmentList.ToList();
+
             dataGridViewDepartmentEdit.DataSource = departmentBindingSource;
             dataGridViewDepartmentEdit.Columns["id"].Visible = false;
             dataGridViewDepartmentEdit.Columns[1].HeaderText = "Nom du Service";
@@ -39,7 +40,6 @@ namespace WinFormsApp1
         private async void loadDataSite()
         {
             IList<Site> siteList = await siteDAO.getSites();
-
             siteBindingSource.DataSource = siteList.ToList();
 
             dataGridViewSiteEdit.DataSource = siteBindingSource;
@@ -52,6 +52,7 @@ namespace WinFormsApp1
         {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
+
             dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
             dataGridViewEmployeeEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
@@ -71,7 +72,6 @@ namespace WinFormsApp1
         private async void loadListBoxSite()
         {
             IList<Site> siteList = await siteDAO.getSites();
-
             siteBindingSource.DataSource = siteList.ToList();
 
             listBoxSite.DataSource = siteBindingSource;
@@ -79,10 +79,11 @@ namespace WinFormsApp1
             listBoxSite.ValueMember = "Id";
         }
 
-        private void loadListBoxDepartment()
+        private async void loadListBoxDepartment()
         {
-            DepartmentDAO departmentDAO = new DepartmentDAO();
-            departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
+            IList<Department> departmentList = await DepartmentDAO.getDepartments();
+            departmentBindingSource.DataSource = departmentList.ToList();
+
             listBoxDepartment.DataSource = departmentBindingSource;
             listBoxDepartment.DisplayMember = "name";
             listBoxDepartment.ValueMember = "id";
@@ -96,7 +97,6 @@ namespace WinFormsApp1
             loadListBoxSite();
             loadListBoxDepartment();
         }
-
 
         private void add_employee_Click(object sender, EventArgs e)
         {
@@ -157,7 +157,8 @@ namespace WinFormsApp1
             }
         }
 
-        private void addService_Click(object sender, EventArgs e)
+        //rename this to AddDepartment_Click
+        private async void addService_Click(object sender, EventArgs e)
         {
             if(String.IsNullOrEmpty(txt_department_name.Text))
             {
@@ -173,12 +174,11 @@ namespace WinFormsApp1
                 name = name,
                 };
 
-                DepartmentDAO departmentDAO = new DepartmentDAO();
-                int result = departmentDAO.addOneDepartment(department);
+                await DepartmentDAO.addDepartment(department);
 
                 txt_department_name.Clear();
 
-                if (result != 0)
+                if (department != null)
                 {
                     MessageBox.Show("Le service " + department.name + " a été ajouté");
                 } 
@@ -254,17 +254,18 @@ namespace WinFormsApp1
             updateEmployee.Show();
         }
 
-        private void deleteDepartment_Click(object sender, EventArgs e)
+        private async void deleteDepartment_Click(object sender, EventArgs e)
         {
             int rowClicked = dataGridViewDepartmentEdit.CurrentRow.Index;
-            int idSelectedDepartment = int.Parse(dataGridViewDepartmentEdit.Rows[rowClicked].Cells[0].Value.ToString());
+            int id = int.Parse(dataGridViewDepartmentEdit.Rows[rowClicked].Cells[0].Value.ToString());
             String nameSelectedDepartment = dataGridViewDepartmentEdit.Rows[rowClicked].Cells[1].Value.ToString();
 
             DialogResult dialogResult = MessageBox.Show("ATTENTION : \n\n" + "Si vous supprimez le service : " + nameSelectedDepartment + "\nles employé(e)s associé(e)s à ce service seront aussi supprimé(e)s.\nVoulez-vous vraiment supprimer ce service ?", "SUPPRESSION D'UN SERVICE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if(dialogResult  == DialogResult.Yes)
             {
-                DepartmentDAO departmentDAO = new DepartmentDAO();
-                int result = departmentDAO.deleteDepartment(idSelectedDepartment);
+                var departmentDAO = new DepartmentDAO();
+                //int result = departmentDAO.deleteDepartment(idSelectedDepartment);
+                var response = await departmentDAO.deleteDepartment(id);
 
                 MessageBox.Show("Le service " + nameSelectedDepartment + " a été supprimé(e)");
                 loadDataEmployee();

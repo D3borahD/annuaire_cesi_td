@@ -16,22 +16,18 @@ namespace WinFormsApp1
         BindingSource employeeBindingSource = new BindingSource();
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
-
-       
-
  
         public Annuaire()
         {
             InitializeComponent();
             KeyPreview = true;
-
-           
         }
 
-        private void loadDataDepartment()
+        private async void loadDataDepartment()
         {
-            DepartmentDAO departmentDAO = new DepartmentDAO();
-            departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
+            IList<Department> departmentList = await DepartmentDAO.getDepartments();
+            departmentBindingSource.DataSource = departmentList.ToList();
+
             dataGridViewDepartmentDisplay.DataSource = departmentBindingSource;
             dataGridViewDepartmentDisplay.DefaultCellStyle.SelectionBackColor = Color.Navy;
             dataGridViewDepartmentDisplay.Columns["id"].Visible = false;
@@ -40,22 +36,14 @@ namespace WinFormsApp1
 
         private async void loadDataSite()
         {
-           // SiteDAO siteDAO = new SiteDAO();
-
-
-           // var siteName = await SiteDAO.getSiteById(siteId)
             IList<Site> siteList = await siteDAO.getSites();
-
             siteBindingSource.DataSource = siteList.ToList();
-
 
             dataGridViewSiteDisplay.DataSource = siteBindingSource;
             dataGridViewSiteDisplay.DefaultCellStyle.SelectionBackColor = Color.Navy;
             dataGridViewSiteDisplay.Columns["id"].Visible = false;
             dataGridViewSiteDisplay.Columns[1].HeaderText = "Nom du Site";
         }
-
-     
 
         private void loadDataEmployee()
         {
@@ -75,17 +63,13 @@ namespace WinFormsApp1
                 dataGridView1.Columns[6].HeaderText = "Site";
                 dataGridView1.Columns[7].HeaderText = "Service";
             }
-       
         }
-     
-
 
         private void Annuaire_Load(object sender, EventArgs e)
         {
             loadDataEmployee();
             loadDataDepartment();
             loadDataSite();
-   
         }
 
         // SearchName function 

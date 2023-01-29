@@ -36,7 +36,6 @@ namespace WinFormsApp1
            // siteBindingSource.DataSource = siteDAO.getAllSites();
 
             IList<Site> siteList = await siteDAO.getSites();
-
             siteBindingSource.DataSource = siteList.ToList();
 
             listBoxSiteUpdate.DataSource = siteBindingSource;
@@ -45,10 +44,11 @@ namespace WinFormsApp1
             listBoxSiteUpdate.SelectedValue = siteId;
         }
 
-        private void loadListBoxDepartment(int departmentId)
+        private async void loadListBoxDepartment(int departmentId)
         {
-            DepartmentDAO departmentDAO = new DepartmentDAO();
-            departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
+            IList<Department> departmentList = await DepartmentDAO.getDepartments();
+            departmentBindingSource.DataSource = departmentList.ToList();
+
             listBoxDepartmentUpdate.DataSource = departmentBindingSource;
             listBoxDepartmentUpdate.DisplayMember = "name";
             listBoxDepartmentUpdate.ValueMember = "id";

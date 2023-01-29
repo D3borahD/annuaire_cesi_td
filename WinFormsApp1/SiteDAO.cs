@@ -79,7 +79,6 @@ namespace WinFormsApp1
 
         public async Task<string> deleteSite(string id)
         {
-           
             using (HttpClient client = new HttpClient())
             {
                 using (HttpResponseMessage res = await client.DeleteAsync(ApiHelper.url + "Sites/" + id))
