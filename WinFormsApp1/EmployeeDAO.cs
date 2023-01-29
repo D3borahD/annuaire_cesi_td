@@ -127,43 +127,6 @@ namespace WinFormsApp1
             }
             return string.Empty;
 
-
-          //  }
-          /*  Employee employee = new Employee();
-
-            // MySqlConnection connection = new MySqlConnection(connectionString);
-            //connection.Open();
-
-            var connection = DBConnection.Connection;
-            connection.Open();
-
-            try
-            {
-                MySqlCommand command = new MySqlCommand("SELECT * FROM `employee`WHERE employee.id = @id", connection);
-                command.Parameters.AddWithValue("@id", employeeId);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-
-                        employee.id = reader.GetInt32(0);
-                        employee.firstname = reader.GetString(1);
-                        employee.lastname = reader.GetString(2);
-                        employee.landline = reader.GetString(3);
-                        employee.mobile = reader.GetString(4);
-                        employee.email = reader.GetString(5);
-                        employee.site = reader.GetString(6);
-                        employee.department = reader.GetString(7);
-                    }
-                }
-                connection.Close();
-                return employee;
-            }
-            catch (MySqlException ex)
-            {
-                throw;
-            }*/
         }
 
         // Get employee with Site search
@@ -247,12 +210,29 @@ namespace WinFormsApp1
             }
         }
 
-        internal int deleteEmployee(int idSelectedEmployee)
+        public async Task<String> deleteEmployee(int idSelectedEmployee)
         {
+            string id = idSelectedEmployee.ToString();
+
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage res = await client.DeleteAsync("http://127.0.0.1:5163/api/Employees/" + id))
+                {
+                    using (HttpContent content = res.Content)
+                    {
+                        string data = await content.ReadAsStringAsync();
+                        if (data != null)
+                        {
+                            return data;
+                        }
+                    }
+                }
+            }
+            return string.Empty;
             // MySqlConnection connection = new MySqlConnection(connectionString);
             // connection.Open();
 
-            var connection = DBConnection.Connection;
+           /* var connection = DBConnection.Connection;
             connection.Open();
 
             try
@@ -268,7 +248,7 @@ namespace WinFormsApp1
             catch (MySqlException ex)
             {
                 throw;
-            }
+            }*/
         }
 
         internal int updateEmployee(Employee employee)

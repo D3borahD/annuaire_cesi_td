@@ -45,9 +45,6 @@ namespace WinFormsApp1
 
         private async void loadListBoxDepartment(int departmentId)
         {
-           
-            //MessageBox.Show("test dep " + departmentId);
-
             IList<Department> departmentList = await DepartmentDAO.getDepartments();
             departmentBindingSource.DataSource = departmentList.ToList();
 

@@ -248,7 +248,7 @@ namespace WinFormsApp1
             }
         }
 
-        private void deleteEmployee_Click(object sender, EventArgs e)
+        private async void deleteEmployee_Click(object sender, EventArgs e)
         {
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
 
@@ -260,8 +260,9 @@ namespace WinFormsApp1
             if (dialogResult == DialogResult.Yes)
             {
                 EmployeeDAO employeeDAO = new EmployeeDAO();
-                int result = employeeDAO.deleteEmployee(idSelectedEmployee);
-
+               // int result = employeeDAO.deleteEmployee(idSelectedEmployee);
+                var response = await employeeDAO.deleteEmployee(idSelectedEmployee);
+    
                 MessageBox.Show("L'employé(e) " + nameSelectedEmployee + " a été supprimé(e)");
                 loadDataEmployee();
     

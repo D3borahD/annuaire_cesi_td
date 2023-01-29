@@ -187,27 +187,7 @@ namespace WinFormsApp1
         public void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowClicked = dataGridView1.CurrentRow.Index;
-            // List<String> userInfo = new List<string>();
-
             int userId = int.Parse(dataGridView1.Rows[rowClicked].Cells[0].Value.ToString());
-
-           // MessageBox.Show("id  " + userId);
-
-
-
-           // EmployeeDAO employee = new EmployeeDAO();
-
-            //MessageBox.Show("test " + dataGridView1.Rows[rowClicked].Cells[0].Value.ToString());
-           // userInfo.Add(dataGridView1.Rows[rowClicked].Cells[0].Value.ToString());
-
-          /*  for (int i = 0; i< 6; i++)
-               {
-                 
-                MessageBox.Show("test " + userInfo[i]);
-
-            }*/
-          
-          //  userInfo
              
               EmployeeCardView employeeCardView = new EmployeeCardView(userId);
               employeeCardView.Show(); 
