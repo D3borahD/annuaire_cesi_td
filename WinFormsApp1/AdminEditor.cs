@@ -173,8 +173,8 @@ namespace WinFormsApp1
                     landline = txt_employee_landline.Text,
                     mobile = txt_employee_mobile.Text,
                     email = createEmail,
-                    siteId = 10,
-                    departmentId = 2,
+                    siteId = (int)listBoxSite.SelectedValue,
+                    departmentId = (int)listBoxDepartment.SelectedValue,
                 };
                 EmployeeDAO employeeDAO = new EmployeeDAO();
                 await employeeDAO.addEmployee(employee);
