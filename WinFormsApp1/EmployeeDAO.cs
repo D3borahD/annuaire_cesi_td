@@ -77,6 +77,10 @@ namespace WinFormsApp1
 
         internal int addOneEmployee(Employee employee)
         {
+
+
+
+
             // MySqlConnection connection = new MySqlConnection(connectionString);
             // connection.Open();
 
@@ -104,9 +108,28 @@ namespace WinFormsApp1
             }
         }
 
-        public Object getOneEmployee(int employeeId)
+        public static async Task<String> getOneEmployee(int employeeId)
         {
-            Employee employee = new Employee();
+            string id = employeeId.ToString();
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage res = await client.GetAsync("http://127.0.0.1:5163/api/Employees/" + id))
+                {
+                    using (HttpContent content = res.Content)
+                    {
+                        string data = await content.ReadAsStringAsync();
+                        if (data != null)
+                        {
+                            return data;
+                        }
+                    }
+                }
+            }
+            return string.Empty;
+
+
+          //  }
+          /*  Employee employee = new Employee();
 
             // MySqlConnection connection = new MySqlConnection(connectionString);
             //connection.Open();
@@ -140,7 +163,7 @@ namespace WinFormsApp1
             catch (MySqlException ex)
             {
                 throw;
-            }
+            }*/
         }
 
         // Get employee with Site search

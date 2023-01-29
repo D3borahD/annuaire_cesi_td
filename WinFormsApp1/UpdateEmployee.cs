@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using WinFormsApp1.Model;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Forms.Application;
 
@@ -55,23 +56,40 @@ namespace WinFormsApp1
             listBoxDepartmentUpdate.SelectedValue = departmentId;
         }
 
-        private void loadEmployee(int employeeId)
+        private async void loadEmployee(int employeeId)
         {
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            Employee employee = (Employee)employeeDAO.getOneEmployee(employeeId);
-            txt_update_lastname.Text = employee.lastname;
-            txt_update_firstname.Text = employee.firstname;
-            txt_update_landline.Text = employee.landline;
-            txt_update_mobile.Text = employee.mobile;
-            txt_update_email.Text = employee.email;
-            departmentId = int.Parse(employee.department);
-            siteId = int.Parse(employee.site);
+           // EmployeeDAO employeeDAO = new EmployeeDAO();
+           // Employee employee = (Employee)employeeDAO.getOneEmployee(employeeId);
+
+            var response = await EmployeeDAO.getOneEmployee(employeeId);
+
+            var result = JsonConvert.DeserializeObject<EmployeeFormated>(response);
+
+            var employee = new EmployeeFormated();
+
+           // var siteName = await siteDAO.getSiteById(result.SiteId);
+            //String siteN = siteName.name;
+
+            //var departmentName = await DepartmentDAO.getDepartmentById(result.DepartmentId);
+           // String departmentN = departmentName.name;
+
+
+            MessageBox.Show("test " + result.SiteId + "employee id " + employeeId);
+
+
+            txt_update_lastname.Text = employee.Lastname;
+            txt_update_firstname.Text = employee.Firstname;
+            txt_update_landline.Text = employee.Landline;
+            txt_update_mobile.Text = employee.Mobile;
+            txt_update_email.Text = employee.Email;
+           // departmentId = siteN;
+          //  siteId = employee.Site;
         }
 
-        public UpdateEmployee(List<String> userInfo)
+        public UpdateEmployee(int userInfo)
         {
             InitializeComponent();
-            employeeId = int.Parse(userInfo[0]);
+            employeeId = userInfo;
             loadEmployee(employeeId);
             loadListBoxDepartment(departmentId);
             loadListBoxSiteAsync(siteId);

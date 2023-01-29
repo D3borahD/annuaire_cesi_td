@@ -19,16 +19,11 @@ namespace WinFormsApp1
         BindingSource employeeBindingSource = new BindingSource();
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
-
-       
-
  
         public Annuaire()
         {
             InitializeComponent();
             KeyPreview = true;
-
-
         }
 
         private async void loadDataDepartment()
@@ -53,8 +48,6 @@ namespace WinFormsApp1
             dataGridViewSiteDisplay.Columns[1].HeaderText = "Nom du Site";
         }
 
-
-
         private async void loadDataEmployee()
         {
             var response = await EmployeeDAO.getAllEmployees();
@@ -73,11 +66,9 @@ namespace WinFormsApp1
                 var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
                 String departmentN = departmentName.name;
 
+                employee.Id = result[i].Id;
                 employee.Firstname = result[i].Firstname;
                 employee.Lastname = result[i].Lastname;
-                //employee.landline= result[0].Landline;
-                // employee.mobile= result[0].Mobile;
-                // employee.email = result[0].Email;
                 employee.Site = siteN;
                 employee.Department = departmentN;
                 employees.Add(employee);
@@ -103,8 +94,6 @@ namespace WinFormsApp1
        
         }
      
-
-
         private void Annuaire_Load(object sender, EventArgs e)
         {
             loadDataEmployee();
@@ -197,16 +186,31 @@ namespace WinFormsApp1
 
         public void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-           /* int rowClicked = dataGridView1.CurrentRow.Index;           
-            List<String> userInfo = new List<string>();
+            int rowClicked = dataGridView1.CurrentRow.Index;
+            // List<String> userInfo = new List<string>();
 
-            for (int i = 0; i< dataGridView1.ColumnCount; i++)
-            {
-                userInfo.Add(dataGridView1.Rows[rowClicked].Cells[i].Value.ToString());
-            }
+            int userId = int.Parse(dataGridView1.Rows[rowClicked].Cells[0].Value.ToString());
 
-            EmployeeCardView employeeCardView = new EmployeeCardView(userInfo);
-            employeeCardView.Show(); */
+           // MessageBox.Show("id  " + userId);
+
+
+
+           // EmployeeDAO employee = new EmployeeDAO();
+
+            //MessageBox.Show("test " + dataGridView1.Rows[rowClicked].Cells[0].Value.ToString());
+           // userInfo.Add(dataGridView1.Rows[rowClicked].Cells[0].Value.ToString());
+
+          /*  for (int i = 0; i< 6; i++)
+               {
+                 
+                MessageBox.Show("test " + userInfo[i]);
+
+            }*/
+          
+          //  userInfo
+             
+              EmployeeCardView employeeCardView = new EmployeeCardView(userId);
+              employeeCardView.Show(); 
         }
 
         private void AdminAcces_KeyDown(object sender, KeyEventArgs e)

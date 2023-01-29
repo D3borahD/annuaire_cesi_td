@@ -53,17 +53,9 @@ namespace WinFormsApp1
 
         private async void loadDataEmployee()
         {
-            //  EmployeeDAO employeeDAO = new EmployeeDAO();
-            // employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
-
-            //  IList<Employee> employeeList = (IList<Employee>)await EmployeeDAO.getAllEmployees();
-            //  employeeBindingSource.DataSource = employeeList.ToList();
-
             var response = await EmployeeDAO.getAllEmployees();
 
             var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
-
-            MessageBox.Show("test" + result);
 
             List<EmployeeFormated> employees = new List<EmployeeFormated>();
 
@@ -89,7 +81,6 @@ namespace WinFormsApp1
 
             dataGridViewEmployeeEdit.DataSource = employees;
 
-           // dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
             dataGridViewEmployeeEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
             if (count != 0)
@@ -184,6 +175,9 @@ namespace WinFormsApp1
                 };
                 EmployeeDAO employeeDAO = new EmployeeDAO();
                 int result = employeeDAO.addOneEmployee(employee);
+
+
+
 
                 txt_employee_lastname.Clear();
                 txt_employee_firstname.Clear();
@@ -282,13 +276,15 @@ namespace WinFormsApp1
         {
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
             List<String> userInfo = new List<string>();
+            int employeeId = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
 
-            for (int i = 0; i < dataGridViewEmployeeEdit.ColumnCount; i++)
-            {
-                userInfo.Add(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[i].Value.ToString());
-            }
+            /* for (int i = 0; i < dataGridViewEmployeeEdit.ColumnCount; i++)
+             {
+                 userInfo.Add(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[i].Value.ToString());
+             }*/
+            MessageBox.Show("id  " + employeeId);
 
-            UpdateEmployee updateEmployee = new UpdateEmployee(userInfo);
+            UpdateEmployee updateEmployee = new UpdateEmployee(employeeId);
             updateEmployee.Show();
         }
 
