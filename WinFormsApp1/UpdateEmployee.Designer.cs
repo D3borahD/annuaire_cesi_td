@@ -121,7 +121,7 @@
             this.txt_update_landline.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_update_landline.Name = "txt_update_landline";
             this.txt_update_landline.Size = new System.Drawing.Size(196, 27);
-            this.txt_update_landline.TabIndex = 26;
+            this.txt_update_landline.TabIndex = 3;
             // 
             // txt_update_firstname
             // 
@@ -129,7 +129,7 @@
             this.txt_update_firstname.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_update_firstname.Name = "txt_update_firstname";
             this.txt_update_firstname.Size = new System.Drawing.Size(196, 27);
-            this.txt_update_firstname.TabIndex = 27;
+            this.txt_update_firstname.TabIndex = 1;
             // 
             // txt_update_mobile
             // 
@@ -137,7 +137,7 @@
             this.txt_update_mobile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_update_mobile.Name = "txt_update_mobile";
             this.txt_update_mobile.Size = new System.Drawing.Size(196, 27);
-            this.txt_update_mobile.TabIndex = 28;
+            this.txt_update_mobile.TabIndex = 4;
             // 
             // txt_update_email
             // 
@@ -145,7 +145,7 @@
             this.txt_update_email.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_update_email.Name = "txt_update_email";
             this.txt_update_email.Size = new System.Drawing.Size(196, 27);
-            this.txt_update_email.TabIndex = 30;
+            this.txt_update_email.TabIndex = 5;
             // 
             // txt_update_lastname
             // 
@@ -153,7 +153,7 @@
             this.txt_update_lastname.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_update_lastname.Name = "txt_update_lastname";
             this.txt_update_lastname.Size = new System.Drawing.Size(196, 27);
-            this.txt_update_lastname.TabIndex = 32;
+            this.txt_update_lastname.TabIndex = 2;
             // 
             // update_employee
             // 
