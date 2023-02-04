@@ -1,11 +1,11 @@
-﻿using MySql.Data.MySqlClient;
+﻿/*using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFormsApp1
+namespace WinFormsApp1.Database
 {
     internal class DBConnection
     {
@@ -21,7 +21,8 @@ namespace WinFormsApp1
 
         static void CloseConnection()
         {
-            if(connection != null) {
+            if (connection != null)
+            {
                 connection.Close();
                 connection = null;
             }
@@ -51,4 +52,4 @@ namespace WinFormsApp1
             }
         }
     }
-}
+}*/

@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 //using System.Security.Policy;
 //using System.Text;
 using System.Text.RegularExpressions;
+using WinFormsApp1.Controller;
 //using System.Threading.Tasks;
 //using System.Windows.Forms;
 using WinFormsApp1.Model;
@@ -29,32 +30,37 @@ namespace WinFormsApp1
             InitializeComponent();         
         }
 
+        // load data departments
         private async void loadDataDepartment()
         {
             IList<Department> departmentList = await DepartmentDAO.getDepartments();
             departmentBindingSource.DataSource = departmentList.ToList();
 
+            // custom grid view
             dataGridViewDepartmentEdit.DataSource = departmentBindingSource;
             dataGridViewDepartmentEdit.Columns["id"].Visible = false;
             dataGridViewDepartmentEdit.Columns[1].HeaderText = "Nom du Service";
             dataGridViewDepartmentEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
         }
 
+
+        // load data sites
         private async void loadDataSite()
         {
             IList<Site> siteList = await siteDAO.getSites();
             siteBindingSource.DataSource = siteList.ToList();
 
+            //custom grid view
             dataGridViewSiteEdit.DataSource = siteBindingSource;
             dataGridViewSiteEdit.Columns["id"].Visible = false;
             dataGridViewSiteEdit.Columns[1].HeaderText = "Nom du Site";
             dataGridViewSiteEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
         }
 
+        //load date employees
         private async void loadDataEmployee()
         {
             var response = await EmployeeDAO.getAllEmployees();
-
             var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
 
             List<EmployeeFormated> employees = new List<EmployeeFormated>();
@@ -82,6 +88,7 @@ namespace WinFormsApp1
 
             dataGridViewEmployeeEdit.DataSource = employees;
 
+            // custom grid view
             dataGridViewEmployeeEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
             if (count != 0)
@@ -99,6 +106,7 @@ namespace WinFormsApp1
             }
         }
 
+        // data site for add new employee
         private async void loadListBoxSite()
         {
              IList<Site> siteList = await siteDAO.getSites();
@@ -109,6 +117,7 @@ namespace WinFormsApp1
              listBoxSite.ValueMember = "Id";
         }
 
+        // data department for add new employee
         private async void loadListBoxDepartment()
         {
               IList<Department> departmentList = await DepartmentDAO.getDepartments();
@@ -119,6 +128,7 @@ namespace WinFormsApp1
               listBoxDepartment.ValueMember = "id";
         }
 
+        // load every data at openning windows AdminEditor
         private void AdminEditor_Load_1(object sender, EventArgs e)
         {
             loadDataEmployee();
@@ -128,12 +138,17 @@ namespace WinFormsApp1
             loadListBoxDepartment();
         }
 
+        // button to add one employee
         private async void add_employee_Click(object sender, EventArgs e)
         {
-           Regex numberRegex = new Regex(@"^\d{10}$");
+            // regex for check valid phone number 
+            // no letter or spécial caracters,
+            // 10 number only
+            Regex numberRegex = new Regex(@"^\d{10}$");
             String fixNumber = txt_employee_landline.Text;
             String mobileNumber = txt_employee_mobile.Text;
 
+            // check is imput is not empty
             if (
               String.IsNullOrEmpty(txt_employee_lastname.Text) ||
               String.IsNullOrEmpty(txt_employee_firstname.Text) ||
@@ -145,6 +160,7 @@ namespace WinFormsApp1
                 return;
             }
 
+            // format firstname in lowcase and first letter in capital
             String formatLastname = txt_employee_firstname.Text;
             formatLastname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatLastname.ToLower());
 
@@ -166,7 +182,6 @@ namespace WinFormsApp1
             {
                 Employee employee = new Employee
                 {
-
                     firstname = txt_employee_lastname.Text.ToUpper(),
                     lastname = formatLastname,
                     landline = txt_employee_landline.Text,
@@ -178,6 +193,7 @@ namespace WinFormsApp1
                 EmployeeDAO employeeDAO = new EmployeeDAO();
                 await employeeDAO.addEmployee(employee);
 
+                // clear all input
                 txt_employee_lastname.Clear();
                 txt_employee_firstname.Clear();
                 txt_employee_landline.Clear();
@@ -188,7 +204,7 @@ namespace WinFormsApp1
             }
         }
 
-        //Add department
+        //Add one department
         private async void addService_Click(object sender, EventArgs e)
         {
             if(String.IsNullOrEmpty(txt_department_name.Text))
@@ -197,6 +213,7 @@ namespace WinFormsApp1
             } 
             else
             {
+                // format department in lowcase and first letter in capital
                 String name = txt_department_name.Text;
                 name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 
@@ -218,6 +235,7 @@ namespace WinFormsApp1
             }
         }
 
+        // add one site
         private async void addSite_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(txt_site_name.Text))
@@ -226,6 +244,7 @@ namespace WinFormsApp1
             } 
             else
             {
+                //format site name in lowcase and first letter in capital
                 String name = txt_site_name.Text;
                 name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 
@@ -246,10 +265,11 @@ namespace WinFormsApp1
             }
         }
 
+        // delete selected employee
         private async void deleteEmployee_Click(object sender, EventArgs e)
         {
+            // get employee's information
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
-
             int idSelectedEmployee = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
 
             String nameSelectedEmployee = dataGridViewEmployeeEdit.Rows[rowClicked].Cells[1].Value.ToString();
@@ -270,8 +290,10 @@ namespace WinFormsApp1
             }
         }
 
+        //update employee selected
         private void updateEmployee_Click(object sender, EventArgs e)
         {
+            //get employee's informations
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
             int employeeId = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
 
@@ -279,8 +301,10 @@ namespace WinFormsApp1
             updateEmployee.Show();
         }
 
+        // delete one department
         private async void deleteDepartment_Click(object sender, EventArgs e)
         {
+            // get information of department selected
             int rowClicked = dataGridViewDepartmentEdit.CurrentRow.Index;
             int id = int.Parse(dataGridViewDepartmentEdit.Rows[rowClicked].Cells[0].Value.ToString());
             String nameSelectedDepartment = dataGridViewDepartmentEdit.Rows[rowClicked].Cells[1].Value.ToString();
@@ -301,8 +325,10 @@ namespace WinFormsApp1
             }
         }
 
+        // update depertment selected
         private void updateDepartment_Click(object sender, EventArgs e)
         {
+            // get information of department selected
             int rowClicked = dataGridViewDepartmentEdit.CurrentRow.Index;
             List<String> departmentInfo = new List<string>();
 
@@ -316,6 +342,7 @@ namespace WinFormsApp1
         }
 
 
+        // button to reload all data
         public async void refresh_Click(object sender, EventArgs e)
         {
             loadDataEmployee();
@@ -323,8 +350,10 @@ namespace WinFormsApp1
             loadDataSite();
         }
 
+        // delete selected site
         public async void deleteSite_Click(object sender, EventArgs e)
         {
+            //get information for selected site
             int rowClicked = dataGridViewSiteEdit.CurrentRow.Index;
             String id = dataGridViewSiteEdit.Rows[rowClicked].Cells[0].Value.ToString();
             String nameSelectedSite = dataGridViewSiteEdit.Rows[rowClicked].Cells[1].Value.ToString();
@@ -355,8 +384,10 @@ namespace WinFormsApp1
             }
         }
 
+        //update selected site
         private void updateSite_Click(object sender, EventArgs e)
         {
+            //get information for selected site
             int rowClicked = dataGridViewSiteEdit.CurrentRow.Index;
             List<String> siteInfo = new List<string>();
 
@@ -370,6 +401,7 @@ namespace WinFormsApp1
             updateSite.Show();
         }
 
+        // search employee by lastame or some letters of lastname
         private async void searchEmployee_Click(object sender, EventArgs e)
         {
             try
@@ -403,6 +435,7 @@ namespace WinFormsApp1
 
                 dataGridViewEmployeeEdit.DataSource = employees;
 
+                // custom grid view
                 dataGridViewEmployeeEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
                 int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
                 if (count != 0)

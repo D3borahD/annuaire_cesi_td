@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace WinFormsApp1
+namespace WinFormsApp1.Database
 {
     public enum httpVerb
     {
@@ -19,14 +19,14 @@ namespace WinFormsApp1
         public string endPoint { get; set; }
         public httpVerb httpMethod { get; set; }
 
-        public HttpClientAcces() 
+        public HttpClientAcces()
         {
-            endPoint= "";
+            endPoint = "";
             httpMethod = httpVerb.GET;
         }
 
         public string MakeRequest()
-        { 
+        {
             string strResponseValue = string.Empty;
             var request = (HttpWebRequest)WebRequest.Create(endPoint);
             request.Method = httpMethod.ToString();
@@ -36,8 +36,9 @@ namespace WinFormsApp1
             {
                 response = (HttpWebResponse)request.GetResponse();
 
-                using (Stream responseStream = response.GetResponseStream()) {
-                    if(responseStream != null)
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    if (responseStream != null)
                     {
                         using (StreamReader reader = new StreamReader(responseStream))
                         {
@@ -46,24 +47,18 @@ namespace WinFormsApp1
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 strResponseValue = "{'errorMessage': [ex.Massage.ToString()], 'error' : {}}";
             }
             finally
             {
-                if(response != null)
+                if (response != null)
                 {
-                    ((IDisposable)response).Dispose();  
+                    ((IDisposable)response).Dispose();
                 }
             }
             return strResponseValue;
         }
-
     }
-
-  /*  public Task<string> getConnection()
-    {
-        var request = new HttpRequestMessage(HttpMethod.Get);
-    }*/
 }

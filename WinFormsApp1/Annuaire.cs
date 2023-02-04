@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using WinFormsApp1.Controller;
 //using System.Windows.Forms;
 //using System.Xml.Linq;
 //using Newtonsoft.Json.Linq;
@@ -17,7 +18,7 @@ namespace WinFormsApp1
 {
     public partial class Annuaire : Form
     {
-        BindingSource employeeBindingSource = new BindingSource();
+       // BindingSource employeeBindingSource = new BindingSource();
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
  
@@ -27,28 +28,33 @@ namespace WinFormsApp1
             KeyPreview = true;
         }
 
+        // load data of departments
         private async void loadDataDepartment()
         {
             IList<Department> departmentList = await DepartmentDAO.getDepartments();
             departmentBindingSource.DataSource = departmentList.ToList();
 
+            //custom grid view
             dataGridViewDepartmentDisplay.DataSource = departmentBindingSource;
             dataGridViewDepartmentDisplay.DefaultCellStyle.SelectionBackColor = Color.Navy;
             dataGridViewDepartmentDisplay.Columns["id"].Visible = false;
             dataGridViewDepartmentDisplay.Columns[1].HeaderText = "Nom du Service";
         }
 
+        //load data of sites
         private async void loadDataSite()
         {
             IList<Site> siteList = await siteDAO.getSites();
             siteBindingSource.DataSource = siteList.ToList();
 
+            //custom grid view
             dataGridViewSiteDisplay.DataSource = siteBindingSource;
             dataGridViewSiteDisplay.DefaultCellStyle.SelectionBackColor = Color.Navy;
             dataGridViewSiteDisplay.Columns["id"].Visible = false;
             dataGridViewSiteDisplay.Columns[1].HeaderText = "Nom du Site";
         }
 
+        // load data of employees
         private async void loadDataEmployee()
         {
             var response = await EmployeeDAO.getAllEmployees();
@@ -77,6 +83,7 @@ namespace WinFormsApp1
 
             dataGridView1.DataSource = employees;
 
+            //custom grid view
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridView1.Rows.Count.ToString());
             if (count != 0)
@@ -95,6 +102,7 @@ namespace WinFormsApp1
        
         }
      
+        // load all data
         private void Annuaire_Load(object sender, EventArgs e)
         {
             loadDataEmployee();
@@ -103,14 +111,12 @@ namespace WinFormsApp1
    
         }
 
-        // SearchName function 
+        // get employee by lastname or some letters of lastname
         private async void button2_Click(object sender, EventArgs e)
         {
             try
             {
-
             var response = await EmployeeDAO.getEmployeesByName(textBox1.Text);
-
             var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
 
             List<EmployeeFormated> employees = new List<EmployeeFormated>();
@@ -138,6 +144,7 @@ namespace WinFormsApp1
 
             dataGridView1.DataSource = employees;
 
+            // cutom grid view
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridView1.Rows.Count.ToString());
             if (count != 0)
@@ -161,23 +168,22 @@ namespace WinFormsApp1
 
         // remove at the end project => button to acces on admin windows during conception
         // remove on Annuaire conception on 08/01/2023
-        private void edition_Click(object sender, EventArgs e)
-        {
+       // private void edition_Click(object sender, EventArgs e)
+        //{
            // var adminForm = new AdminEditor();
            // adminForm.Show();
-        }
+        //}
 
-        //Search employee by site
+        //get employee by site
         private async void dataGridViewSiteDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            // get site information
             int rowClicked = dataGridViewSiteDisplay.CurrentRow.Index;
             int idSite = (int)dataGridViewSiteDisplay.Rows[rowClicked].Cells[0].Value;
 
             try
             {
-
                 var response = await EmployeeDAO.getEmployeesBySite(idSite);
-
                 var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
 
                 List<EmployeeFormated> employees = new List<EmployeeFormated>();
@@ -205,6 +211,7 @@ namespace WinFormsApp1
 
                 dataGridView1.DataSource = employees;
 
+                // custom grid view
                 dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Navy;
                 int count = int.Parse(dataGridView1.Rows.Count.ToString());
                 if (count != 0)
@@ -228,18 +235,16 @@ namespace WinFormsApp1
 
         }
 
-        //search employee by department
+        //get employee by department
         private async void dataGridViewDepartmentDisplay_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            //get department information
             int rowClicked = dataGridViewDepartmentDisplay.CurrentRow.Index;
             int idDepartment = (int)dataGridViewDepartmentDisplay.Rows[rowClicked].Cells[0].Value;
 
             try
             {
-
                 var response = await EmployeeDAO.getEmployeesByDepartment(idDepartment);
-
                 var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
 
                 List<EmployeeFormated> employees = new List<EmployeeFormated>();
@@ -267,6 +272,7 @@ namespace WinFormsApp1
 
                 dataGridView1.DataSource = employees;
 
+                // custom grid view
                 dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Navy;
                 int count = int.Parse(dataGridView1.Rows.Count.ToString());
                 if (count != 0)
@@ -282,15 +288,16 @@ namespace WinFormsApp1
                     dataGridView1.Columns[8].Visible = false;
                     dataGridView1.Columns[9].HeaderText = "Service";
                 }
-              //  textBox1.Clear();
             }
             catch (Exception ex)
             {
             }
           }
 
+            // display employee card on click on a row
           public void displayEmplyeeCard_CellClick(object sender, DataGridViewCellEventArgs e)
           {
+            //get employee's information
               int rowClicked = dataGridView1.CurrentRow.Index;
               int userId = int.Parse(dataGridView1.Rows[rowClicked].Cells[0].Value.ToString());
 
@@ -298,6 +305,7 @@ namespace WinFormsApp1
               employeeCardView.Show(); 
           }
 
+            //code access to AdminEditor windows
           private void AdminAcces_KeyDown(object sender, KeyEventArgs e)
           {
               if (e.Shift && e.Control && e.KeyCode == Keys.E)

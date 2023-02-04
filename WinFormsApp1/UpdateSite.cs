@@ -1,13 +1,15 @@
-﻿using MySqlX.XDevAPI.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿//using MySqlX.XDevAPI.Common;
+//using System;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Data;
+//using System.Drawing;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using System.Windows.Forms;
+using WinFormsApp1.Controller;
+using WinFormsApp1.Model;
 
 namespace WinFormsApp1
 {
@@ -16,6 +18,7 @@ namespace WinFormsApp1
         public int siteId;
         public string oldName;
 
+        // load data of soite
         private async void loadDataSite(int siteId)
         {
             var siteName = await siteDAO.getSiteById(siteId);
@@ -31,8 +34,10 @@ namespace WinFormsApp1
             oldName = siteInfo[1];
         }
 
+        // button to save changes 
         private async void saveUpdateSite_Click(object sender, EventArgs e)
         {
+            // format name with low case and first letter capital
             String name = txt_site_update.Text;
             name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 
@@ -60,8 +65,6 @@ namespace WinFormsApp1
                 this.Close();
                 return;
             }
-
-          
             this.Close();
         }
     }
