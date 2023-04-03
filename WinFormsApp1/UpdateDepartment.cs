@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿//using System;
+///using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Data;
+//using System.Drawing;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using System.Windows.Forms;
+using WinFormsApp1.Controller;
+using WinFormsApp1.Model;
 
 namespace WinFormsApp1
 {
@@ -15,11 +17,12 @@ namespace WinFormsApp1
         public int departmentId;
         public string oldName;
 
-        private void loadDataDepartment(int departmentId)
+        //load date of department
+        private async void loadDataDepartment(int departmentId)
         {
-            DepartmentDAO departmentDAO = new DepartmentDAO();
-            Department department = (Department)departmentDAO.getDepartmentById(departmentId);
-            labelDepartment.Text = department.name;
+            var departmentName = await DepartmentDAO.getDepartmentById(departmentId);
+            String departmentN = departmentName.name;
+            labelDepartment.Text = $"{departmentN}";
         }
 
         public UpdateDepartment(List<String> departmentInfo)
@@ -30,8 +33,10 @@ namespace WinFormsApp1
             oldName = departmentInfo[1];
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // button to update department
+        private async void button1_Click(object sender, EventArgs e)
         {
+            // format department in low case and first letter capital
             String name = txt_department_update.Text;
             name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 
@@ -52,8 +57,7 @@ namespace WinFormsApp1
                 MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
-                int result = departmentDAO.updateDepartment(department);
-           
+                await departmentDAO.updateDepartment(department.id, department);
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -61,7 +65,6 @@ namespace WinFormsApp1
                 return;
             }
             this.Close();
-           
         }
     }
 }

@@ -1,23 +1,27 @@
-﻿using MySqlX.XDevAPI.Common;
-using Org.BouncyCastle.Bcpg;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Policy;
-using System.Text;
+﻿//using MySqlX.XDevAPI.Common;
+using Newtonsoft.Json;
+//using Newtonsoft.Json.Linq;
+//using Org.BouncyCastle.Bcpg;
+//using System;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Data;
+//using System.Drawing;
+//using System.Linq;
+//using System.Runtime.CompilerServices;
+//using System.Security.Policy;
+//using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using WinFormsApp1.Controller;
+//using System.Threading.Tasks;
+//using System.Windows.Forms;
+using WinFormsApp1.Model;
 
 namespace WinFormsApp1
 {
     public partial class AdminEditor : Form
     {
-        BindingSource employeeBindingSource = new BindingSource();
+        //BindingSource employeeBindingSource = new BindingSource();
         BindingSource siteBindingSource = new BindingSource();
         BindingSource departmentBindingSource = new BindingSource();
 
@@ -26,31 +30,65 @@ namespace WinFormsApp1
             InitializeComponent();         
         }
 
-        private void loadDataDepartment()
+        // load data departments
+        private async void loadDataDepartment()
         {
-            DepartmentDAO departmentDAO = new DepartmentDAO();
-            departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
+            IList<Department> departmentList = await DepartmentDAO.getDepartments();
+            departmentBindingSource.DataSource = departmentList.ToList();
+
+            // custom grid view
             dataGridViewDepartmentEdit.DataSource = departmentBindingSource;
             dataGridViewDepartmentEdit.Columns["id"].Visible = false;
             dataGridViewDepartmentEdit.Columns[1].HeaderText = "Nom du Service";
             dataGridViewDepartmentEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
         }
 
-        private void loadDataSite()
+
+        // load data sites
+        private async void loadDataSite()
         {
-            SiteDAO siteDAO = new SiteDAO();
-            siteBindingSource.DataSource = siteDAO.getAllSites();
+            IList<Site> siteList = await siteDAO.getSites();
+            siteBindingSource.DataSource = siteList.ToList();
+
+            //custom grid view
             dataGridViewSiteEdit.DataSource = siteBindingSource;
             dataGridViewSiteEdit.Columns["id"].Visible = false;
             dataGridViewSiteEdit.Columns[1].HeaderText = "Nom du Site";
             dataGridViewSiteEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
         }
 
-        private void loadDataEmployee()
+        //load date employees
+        private async void loadDataEmployee()
         {
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            employeeBindingSource.DataSource = employeeDAO.getAllEmployees();
-            dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
+            var response = await EmployeeDAO.getAllEmployees();
+            var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
+
+            List<EmployeeFormated> employees = new List<EmployeeFormated>();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                var employee = new EmployeeFormated();
+
+                var siteName = await siteDAO.getSiteById(result[i].SiteId);
+                String siteN = siteName.name;
+
+                var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
+                String departmentN = departmentName.name;
+
+                employee.Id = result[i].Id;
+                employee.Firstname = result[i].Firstname;
+                employee.Lastname = result[i].Lastname;
+                employee.Landline = result[i].Landline;
+                employee.Mobile = result[i].Mobile;
+                employee.Email = result[i].Email;
+                employee.Site = siteN;
+                employee.Department = departmentN;
+                employees.Add(employee);
+            }
+
+            dataGridViewEmployeeEdit.DataSource = employees;
+
+            // custom grid view
             dataGridViewEmployeeEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
             int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
             if (count != 0)
@@ -61,29 +99,36 @@ namespace WinFormsApp1
                 dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone fixe";
                 dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
                 dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
-                dataGridViewEmployeeEdit.Columns[6].HeaderText = "Site";
-                dataGridViewEmployeeEdit.Columns[7].HeaderText = "Service";
+                dataGridViewEmployeeEdit.Columns[6].Visible = false;
+                dataGridViewEmployeeEdit.Columns[7].HeaderText = "Site";
+                dataGridViewEmployeeEdit.Columns[8].Visible = false;
+                dataGridViewEmployeeEdit.Columns[9].HeaderText = "Service";
             }
         }
 
-        private void loadListBoxSite()
+        // data site for add new employee
+        private async void loadListBoxSite()
         {
-            SiteDAO siteDAO = new SiteDAO();
-            siteBindingSource.DataSource = siteDAO.getAllSites();
-            listBoxSite.DataSource = siteBindingSource;
-            listBoxSite.DisplayMember = "name";
-            listBoxSite.ValueMember = "id";
+             IList<Site> siteList = await siteDAO.getSites();
+             siteBindingSource.DataSource = siteList.ToList();
+
+             listBoxSite.DataSource = siteBindingSource;
+             listBoxSite.DisplayMember = "name";
+             listBoxSite.ValueMember = "Id";
         }
 
-        private void loadListBoxDepartment()
+        // data department for add new employee
+        private async void loadListBoxDepartment()
         {
-            DepartmentDAO departmentDAO = new DepartmentDAO();
-            departmentBindingSource.DataSource = departmentDAO.getAllDepartments();
-            listBoxDepartment.DataSource = departmentBindingSource;
-            listBoxDepartment.DisplayMember = "name";
-            listBoxDepartment.ValueMember = "id";
+              IList<Department> departmentList = await DepartmentDAO.getDepartments();
+              departmentBindingSource.DataSource = departmentList.ToList();
+
+              listBoxDepartment.DataSource = departmentBindingSource;
+              listBoxDepartment.DisplayMember = "name";
+              listBoxDepartment.ValueMember = "id";
         }
 
+        // load every data at openning windows AdminEditor
         private void AdminEditor_Load_1(object sender, EventArgs e)
         {
             loadDataEmployee();
@@ -93,13 +138,17 @@ namespace WinFormsApp1
             loadListBoxDepartment();
         }
 
-
-        private void add_employee_Click(object sender, EventArgs e)
+        // button to add one employee
+        private async void add_employee_Click(object sender, EventArgs e)
         {
+            // regex for check valid phone number 
+            // no letter or spécial caracters,
+            // 10 number only
             Regex numberRegex = new Regex(@"^\d{10}$");
             String fixNumber = txt_employee_landline.Text;
             String mobileNumber = txt_employee_mobile.Text;
 
+            // check is imput is not empty
             if (
               String.IsNullOrEmpty(txt_employee_lastname.Text) ||
               String.IsNullOrEmpty(txt_employee_firstname.Text) ||
@@ -111,12 +160,12 @@ namespace WinFormsApp1
                 return;
             }
 
-            String formatFirstname = txt_employee_firstname.Text;
-            formatFirstname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatFirstname.ToLower());
+            // format firstname in lowcase and first letter in capital
+            String formatLastname = txt_employee_firstname.Text;
+            formatLastname = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formatLastname.ToLower());
 
-            String getFirstletter = formatFirstname.Substring(0, 1);
+            String getFirstletter = formatLastname.Substring(0, 1);
             String createEmail = (getFirstletter + "." + txt_employee_lastname.Text + "@natural.product").ToLower();
-
 
 
             if (!numberRegex.IsMatch(fixNumber))
@@ -133,61 +182,61 @@ namespace WinFormsApp1
             {
                 Employee employee = new Employee
                 {
-                    lastname = txt_employee_lastname.Text.ToUpper(),
-                    firstname = formatFirstname,
+                    firstname = txt_employee_lastname.Text.ToUpper(),
+                    lastname = formatLastname,
                     landline = txt_employee_landline.Text,
                     mobile = txt_employee_mobile.Text,
                     email = createEmail,
-                    site = listBoxSite.SelectedValue.ToString(),
-                    department = listBoxDepartment.SelectedValue.ToString(),
+                    siteId = (int)listBoxSite.SelectedValue,
+                    departmentId = (int)listBoxDepartment.SelectedValue,
                 };
                 EmployeeDAO employeeDAO = new EmployeeDAO();
-                int result = employeeDAO.addOneEmployee(employee);
+                await employeeDAO.addEmployee(employee);
 
+                // clear all input
                 txt_employee_lastname.Clear();
                 txt_employee_firstname.Clear();
                 txt_employee_landline.Clear();
                 txt_employee_mobile.Clear();
 
-                MessageBox.Show("L'employé(e) " + employee.lastname + " " + employee.firstname+ " a été ajouté(e)");
+                MessageBox.Show("L'employé(e) " + employee.firstname + " " + employee.lastname+ " a été ajouté(e)");
                 loadDataEmployee();
             }
         }
 
-        private void addService_Click(object sender, EventArgs e)
+        //Add one department
+        private async void addService_Click(object sender, EventArgs e)
         {
-
             if(String.IsNullOrEmpty(txt_department_name.Text))
             {
                 MessageBox.Show("Erreur : Le champ est vide");
             } 
             else
             {
+                // format department in lowcase and first letter in capital
                 String name = txt_department_name.Text;
                 name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 
-                // add a new item to the database
                 Department department = new Department
                 {
                 name = name,
                 };
 
-                DepartmentDAO departmentDAO = new DepartmentDAO();
-                int result = departmentDAO.addOneDepartment(department);
+                await DepartmentDAO.addDepartment(department);
 
                 txt_department_name.Clear();
 
-                if (result != 0)
+                if (department != null)
                 {
                     MessageBox.Show("Le service " + department.name + " a été ajouté");
                 } 
               
-
                 loadDataDepartment();
             }
         }
 
-        private void addSite_Click(object sender, EventArgs e)
+        // add one site
+        private async void addSite_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(txt_site_name.Text))
             {
@@ -195,36 +244,32 @@ namespace WinFormsApp1
             } 
             else
             {
+                //format site name in lowcase and first letter in capital
                 String name = txt_site_name.Text;
                 name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 
                 Site site = new Site
-            {
-                name = name,
-            };
+                {
+                 name = name,
+                };
+            
+                await siteDAO.addSite(site);
+                txt_site_name.Clear();
 
-                
+                if (site != null)
+                {
+                    MessageBox.Show("Le site " + site.name + " a été ajouté");
+                }
 
-            SiteDAO siteDAO = new SiteDAO();
-            int result = siteDAO.addOneSite(site);
-
-            txt_site_name.Clear();
-
-            if (result != 0)
-            {
-               MessageBox.Show("Le service " + site.name + " a été ajouté");
-            }
-            //    MessageBox.Show("Le site " + site.name + " a été ajouté");
-
-            loadDataSite();
+                loadDataSite();
             }
         }
 
-        private void deleteEmployee_Click(object sender, EventArgs e)
+        // delete selected employee
+        private async void deleteEmployee_Click(object sender, EventArgs e)
         {
+            // get employee's information
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
-
-            // cast don't work ??
             int idSelectedEmployee = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
 
             String nameSelectedEmployee = dataGridViewEmployeeEdit.Rows[rowClicked].Cells[1].Value.ToString();
@@ -233,44 +278,42 @@ namespace WinFormsApp1
             if (dialogResult == DialogResult.Yes)
             {
                 EmployeeDAO employeeDAO = new EmployeeDAO();
-                int result = employeeDAO.deleteEmployee(idSelectedEmployee);
-
+                var response = await employeeDAO.deleteEmployee(idSelectedEmployee);
+    
                 MessageBox.Show("L'employé(e) " + nameSelectedEmployee + " a été supprimé(e)");
                 loadDataEmployee();
     
             }
             else if (dialogResult == DialogResult.No)
             {
-                // Application.OpenForms["UpdateDepartment"].Close();
                 return;
             }
         }
 
+        //update employee selected
         private void updateEmployee_Click(object sender, EventArgs e)
         {
+            //get employee's informations
             int rowClicked = dataGridViewEmployeeEdit.CurrentRow.Index;
-            List<String> userInfo = new List<string>();
+            int employeeId = int.Parse(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[0].Value.ToString());
 
-            for (int i = 0; i < dataGridViewEmployeeEdit.ColumnCount; i++)
-            {
-                userInfo.Add(dataGridViewEmployeeEdit.Rows[rowClicked].Cells[i].Value.ToString());
-            }
-
-            UpdateEmployee updateEmployee = new UpdateEmployee(userInfo);
+            UpdateEmployee updateEmployee = new UpdateEmployee(employeeId);
             updateEmployee.Show();
         }
 
-        private void deleteDepartment_Click(object sender, EventArgs e)
+        // delete one department
+        private async void deleteDepartment_Click(object sender, EventArgs e)
         {
+            // get information of department selected
             int rowClicked = dataGridViewDepartmentEdit.CurrentRow.Index;
-            int idSelectedDepartment = int.Parse(dataGridViewDepartmentEdit.Rows[rowClicked].Cells[0].Value.ToString());
+            int id = int.Parse(dataGridViewDepartmentEdit.Rows[rowClicked].Cells[0].Value.ToString());
             String nameSelectedDepartment = dataGridViewDepartmentEdit.Rows[rowClicked].Cells[1].Value.ToString();
 
             DialogResult dialogResult = MessageBox.Show("ATTENTION : \n\n" + "Si vous supprimez le service : " + nameSelectedDepartment + "\nles employé(e)s associé(e)s à ce service seront aussi supprimé(e)s.\nVoulez-vous vraiment supprimer ce service ?", "SUPPRESSION D'UN SERVICE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if(dialogResult  == DialogResult.Yes)
             {
-                DepartmentDAO departmentDAO = new DepartmentDAO();
-                int result = departmentDAO.deleteDepartment(idSelectedDepartment);
+                var departmentDAO = new DepartmentDAO();
+                await departmentDAO.deleteDepartment(id);
 
                 MessageBox.Show("Le service " + nameSelectedDepartment + " a été supprimé(e)");
                 loadDataEmployee();
@@ -278,13 +321,14 @@ namespace WinFormsApp1
             }
             else if(dialogResult == DialogResult.No)
             {
-               // Application.OpenForms["UpdateDepartment"].Close();
                 return;
             }
         }
 
+        // update depertment selected
         private void updateDepartment_Click(object sender, EventArgs e)
         {
+            // get information of department selected
             int rowClicked = dataGridViewDepartmentEdit.CurrentRow.Index;
             List<String> departmentInfo = new List<string>();
 
@@ -297,38 +341,53 @@ namespace WinFormsApp1
             updateDepartment.Show();
         }
 
-        public void refresh_Click(object sender, EventArgs e)
+
+        // button to reload all data
+        public async void refresh_Click(object sender, EventArgs e)
         {
             loadDataEmployee();
             loadDataDepartment();
             loadDataSite();
         }
 
-        private void deleteSite_Click(object sender, EventArgs e)
+        // delete selected site
+        public async void deleteSite_Click(object sender, EventArgs e)
         {
+            //get information for selected site
             int rowClicked = dataGridViewSiteEdit.CurrentRow.Index;
-            int idSelectedSite = int.Parse(dataGridViewSiteEdit.Rows[rowClicked].Cells[0].Value.ToString());
+            String id = dataGridViewSiteEdit.Rows[rowClicked].Cells[0].Value.ToString();
             String nameSelectedSite = dataGridViewSiteEdit.Rows[rowClicked].Cells[1].Value.ToString();
 
-            DialogResult dialogResult = MessageBox.Show("ATTENTION : \n\n" + "Si vous supprimez le site : " + nameSelectedSite + "\nles employé(e)s associé(e)s à ce site seront aussi supprimé(e)s.\nVoulez-vous vraiment supprimer ce site ?", "SUPPRESSION D'UN SITE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var siteDAO = new siteDAO();
+            
+            DialogResult dialogResult = MessageBox.Show(
+                "ATTENTION : \n\n" +
+                "Si vous supprimez le site : " +
+                nameSelectedSite + 
+                "\nles employé(e)s associé(e)s à ce site seront aussi supprimé(e)s.\n" +
+                "Voulez-vous vraiment supprimer ce site ?", 
+                "SUPPRESSION D'UN SITE", 
+                MessageBoxButtons.YesNo, 
+                MessageBoxIcon.Warning);
+
             if (dialogResult == DialogResult.Yes)
-            {
-                SiteDAO siteDAO = new SiteDAO();
-                int result = siteDAO.deleteSite(idSelectedSite);
+             {
+                var response = await siteDAO.deleteSite(id);
 
                 MessageBox.Show("Le site " + nameSelectedSite + " a été supprimé(e)");
-                loadDataEmployee();
-                loadDataSite();
+                   loadDataEmployee();
+                   loadDataSite();
             }
             else if (dialogResult == DialogResult.No)
             {
-                // Application.OpenForms["UpdateDepartment"].Close();
-                return;
+               return;
             }
         }
 
+        //update selected site
         private void updateSite_Click(object sender, EventArgs e)
         {
+            //get information for selected site
             int rowClicked = dataGridViewSiteEdit.CurrentRow.Index;
             List<String> siteInfo = new List<string>();
 
@@ -340,50 +399,65 @@ namespace WinFormsApp1
             UpdateSite updateSite = new UpdateSite(siteInfo);
 
             updateSite.Show();
-         
-
         }
 
-
-        private void dataGridViewSiteEdit_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        // search employee by lastame or some letters of lastname
+        private async void searchEmployee_Click(object sender, EventArgs e)
         {
-           /* int rowClicked = dataGridViewSiteEdit.CurrentRow.Index;
-            List<String> siteInfo = new List<string>();
-
-            for (int i = 0; i < dataGridViewSiteEdit.ColumnCount; i++)
+            try
             {
-                siteInfo.Add(dataGridViewSiteEdit.Rows[rowClicked].Cells[i].Value.ToString());
-            }
+                var response = await EmployeeDAO.getEmployeesByName(textBoxSearch.Text);
 
-            UpdateSite updateSite = new UpdateSite(siteInfo);
-            updateSite.Show();*/
-           // loadDataEmployee();
-           // loadDataSite();
+                var result = JsonConvert.DeserializeObject<List<EmployeeFormated>>(response);
+
+                List<EmployeeFormated> employees = new List<EmployeeFormated>();
+
+                for (int i = 0; i < result.Count; i++)
+                {
+                    var employee = new EmployeeFormated();
+
+                    var siteName = await siteDAO.getSiteById(result[i].SiteId);
+                    String siteN = siteName.name;
+
+                    var departmentName = await DepartmentDAO.getDepartmentById(result[i].DepartmentId);
+                    String departmentN = departmentName.name;
+
+                    employee.Id = result[i].Id;
+                    employee.Firstname = result[i].Firstname;
+                    employee.Lastname = result[i].Lastname;
+                    employee.Landline = result[i].Landline;
+                    employee.Mobile = result[i].Mobile;
+                    employee.Email = result[i].Email;
+                    employee.Site = siteN;
+                    employee.Department = departmentN;
+                    employees.Add(employee);
+                }
+
+                dataGridViewEmployeeEdit.DataSource = employees;
+
+                // custom grid view
+                dataGridViewEmployeeEdit.DefaultCellStyle.SelectionBackColor = Color.Navy;
+                int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
+                if (count != 0)
+                {
+                    dataGridViewEmployeeEdit.Columns[0].Visible = false;
+                    dataGridViewEmployeeEdit.Columns[1].HeaderText = "Nom";
+                    dataGridViewEmployeeEdit.Columns[2].HeaderText = "Prénom";
+                    dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone fixe";
+                    dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
+                    dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
+                    dataGridViewEmployeeEdit.Columns[6].Visible = false;
+                    dataGridViewEmployeeEdit.Columns[7].HeaderText = "Site";
+                    dataGridViewEmployeeEdit.Columns[8].Visible = false;
+                    dataGridViewEmployeeEdit.Columns[9].HeaderText = "Service";
+                }
+                textBoxSearch.Clear();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
-        private void searchEmployee_Click(object sender, EventArgs e)
-        {
-            EmployeeDAO employeeDAO = new EmployeeDAO();
-            employeeBindingSource.DataSource = employeeDAO.searchName(textBoxSearch.Text);
-
-            dataGridViewEmployeeEdit.DataSource = employeeBindingSource;
-
-            int count = int.Parse(dataGridViewEmployeeEdit.Rows.Count.ToString());
-            if (count != 0)
-            {
-                dataGridViewEmployeeEdit.Columns[0].Visible = false;
-                dataGridViewEmployeeEdit.Columns[1].HeaderText = "Nom";
-                dataGridViewEmployeeEdit.Columns[2].HeaderText = "Prénom";
-                dataGridViewEmployeeEdit.Columns[3].HeaderText = "Téléphone Fixe";
-                dataGridViewEmployeeEdit.Columns[4].HeaderText = "Mobile";
-                dataGridViewEmployeeEdit.Columns[5].HeaderText = "Email";
-                dataGridViewEmployeeEdit.Columns[6].HeaderText = "Site";
-                dataGridViewEmployeeEdit.Columns[7].HeaderText = "Service";
-            }
-
-            textBoxSearch.Clear();
-        }
-
-      
-    }
+       }
 }

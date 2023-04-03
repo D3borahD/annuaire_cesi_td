@@ -37,6 +37,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.refreashData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSiteDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDepartmentDisplay)).BeginInit();
@@ -142,12 +143,25 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Nom";
             // 
+            // refreashData
+            // 
+            this.refreashData.BackColor = System.Drawing.Color.Navy;
+            this.refreashData.ForeColor = System.Drawing.Color.White;
+            this.refreashData.Location = new System.Drawing.Point(729, 176);
+            this.refreashData.Name = "refreashData";
+            this.refreashData.Size = new System.Drawing.Size(195, 45);
+            this.refreashData.TabIndex = 10;
+            this.refreashData.Text = "Recharger la page";
+            this.refreashData.UseVisualStyleBackColor = false;
+            this.refreashData.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Annuaire
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(959, 835);
+            this.Controls.Add(this.refreashData);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
@@ -180,5 +194,6 @@
         private PictureBox pictureBox1;
         private Label label1;
         private Label label2;
+        private Button refreashData;
     }
 }
